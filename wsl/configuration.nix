@@ -22,8 +22,6 @@
     "flakes"
   ];
 
-  nix.gc.automatic = true;
-
   virtualisation.docker = {
     enable = true;
   };

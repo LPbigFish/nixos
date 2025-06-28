@@ -96,16 +96,6 @@
 
   services.mullvad-vpn.enable = true;
 
-  programs.nh = {
-	enable = true;
-	clean.enable = true;
-	clean.extraArgs = "--keep-since 4d --keep 2";
-	flake = "/home/lpbigfish/.config/nixos";
-  };
-
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
