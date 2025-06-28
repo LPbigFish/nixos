@@ -40,7 +40,19 @@
           specialArgs = { inherit inputs; };
           modules = [
             nixos-wsl.nixosModules.default
+						./shared/generic.nix
             ./wsl/configuration.nix
+          ];
+        };
+
+				laptop = nixpkgs.lib.nixosSystem {
+					inherit system;
+          specialArgs = { inherit inputs; };
+          modules = [
+						./shared/generic.nix
+						./shared/gnome.nix
+            ./laptop/configuration.nix
+						./hardware-configuration.nix
           ];
         };
       };

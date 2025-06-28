@@ -3,7 +3,6 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ../hardware-configuration.nix
       inputs.home-manager.nixosModules.default
     ];
 
@@ -54,13 +53,6 @@
     LC_TELEPHONE = "cs_CZ.UTF-8";
     LC_TIME = "cs_CZ.UTF-8";
   };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
