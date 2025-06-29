@@ -33,8 +33,6 @@
     nil
     dbeaver-bin
     docker-compose
-    fulcrum
-    electrum
     git
   ];
 
