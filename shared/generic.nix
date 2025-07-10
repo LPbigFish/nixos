@@ -1,0 +1,19 @@
+{ lib, pkgs, config, ... }:
+{
+  imports = [
+    ./nix-options.nix
+    ./graphics_drivers
+  ];
+
+  programs = {
+    nh = {
+      enable = true;
+      flake = "/home/lpbigfish/.config/nixos";
+    };
+    nix-ld = {
+      enable = true;
+      package = pkgs.nix-ld-rs;
+    };
+    direnv.enable = true;
+  };
+}
