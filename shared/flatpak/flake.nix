@@ -1,0 +1,23 @@
+{
+  description = "Flatpak module";
+
+  inputs = {
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+  };
+
+  outputs = { self, nixpkgs, nix-flatpak, ... }: {
+    nixosModules.flatpak = { config, pkgs, ...}: {
+      imports = [
+        nix-flatpak.nixosModules.nix-flatpak
+      ];
+
+      services.flatpak = {
+        enable = true;
+        update.onActivation = true;
+        packages = [
+          "org.vinegarhq.Sober"
+        ];
+      };
+    };
+  };
+}

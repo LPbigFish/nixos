@@ -9,6 +9,10 @@
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    flatpak-module = {
+      url = "./shared/flatpak";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -17,6 +21,7 @@
       nixpkgs,
       nixpkgs-unstable,
       nixos-wsl,
+      flatpak-module,
       ...
     }@inputs:
     let
@@ -53,7 +58,8 @@
 					inherit system pkgs;
           specialArgs = { inherit inputs; };
           modules = shared_modules ++ [
-						./shared/gnome.nix
+            flatpak-module.nixosModules.flatpak
+						./shared/desktop/gnome.nix
             ./laptop/configuration.nix
 						./hardware-configuration.nix
           ];
