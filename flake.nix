@@ -13,6 +13,10 @@
       url = "./shared/flatpak";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    grub-conf = {
+      url = "./shared/grub";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -22,6 +26,7 @@
       nixpkgs-unstable,
       nixos-wsl,
       flatpak-module,
+      grub-conf,
       ...
     }@inputs:
     let
@@ -58,6 +63,7 @@
 					inherit system pkgs;
           specialArgs = { inherit inputs; };
           modules = shared_modules ++ [
+            grub-conf.nixosModules.grubConfiguration
             flatpak-module.nixosModules.flatpak
 						./shared/desktop/gnome.nix
             ./laptop/configuration.nix

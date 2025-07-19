@@ -10,23 +10,6 @@
     inputs.home-manager.nixosModules.default
   ];
 
-  boot = {
-    # Use the GRUB 2 boot loader.
-    loader.grub = {
-      enable = true;
-      device = "nodev";
-      efiSupport = true;
-      useOSProber = true;
-
-      dedsec-theme = {
-        enable = true;
-        style = "comments";
-        icon = "color";
-        resolution = "1080p";
-      };
-    };
-  };
-
   graphics-driver-selection.gpu = "intel";
 
   boot.loader.efi.canTouchEfiVariables = true;
