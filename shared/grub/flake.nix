@@ -29,7 +29,7 @@
 
               dedsec-theme = {
                 enable = true;
-                style = "sitedown";
+                style = "comments";
                 icon = "color";
                 resolution = "1080p";
               };
