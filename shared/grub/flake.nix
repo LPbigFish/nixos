@@ -17,6 +17,8 @@
         { config, dedsec-grub-theme, ... }:
         {
           boot = {
+            loader.efi.canTouchEfiVariables = true;
+
             # Use the GRUB 2 boot loader.
             loader.grub = {
               enable = true;

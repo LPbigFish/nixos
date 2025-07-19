@@ -17,6 +17,10 @@
       url = "./shared/grub";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -27,6 +31,7 @@
       nixos-wsl,
       flatpak-module,
       grub-conf,
+      disko,
       ...
     }@inputs:
     let
@@ -46,6 +51,7 @@
       shared_modules = [
 				./shared/generic.nix
         ./shared/graphics_drivers
+        disko.nixosModules.disko
       ];
     in
     {
