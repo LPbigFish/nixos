@@ -1,9 +1,8 @@
-{ ... }:
-
+{ }:
 {
   disko.devices.disk.main = {
-    type   = "disk";
-    device = "/dev/disk/by-id/REPLACE_ME";  # change to your stable path
+    type = "disk";
+    device = "/dev/disk/by-id/REPLACE_ME"; # change to your stable path
     content = {
       type = "gpt";
       partitions = {
@@ -11,8 +10,8 @@
           size = "1G";
           type = "EF00";
           content = {
-            type       = "filesystem";
-            format     = "vfat";
+            type = "filesystem";
+            format = "vfat";
             mountpoint = "/boot";
             mountOptions = [ "umask=0077" ];
           };
@@ -22,13 +21,31 @@
           size = "100%";
           content = {
             type = "btrfs";
-            extraArgs = [ "-f" ];   # force on reinstall
+            extraArgs = [ "-f" ]; # force on reinstall
             subvolumes = {
-              "@root" = { mountpoint = "/";    mountOptions = [ "compress=zstd" "noatime" ]; };
-              "@nix"  = { mountpoint = "/nix"; mountOptions = [ "compress=zstd" "noatime" ]; };
-              "@home" = { mountpoint = "/home";mountOptions = [ "compress=zstd" "noatime" ]; };
+              "@root" = {
+                mountpoint = "/";
+                mountOptions = [
+                  "compress=zstd"
+                  "noatime"
+                ];
+              };
+              "@nix" = {
+                mountpoint = "/nix";
+                mountOptions = [
+                  "compress=zstd"
+                  "noatime"
+                ];
+              };
+              "@home" = {
+                mountpoint = "/home";
+                mountOptions = [
+                  "compress=zstd"
+                  "noatime"
+                ];
+              };
               "@swap" = {
-                mountpoint         = "/.swapvol";
+                mountpoint = "/.swapvol";
                 swap.swapfile.size = "8192M";
               };
             };
