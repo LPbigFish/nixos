@@ -71,6 +71,7 @@
           modules = shared_modules ++ [
             grub-conf.nixosModules.grubConfiguration
             flatpak-module.nixosModules.flatpak
+            ./shared/gaming.nix
 						./shared/desktop/gnome.nix
             ./laptop/configuration.nix
 						./hardware-configuration.nix
