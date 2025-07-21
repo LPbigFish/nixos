@@ -68,6 +68,7 @@
       "networkmanager"
       "wheel"
     ];
+    createHome = true;
     packages = with pkgs; [ ];
   };
 
