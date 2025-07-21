@@ -26,7 +26,6 @@
             # Use the GRUB 2 boot loader.
             loader.grub = {
               enable = true;
-              version = 2;
               efiSupport = true;
               device = "nodev";
               useOSProber = true;
