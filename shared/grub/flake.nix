@@ -14,8 +14,12 @@
     }:
     {
       nixosModules.grubConfiguration =
-        { config, dedsec-grub-theme, ... }:
+        { config, ... }:
         {
+          imports = [
+            dedsec-grub-theme.nixosModule
+          ];
+
           boot = {
             loader.efi.canTouchEfiVariables = true;
 

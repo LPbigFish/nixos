@@ -16,4 +16,8 @@
     };
     direnv.enable = true;
   };
+
+  fonts.packages = [
+    pkgs.nerd-fonts.meslo-lg
+  ];
 }

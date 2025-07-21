@@ -15,29 +15,21 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages =
-    (with pkgs; [
-      (nerdfonts.override { fonts = [ "Meslo" ]; })
-
+  home.packages = with pkgs.unstable; [
+    (with jetbrains; [
+      idea-ultimate
+      clion
+      rust-rover
+      rider
     ])
-    ++ lib.flatten (
-      with pkgs.unstable;
-      [
-        (with jetbrains; [
-          idea-ultimate
-          clion
-          rust-rover
-          rider
-        ])
-        mullvad-vpn
-        brave
-        gnome-tweaks
-        nil
-        libreoffice-qt
-        hunspell
-        hunspellDicts.cs_CZ
-      ]
-    );
+    mullvad-vpn
+    brave
+    gnome-tweaks
+    nil
+    libreoffice-qt
+    hunspell
+    hunspellDicts.cs_CZ
+  ];
 
   gtk = {
     enable = true;
