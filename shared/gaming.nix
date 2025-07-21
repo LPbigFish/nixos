@@ -8,7 +8,7 @@
     gamemode.enable = true;
   };
 
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs.unstable; [
     mangohud
     protonup-rs
     heroic

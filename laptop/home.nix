@@ -15,21 +15,22 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = with pkgs.unstable; [
-    (with jetbrains; [
+  home.packages =
+    (with pkgs.unstable; [
+      mullvad-vpn
+      brave
+      gnome-tweaks
+      nil
+      libreoffice-qt
+      hunspell
+      hunspellDicts.cs_CZ
+    ])
+    ++ (with pkgs.unstable.jetbrains; [
       idea-ultimate
       clion
       rust-rover
       rider
-    ])
-    mullvad-vpn
-    brave
-    gnome-tweaks
-    nil
-    libreoffice-qt
-    hunspell
-    hunspellDicts.cs_CZ
-  ];
+    ]);
 
   gtk = {
     enable = true;
