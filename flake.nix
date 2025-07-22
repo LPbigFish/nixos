@@ -49,7 +49,7 @@
       };
 
       shared_modules = [
-				./shared/generic.nix
+        ./shared/generic.nix
         ./shared/graphics_drivers
         disko.nixosModules.disko
       ];
@@ -57,7 +57,7 @@
     {
       nixosConfigurations = {
         wsl = nixpkgs.lib.nixosSystem {
-					inherit system pkgs;
+          inherit system pkgs;
           specialArgs = { inherit inputs; };
           modules = shared_modules ++ [
             ./wsl/configuration.nix
@@ -65,16 +65,26 @@
           ];
         };
 
-				laptop = nixpkgs.lib.nixosSystem {
-					inherit system pkgs;
+        laptop = nixpkgs.lib.nixosSystem {
+          inherit system pkgs;
           specialArgs = { inherit inputs; };
           modules = shared_modules ++ [
             grub-conf.nixosModules.grubConfiguration
             flatpak-module.nixosModules.flatpak
             ./shared/gaming.nix
-						./shared/desktop/gnome.nix
+            ./shared/desktop/gnome.nix
             ./laptop/configuration.nix
-						./hardware-configuration.nix
+            ./hardware-configuration.nix
+          ];
+        };
+
+        minimal = nixpkgs.lib.nixosSystem {
+          inherit system pkgs;
+          specialArgs = { inherit inputs; };
+          modules = shared_modules ++ [
+            grub-conf.nixosModules.grubConfiguration
+            ./minimal/configuration.nix
+            ./hardware-configuration.nix
           ];
         };
       };

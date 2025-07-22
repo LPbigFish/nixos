@@ -6,14 +6,11 @@
 }:
 {
   imports = [
-    ./disk-config.nix
     # Include the results of the hardware scan.
     inputs.home-manager.nixosModules.default
   ];
 
   graphics-driver-selection.gpu = "intel";
-
-  boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "DESKTOP-E323AF"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.

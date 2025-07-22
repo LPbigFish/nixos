@@ -1,4 +1,9 @@
-{ lib, pkgs, config, ... }:
+{
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   imports = [
     ./nix-options.nix
@@ -20,4 +25,10 @@
   fonts.packages = [
     pkgs.nerd-fonts.meslo-lg
   ];
+
+  environment.systemPackages = lib.mkBefore (with pkgs.unstable; [
+    git
+    nano
+    vim
+  ]);
 }
