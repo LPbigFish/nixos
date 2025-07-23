@@ -1,4 +1,4 @@
-{ ... }:
+{ swapSize ? "8G", ... }:
 {
   disko.devices.disk.main = {
     type = "disk";
@@ -46,7 +46,7 @@
               };
               "@swap" = {
                 mountpoint = "/.swapvol";
-                swap.swapfile.size = "8192M";
+                swap.swapfile.size = swapSize;
               };
             };
           };

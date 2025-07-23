@@ -19,7 +19,7 @@
     };
     disko = {
       url = "github:nix-community/disko/latest";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
@@ -80,9 +80,10 @@
 
         minimal = nixpkgs.lib.nixosSystem {
           inherit system pkgs;
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs; swapSize = "8G"; };
           modules = shared_modules ++ [
             grub-conf.nixosModules.grubConfiguration
+            ./minimal/disk-config.nix
             ./minimal/configuration.nix
             ./hardware-configuration.nix
           ];

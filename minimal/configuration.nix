@@ -6,8 +6,6 @@
 }:
 {
   imports = [
-    # Include the results of the hardware scan.
-    ./disk-config.nix
   ];
 
   networking.hostName = "DESKTOP-E323AF"; # Define your hostname.
