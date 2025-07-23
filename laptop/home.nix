@@ -16,7 +16,7 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages =
-    (with pkgs.unstable; [
+    (with pkgs; [
       mullvad-vpn
       brave
       gnome-tweaks
@@ -25,7 +25,7 @@
       hunspell
       hunspellDicts.cs_CZ
     ])
-    ++ (with pkgs.unstable.jetbrains; [
+    ++ (with pkgs.jetbrains; [
       idea-ultimate
       clion
       rust-rover
@@ -40,20 +40,20 @@
     };
     theme = {
       name = "Orchis-Dark-Compact";
-      package = pkgs.unstable.orchis-theme;
+      package = pkgs.orchis-theme;
     };
   };
 
   programs = {
     vscode = {
       enable = true;
-      package = pkgs.unstable.vscode-fhs;
+      package = pkgs.vscode-fhs;
     };
     gnome-shell = {
       enable = true;
       extensions = [
-        { package = pkgs.unstable.gnomeExtensions.user-themes; }
-        { package = pkgs.unstable.gnomeExtensions.lockscreen-extension; }
+        { package = pkgs.gnomeExtensions.user-themes; }
+        { package = pkgs.gnomeExtensions.lockscreen-extension; }
       ];
     };
     git = {

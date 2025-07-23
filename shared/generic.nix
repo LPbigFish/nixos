@@ -26,7 +26,7 @@
     pkgs.nerd-fonts.meslo-lg
   ];
 
-  environment.systemPackages = lib.mkBefore (with pkgs.unstable; [
+  environment.systemPackages = lib.mkBefore (with pkgs; [
     git
     nano
     vim
