@@ -66,11 +66,11 @@
       "wheel"
     ];
     createHome = true;
-    initialPassword = 1234;
+    initialPassword = "1234";
     packages = with pkgs; [ ];
   };
 
-  users.users.root.initialPassword = 1234;
+  users.users.root.initialPassword = "1234";
 
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs; };

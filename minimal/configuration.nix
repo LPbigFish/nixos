@@ -62,11 +62,11 @@
       "wheel"
     ];
     createHome = true;
-    initialPassword = 1234;
+    initialPassword = "1234";
     packages = with pkgs; [ ];
   };
 
-  users.users.root.initialPassword = 1234;
+  users.users.root.initialPassword = "1234";
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
