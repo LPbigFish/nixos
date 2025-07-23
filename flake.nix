@@ -57,6 +57,7 @@
           modules = shared_modules ++ [
             grub-conf.nixosModules.grubConfiguration
             flatpak-module.nixosModules.flatpak
+            ./disk-config.nix
             ./shared/gaming.nix
             ./shared/graphics_drivers
             ./shared/desktop/gnome.nix

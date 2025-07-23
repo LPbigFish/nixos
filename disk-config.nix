@@ -2,7 +2,7 @@
 {
   disko.devices.disk.main = {
     type = "disk";
-    device = "/dev/disk/by-id/REPLACE_ME"; # change to your stable path
+    device = "/dev/nvme0n1"; # change to your stable path
     content = {
       type = "gpt";
       partitions = {
