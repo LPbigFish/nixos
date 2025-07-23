@@ -37,7 +37,6 @@
 
       shared_modules = [
         ./shared/generic.nix
-        ./shared/graphics_drivers
         disko.nixosModules.disko
       ];
     in
@@ -59,6 +58,7 @@
             grub-conf.nixosModules.grubConfiguration
             flatpak-module.nixosModules.flatpak
             ./shared/gaming.nix
+            ./shared/graphics_drivers
             ./shared/desktop/gnome.nix
             ./laptop/configuration.nix
             ./hardware-configuration.nix
@@ -70,7 +70,8 @@
           specialArgs = { inherit inputs; swapSize = "8G"; };
           modules = shared_modules ++ [
             grub-conf.nixosModules.grubConfiguration
-            ./minimal/disk-config.nix
+            ./shared/graphics_drivers
+            ./disk-config.nix
             ./minimal/configuration.nix
             ./hardware-configuration.nix
           ];

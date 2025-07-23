@@ -1,13 +1,9 @@
 {
   config,
   pkgs,
-  inputs,
   ...
 }:
 {
-  imports = [
-  ];
-
   networking.hostName = "DESKTOP-E323AF"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -32,27 +28,8 @@
     LC_TIME = "cs_CZ.UTF-8";
   };
 
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "cz";
-    variant = "";
-  };
-
   # Configure console keymap
   console.keyMap = "cz-lat2";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   users.users.lpbigfish = {
     isNormalUser = true;
@@ -72,8 +49,6 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     curl
-    wget
-    nixfmt-rfc-style
   ];
 
   system.stateVersion = "25.05"; # Did you read the comment?
