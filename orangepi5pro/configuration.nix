@@ -17,7 +17,7 @@
   networking.networkmanager.enable = true;
 
   # OPi 5 Pro DTB (RK3588S)
-  hardware.deviceTree.name = "rockchip/rk3588s-orangepi-5-pro.dtb";
+  hardware.deviceTree.name = lib.mkForce "rockchip/rk3588s-orangepi-5-pro.dtb";
 
   # Serial console (UART2, 1.5M) is handy for debugging
   boot.kernelParams = [ "console=ttyS2,1500000n8" ];
