@@ -96,7 +96,7 @@
             inherit inputs;
             rk3588 = { inherit nixpkgs rk_pkgsKernel; };
           };
-          modules = [
+          modules = shared_modules ++ [
             # Board: core + U‑Boot (sd-image). We stay off UEFI entirely.
             boardModule.core
             boardModule.sd-image
