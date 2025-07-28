@@ -35,8 +35,14 @@
 
   users.users.lpbigfish = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    description = "LPbigFish";
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
+    createHome = true;
     initialPassword = "1234";
+    packages = with pkgs; [ ];
   };
 
   users.users.root.initialPassword = "1234";
@@ -57,7 +63,17 @@
     gnused
     gawk
     tmux
+
+    
+    jellyfin
+    jellyfin-web
+    jellyfin-ffmpeg
   ];
+
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+  };
 
   # Match your target release
   system.stateVersion = "24.11";
