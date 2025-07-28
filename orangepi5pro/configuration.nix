@@ -36,7 +36,7 @@
   users.users.lpbigfish = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    initPassword = "1234";
+    initialPassword = "1234";
   };
 
   users.users.root.initialPassword = "1234";
