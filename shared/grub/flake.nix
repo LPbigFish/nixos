@@ -2,7 +2,6 @@
   inputs = {
     dedsec-grub-theme = {
       url = "gitlab:VandalByte/dedsec-grub-theme";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
