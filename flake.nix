@@ -99,8 +99,6 @@
           modules = shared_modules ++ [
             # Board: core + U‑Boot (sd-image). We stay off UEFI entirely.
             boardModule.core
-            boardModule.sd-image
-
             # Disko for declarative NVMe partitioning/mounts
             disko.nixosModules.disko
             ./orangepi5pro/configuration.nix
