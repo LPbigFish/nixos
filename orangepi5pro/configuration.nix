@@ -42,6 +42,7 @@
   users.users.root.initialPassword = "1234";
 
   environment.systemPackages = with pkgs; [
+    util-linux
     curl
     zip
     xz
