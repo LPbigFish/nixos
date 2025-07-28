@@ -48,7 +48,7 @@
       rk_system = "aarch64-linux";
       rk_pkgsKernel = import nixpkgs { system = rk_system; };
 
-      boardModule = nixos-rk3588.nixosModules.orangepi5;
+      boardModule = nixos-rk3588.nixosModules.boards.orangepi5;
     in
     {
       nixosConfigurations = {

@@ -2,7 +2,7 @@
 {
   disko.devices.disk.nvme = {
     type = "disk";
-    device = "/dev/by-id/nvme-WD_Blue_SN570_500GB_224014494111"; # change to your stable path
+    device = "/dev/disk/by-id/nvme-WD_Blue_SN570_500GB_224014494111"; # change to your stable path
     content = {
       type = "gpt";
       partitions = {
