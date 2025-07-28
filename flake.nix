@@ -20,6 +20,10 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-rk3588 = {
+      url = "github:gnull/nixos-rk3588";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -30,6 +34,7 @@
       flatpak-module,
       grub-conf,
       disko,
+      nixos-rk3588,
       ...
     }@inputs:
     let
@@ -39,6 +44,11 @@
         ./shared/generic.nix
         disko.nixosModules.disko
       ];
+
+      rk_system = "aarch64-linux";
+      rk_pkgsKernel = import nixpkgs { system = rk_system; };
+
+      boardModule = nixos-rk3588.nixosModules.orangepi5;
     in
     {
       nixosConfigurations = {
@@ -68,12 +78,32 @@
 
         minimal = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs; swapSize = "8G"; };
+          specialArgs = {
+            inherit inputs;
+            swapSize = "8G";
+          };
           modules = shared_modules ++ [
             grub-conf.nixosModules.grubConfiguration
             ./shared/graphics_drivers
             ./disk-config.nix
             ./minimal/configuration.nix
+            ./hardware-configuration.nix
+          ];
+        };
+        opi5pro = nixpkgs.lib.nixosSystem {
+          system = rk_system;
+          specialArgs = {
+            inherit inputs;
+            rk3588 = { inherit nixpkgs rk_pkgsKernel; };
+          };
+          modules = [
+            # Board: core + U‑Boot (sd-image). We stay off UEFI entirely.
+            boardModule.core
+            boardModule.sd-image
+
+            # Disko for declarative NVMe partitioning/mounts
+            disko.nixosModules.disko
+            ./orangepi5pro/configuration.nix
             ./hardware-configuration.nix
           ];
         };
