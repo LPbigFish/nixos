@@ -104,7 +104,6 @@
             # Disko for declarative NVMe partitioning/mounts
             disko.nixosModules.disko
             ./orangepi5pro/configuration.nix
-            ./hardware-configuration.nix
           ];
         };
       };
