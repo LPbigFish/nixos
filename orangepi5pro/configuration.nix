@@ -70,11 +70,6 @@
     jellyfin-ffmpeg
   ];
 
-  services.jellyfin = {
-    enable = true;
-    openFirewall = true;
-  };
-
   # Match your target release
   system.stateVersion = "24.11";
 }

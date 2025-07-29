@@ -101,6 +101,7 @@
             boardModule.core
             # Disko for declarative NVMe partitioning/mounts
             disko.nixosModules.disko
+            ./shared/media_server/jellyfin.nix
             ./orangepi5pro/configuration.nix
           ];
         };
