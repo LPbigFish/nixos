@@ -1,10 +1,9 @@
 { ... }: {
   users.users.jellyfin = {
-    isNormalUser = true;
+    isSystemUser = true;
     description = "Jellyfin user account";
     extraGroups = [
       "networkmanager"
-      "wheel"
     ];
     createHome = true;
   };
