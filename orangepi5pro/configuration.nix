@@ -28,6 +28,10 @@
     fsType = "ext4";
   };
 
+  services.udev.extraRules = ''
+    SUBSYSTEM=="leds", ACTION=="add", ATTR{trigger}="none", ATTR{brightness}="0"
+  '';
+
   graphics-driver-selection.gpu = "none";
 
   networking.hostName = "orangepi5pro";
