@@ -6,7 +6,7 @@
         /dts-v1/;
         /plugin/;
         / {
-            compatible = "xunlong,orangepi-5-pro", "rockchip,rk3588s";
+            compatible = "rockchip,rk3588", "9tripod,rk3588s";
         };
         / {
             fragment@0 {
