@@ -6,6 +6,7 @@
 }:
 {
   imports = [
+    ./led-overlay.nix
     ./orange-disk.nix
   ];
 
@@ -27,10 +28,6 @@
     device = "/dev/disk/by-uuid/d3efb2a1-300f-429a-9d95-853ecd1e3b1d";
     fsType = "ext4";
   };
-
-  services.udev.extraRules = ''
-    SUBSYSTEM=="leds", ACTION=="add", ATTR{trigger}="none", ATTR{brightness}="0"
-  '';
 
   graphics-driver-selection.gpu = "none";
 
