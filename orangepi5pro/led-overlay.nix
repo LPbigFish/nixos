@@ -6,7 +6,7 @@
         /dts-v1/;
         /plugin/;
         / {
-            compatible = "rockchip,rk3588s-orangepi-5-pro", "rockchip,rk3588";
+            compatible = "rockchip,rk3588s-orangepi-5-pro";
         };
         / {
             fragment@0 {
