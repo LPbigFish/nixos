@@ -7,8 +7,7 @@
         /plugin/;
         / {
             compatible = "rockchip,rk3588s-orangepi-5-pro";
-        };
-        / {
+
             fragment@0 {
                 target-path = "/gpio-leds/blue_led@1";
                 __overlay__ {
