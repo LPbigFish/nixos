@@ -87,7 +87,7 @@
             ./hardware-configuration.nix
           ];
         };
-        opi5pro = nixpkgs.lib.nixosSystem {
+        orangepi5pro = nixpkgs.lib.nixosSystem {
           system = rk_system;
           specialArgs = {
             inherit inputs;
