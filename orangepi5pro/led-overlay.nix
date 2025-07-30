@@ -5,7 +5,9 @@
       dtsText = ''
         /dts-v1/;
         /plugin/;
-
+        / {
+            compatible = "xunlong,orangepi-5-pro", "rockchip,rk3588s";
+        };
         / {
             fragment@0 {
                 target-path = "/gpio-leds/blue_led@1";
