@@ -12,10 +12,7 @@
       url = "./shared/flatpak";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    grub-conf = {
-      url = "./shared/grub";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    grub-conf.url = "./shared/grub";
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
