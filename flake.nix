@@ -96,11 +96,16 @@
             overlays = [
               (import ./overlays/rk-overlay.nix)
             ];
+            config = {
+              allowUnfree = true;
+              # optional: allowedUnfreePredicate = pkg: true;  # or narrow it down
+            };
           };
           specialArgs = {
             inherit inputs;
-            rk3588 = { inherit nixpkgs;
-            pkgsKernel = rk_pkgsKernel;
+            rk3588 = {
+              inherit nixpkgs;
+              pkgsKernel = rk_pkgsKernel;
             };
           };
           modules = shared_modules ++ [
