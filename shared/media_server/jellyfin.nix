@@ -9,10 +9,9 @@ in{
   services.jellyfin = {
     enable = true;
     openFirewall = true;
-    ffmpegPackage = ffmpeg-rk;
   };
 
   users.users.jellyfin.extraGroups = [ "video" "render" ];
 
-  environment.systemPackages = with pkgs; [ v4l-utils ];
+  environment.systemPackages = [ pkgs.v4l-utils ffmpeg-rk ];
 }
