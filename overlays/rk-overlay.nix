@@ -11,7 +11,7 @@ let
       repo  = "mpp";
       rev   = version;
       # First build will tell you the wanted hash; paste it back here.
-      sha256 = lib.fakeSha256;
+      sha256 = "sha256-+1Gnx7n9nZVVt0S/hZEzXupADPX0JRmTGD1XBhLMZ7o=";
     };
 
     nativeBuildInputs = [ cmake pkg-config ];
