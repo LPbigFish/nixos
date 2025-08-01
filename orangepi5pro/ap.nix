@@ -24,9 +24,9 @@
       channel = 9; # pick a legal, uncongested channel
 
       settings = {
-        ieee80211n = lib.mkForce "1"; # keep 11n
-        ht_capab = lib.mkForce "[SHORT-GI-20]"; # no [HT40+/-], no [SHORT-GI-40]
-        wmm_enabled = "1"; # recommended for 11n
+        ieee80211n = lib.mkForce "1";
+        ht_capab   = lib.mkForce "[SHORT-GI-20]";  # 20 MHz only, no SGI-40
+        wmm_enabled = lib.mkForce "1";
       };
 
       networks = {
