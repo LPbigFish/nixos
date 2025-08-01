@@ -23,7 +23,7 @@
       band = "2g"; # or "5g" if your chip supports it
       channel = 9; # pick a legal, uncongested channel
       networks = {
-        orange = {
+        wlan0 = {
           ssid = "OrangeBox";
           authentication = {
             mode = "wpa2-sha256";
