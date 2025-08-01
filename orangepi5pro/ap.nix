@@ -51,30 +51,23 @@
   services.dnsmasq = {
     enable = true;
     settings = {
-      interface = "wlan0";
-      bind-interfaces = true;
-
-      # Use a private zone
       domain = "home.arpa";
       local = "/home.arpa/";
-      expand-hosts = true; # append domain to hostnames
+      expand-hosts = true;
 
-      # DHCP range as before, but point DNS to the AP
-      dhcp-range = "192.168.50.2,192.168.50.30,255.255.255.224,12h";
+      # Serve only yourself as DNS to clients
       dhcp-option = [
-        "3,192.168.50.1" # router/gateway
-        "6,192.168.50.1" # DNS = AP (dnsmasq)
-        "15,home.arpa" # domain name
-        "119,home.arpa" # domain search list (short names)
+        "3,192.168.50.1" # router
+        "6,192.168.50.1" # DNS = the Pi
+        "15,home.arpa" # domain
+        "119,home.arpa" # search
       ];
 
-      # Upstream DNS (dnsmasq will forward non-local lookups)
-      server = [
-        "1.1.1.1"
-        "9.9.9.9"
-      ];
+      # Good for debugging
+      log-queries = true;
+      log-dhcp = true;
 
-      # Ensure the AP itself has a fixed name in DNS
+      # Your host record
       host-record = [ "orangepi.home.arpa,192.168.50.1" ];
     };
   };
