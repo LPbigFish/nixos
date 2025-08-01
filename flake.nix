@@ -99,8 +99,9 @@
           };
           specialArgs = {
             inherit inputs;
-            rk3588 = { inherit nixpkgs; };
+            rk3588 = { inherit nixpkgs;
             pkgsKernel = rk_pkgsKernel;
+            };
           };
           modules = shared_modules ++ [
             boardModule.core
