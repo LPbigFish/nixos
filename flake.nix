@@ -46,6 +46,8 @@
       rk_pkgsKernel = import nixpkgs { system = rk_system; };
 
       boardModule = nixos-rk3588.nixosModules.boards.orangepi5;
+
+      rk_overlay = (import ./overlays/rk-overlay.nix);
     in
     {
       nixosConfigurations = {
@@ -89,24 +91,29 @@
         };
         orangepi5pro = nixpkgs.lib.nixosSystem {
           system = rk_system;
+
+          # Apply the overlay ONLY to this system
           pkgs = import nixpkgs {
-            inherit system;
-            overlays = [ (import ./overlays/rk-overlay.nix) ];
+            system = rk_system;
+            overlays = [ rk_overlay ];
           };
+
           specialArgs = {
             inherit inputs;
             rk3588 = { inherit nixpkgs; };
             pkgsKernel = rk_pkgsKernel;
           };
+
+          modules = shared_modules ++ [
+            # Board: core + U-Boot (sd-image)
+            boardModule.core
+            disko.nixosModules.disko
+
+            # Your Jellyfin and machine config
+            ./shared/media_server/jellyfin.nix
+            ./orangepi5pro/configuration.nix
+          ];
         };
-        modules = shared_modules ++ [
-          # Board: core + U‑Boot (sd-image). We stay off UEFI entirely.
-          boardModule.core
-          # Disko for declarative NVMe partitioning/mounts
-          disko.nixosModules.disko
-          ./shared/media_server/jellyfin.nix
-          ./orangepi5pro/configuration.nix
-        ];
       };
     };
 }
