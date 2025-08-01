@@ -8,7 +8,10 @@
   # Give the AP interface a static /27 address and disable DHCP client on it
   networking.interfaces.wlan0.useDHCP = false;
   networking.interfaces.wlan0.ipv4.addresses = [
-    { address = "192.168.50.1"; prefixLength = 27; }  # 192.168.50.0/27
+    {
+      address = "192.168.50.1";
+      prefixLength = 27;
+    } # 192.168.50.0/27
   ];
 
   # Hostapd: Wi-Fi AP
@@ -16,16 +19,18 @@
     enable = true;
     # New-style, declarative radios/networks
     radios.wlan0 = {
-      countryCode = "CZ";    # <-- set your 2-letter code (e.g., DE, GB)
-      band = "2g";           # or "5g" if your chip supports it
-      channel = 9;           # pick a legal, uncongested channel
-      networks = [{
-        ssid = "OrangeBox";       # <-- your SSID
-        authentication = {
-          mode = "wpa2";     # or "wpa3" if clients support it
-          wpaPassword = "12345678";  # 8+ chars
+      countryCode = "CZ"; # <-- set your 2-letter code (e.g., DE, GB)
+      band = "2g"; # or "5g" if your chip supports it
+      channel = 9; # pick a legal, uncongested channel
+      networks = {
+        orange = {
+          ssid = "OrangeBox";
+          authentication = {
+            mode = "wpa2";
+            wpaPassphrase = "12345678"; # use wpaPassphrase here
+          };
         };
-      }];
+      };
     };
   };
 
@@ -42,8 +47,8 @@
 
       # Default gateway & DNS given to clients
       dhcp-option = [
-        "3,192.168.50.1"             # router (option 3)
-        "6,1.1.1.1,9.9.9.9"          # DNS servers (option 6)
+        "3,192.168.50.1" # router (option 3)
+        "6,1.1.1.1,9.9.9.9" # DNS servers (option 6)
       ];
     };
   };
@@ -51,7 +56,7 @@
   # (Optional) Share WAN to Wi-Fi clients with NAT via eth0
   networking.nat = {
     enable = true;
-    externalInterface = "enP4p65s0";       # <-- your uplink
+    externalInterface = "enP4p65s0"; # <-- your uplink
     internalInterfaces = [ "wlan0" ];
   };
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
@@ -59,7 +64,15 @@
   # Firewall: allow DHCP/DNS from clients (and let NAT handle forwarding)
   networking.firewall = {
     enable = true;
-    allowedUDPPorts = [ 67 68 53 22 ];
-    allowedTCPPorts = [ 53 22 ];
+    allowedUDPPorts = [
+      67
+      68
+      53
+      22
+    ];
+    allowedTCPPorts = [
+      53
+      22
+    ];
   };
 }
