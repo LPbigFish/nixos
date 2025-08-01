@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   # Let NetworkManager manage everything EXCEPT the AP interface
@@ -25,10 +25,10 @@
 
       settings = {
         ieee80211n = "1"; # keep 11n
-        ht_capab = "[SHORT-GI-20]"; # no [HT40+/-], no [SHORT-GI-40]
+        ht_capab = lib.mkForce "[SHORT-GI-20]"; # no [HT40+/-], no [SHORT-GI-40]
         wmm_enabled = "1"; # recommended for 11n
       };
-      
+
       networks = {
         wlan0 = {
           ssid = "OrangeBox";
