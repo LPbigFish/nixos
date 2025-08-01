@@ -6,8 +6,8 @@
   networking.networkmanager.unmanaged = [ "interface-name:${interface}" ];
 
   # Give the AP interface a static /27 address and disable DHCP client on it
-  networking.interfaces.${interface}.useDHCP = false;
-  networking.interfaces.${interface}.ipv4.addresses = [
+  networking.wlaninterfaces.${interface}.useDHCP = false;
+  networking.wlaninterfaces.${interface}.ipv4.addresses = [
     { address = "192.168.50.1"; prefixLength = 27; }  # 192.168.50.0/27
   ];
 
@@ -51,7 +51,7 @@
   # (Optional) Share WAN to Wi-Fi clients with NAT via eth0
   networking.nat = {
     enable = true;
-    externalInterface = "eth0";       # <-- your uplink
+    externalInterface = "enP4p65s0";       # <-- your uplink
     internalInterfaces = [ "${interface}" ];
   };
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
