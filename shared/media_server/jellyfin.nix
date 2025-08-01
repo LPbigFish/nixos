@@ -1,11 +1,4 @@
 { pkgs, ... }:
-let
-  ffmpeg-rk = pkgs.jellyfin-ffmpeg.overrideAttrs (old: {
-    configureFlags = old.configureFlags ++ [
-      "--enable-rkmpp"
-    ];
-  });
-in
 {
   hardware.graphics.enable = true;
 
@@ -21,9 +14,9 @@ in
 
   environment.systemPackages = [
     pkgs.v4l-utils
-    ffmpeg-rk
 
     pkgs.jellyfin
     pkgs.jellyfin-web
+    pkgs.jellyfin-ffmpeg
   ];
 }
