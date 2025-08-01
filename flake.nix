@@ -92,7 +92,7 @@
         orangepi5pro = nixpkgs.lib.nixosSystem {
           system = rk_system; # "aarch64-linux"
           pkgs = import nixpkgs {
-            inherit system;
+            system = rk_system;
             overlays = [
               (import ./overlays/rk-overlay.nix)
             ];
