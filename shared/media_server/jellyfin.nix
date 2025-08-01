@@ -7,6 +7,8 @@
     openFirewall = true;
   };
 
+  systemd.services.jellyfin.path = [ pkgs.jellyfin-ffmpeg ];
+
   users.users.jellyfin.extraGroups = [
     "video"
     "render"
