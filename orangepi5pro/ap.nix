@@ -27,7 +27,7 @@
           ssid = "OrangeBox";
           authentication = {
             mode = "wpa2";
-            wpaPassphrase = "12345678"; # use wpaPassphrase here
+            wpaPassword = "12345678"; # use wpaPassphrase here
           };
         };
       };
