@@ -53,28 +53,23 @@
       interface = "wlan0";
       bind-interfaces = true;
 
-      # Be authoritative for this link → clients pick up changes faster
+      # Make dnsmasq the authority for this subnet
       dhcp-authoritative = true;
 
-      # Local zone
-      domain = "home.arpa";
-      local = "/home.arpa/";
-      expand-hosts = true;
+      # 192.168.50.0/27  -> usable .1-.30; serve .10-.30
+      dhcp-range = "192.168.50.10,192.168.50.30,255.255.255.224,12h";
 
-      # Hand out the Pi as gateway and DNS
+      # Hand out gateway & DNS (use the AP itself as DNS)
       dhcp-option = [
-        "3,192.168.50.1" # router
-        "6,192.168.50.1" # DNS = the Pi
-        "15,home.arpa" # domain (search)
-        "119,home.arpa" # search list (not all clients use it)
+        "3,192.168.50.1" # default route
+        "6,192.168.50.1" # DNS server
       ];
 
-      # Host record
-      host-record = [ "orangepi.home.arpa,192.168.50.1" ];
-
-      # Debugging
-      log-queries = true;
+      # Helpful for visibility while debugging
       log-dhcp = true;
+
+      domain = "home.arpa";
+      expand-hosts = true;
     };
   };
 
@@ -86,18 +81,12 @@
   };
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
-  # Firewall: allow DHCP/DNS from clients (and let NAT handle forwarding)
-  networking.firewall = {
-    enable = true;
-    allowedUDPPorts = [
-      67
-      68
-      53
-      22
-    ];
-    allowedTCPPorts = [
-      53
-      22
-    ];
-  };
+  # Firewall must allow DHCP/DNS from clients
+  networking.firewall.allowedUDPPorts = [
+    67
+    68
+    53
+    22
+  ];
+  networking.firewall.allowedTCPPorts = [ 53 22 ];
 }
