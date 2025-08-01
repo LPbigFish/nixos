@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   # Let NetworkManager manage everything EXCEPT the AP interface
@@ -25,7 +30,7 @@
 
       settings = {
         ieee80211n = lib.mkForce "1";
-        ht_capab   = lib.mkForce "[SHORT-GI-20]";  # 20 MHz only, no SGI-40
+        ht_capab = lib.mkForce "[SHORT-GI-20]"; # 20 MHz only, no SGI-40
         wmm_enabled = lib.mkForce "1";
       };
 
@@ -33,10 +38,9 @@
         wlan0 = {
           ssid = "OrangeBox";
           authentication = {
-            mode = "wpa3-sae";
-            saePasswords = [
-              { password = "123456789"; }
-            ];
+            mode = "wpa3-sae-transition"; # WPA3 + WPA2 fallback
+            wpaPassword = "123456789";
+            saePasswords = [ { password = "123456789"; } ];
           };
         };
       };
