@@ -1,13 +1,13 @@
-{ config, pkgs, interface ? "wlan0", ... }:
+{ config, pkgs, ... }:
 
 {
   # Let NetworkManager manage everything EXCEPT the AP interface
   networking.networkmanager.enable = true;
-  networking.networkmanager.unmanaged = [ "interface-name:${interface}" ];
+  networking.networkmanager.unmanaged = [ "interface-name:wlan0" ];
 
   # Give the AP interface a static /27 address and disable DHCP client on it
-  networking.wlaninterfaces.${interface}.useDHCP = false;
-  networking.wlaninterfaces.${interface}.ipv4.addresses = [
+  networking.interfaces.wlan0.useDHCP = false;
+  networking.interfaces.wlan0.ipv4.addresses = [
     { address = "192.168.50.1"; prefixLength = 27; }  # 192.168.50.0/27
   ];
 
@@ -15,7 +15,7 @@
   services.hostapd = {
     enable = true;
     # New-style, declarative radios/networks
-    radios.${interface} = {
+    radios.wlan0 = {
       countryCode = "CZ";    # <-- set your 2-letter code (e.g., DE, GB)
       band = "2g";           # or "5g" if your chip supports it
       channel = 9;           # pick a legal, uncongested channel
@@ -33,7 +33,7 @@
   services.dnsmasq = {
     enable = true;
     settings = {
-      interface = "${interface}";
+      interface = "wlan0";
       bind-interfaces = true;
 
       # 192.168.50.0/27 → mask 255.255.255.224, usable .1-.30
@@ -52,7 +52,7 @@
   networking.nat = {
     enable = true;
     externalInterface = "enP4p65s0";       # <-- your uplink
-    internalInterfaces = [ "${interface}" ];
+    internalInterfaces = [ "wlan0" ];
   };
   boot.kernel.sysctl."net.ipv4.ip_forward" = 1;
 
