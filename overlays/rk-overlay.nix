@@ -23,36 +23,15 @@ let
       "-DBUILD_DOC=OFF"
     ];
   };
-
-  librga = stdenv.mkDerivation rec {
-    pname = "librga";
-    version = "v2.2.0";
-    src = fetchFromGitHub {
-      owner = "rockchip-linux";
-      repo  = "rga";
-      rev   = version;
-      sha256 = lib.fakeSha256;
-    };
-
-    nativeBuildInputs = [ cmake pkg-config ];
-    buildInputs       = [ libdrm ];
-    cmakeFlags = [
-      "-DCMAKE_BUILD_TYPE=Release"
-      "-DBUILD_TEST=OFF"
-      "-DBUILD_EXAMPLES=OFF"
-    ];
-  };
 in {
   # Expose the libraries (names are your choice)
   rockchip-mpp = rockchip-mpp;
-  librga       = librga;
 
   # Teach jellyfin-ffmpeg to use them
   jellyfin-ffmpeg = prev.jellyfin-ffmpeg.overrideAttrs (old: {
-    buildInputs = (old.buildInputs or []) ++ [ rockchip-mpp librga libdrm pkg-config ];
+    buildInputs = (old.buildInputs or []) ++ [ rockchip-mpp libdrm pkg-config ];
     configureFlags = (old.configureFlags or []) ++ [
       "--enable-rkmpp"
-      "--enable-rkrga"
     ];
   });
 }
