@@ -92,12 +92,6 @@
         orangepi5pro = nixpkgs.lib.nixosSystem {
           system = rk_system;
 
-          # Apply the overlay ONLY to this system
-          pkgs = import nixpkgs {
-            system = rk_system;
-            overlays = [ rk_overlay ];
-          };
-
           specialArgs = {
             inherit inputs;
             rk3588 = { inherit nixpkgs; 
@@ -108,7 +102,7 @@
             # Board: core + U-Boot (sd-image)
             boardModule.core
             disko.nixosModules.disko
-
+            ({ ... }: { nixpkgs.overlays = [ rk_overlay ]; })
             # Your Jellyfin and machine config
             ./shared/media_server/jellyfin.nix
             ./orangepi5pro/configuration.nix
