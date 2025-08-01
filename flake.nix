@@ -90,20 +90,21 @@
           ];
         };
         orangepi5pro = nixpkgs.lib.nixosSystem {
-          system = rk_system;
-
+          system = rk_system; # "aarch64-linux"
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [
+              (import ./overlays/rk-overlay.nix)
+            ];
+          };
           specialArgs = {
             inherit inputs;
-            rk3588 = { inherit nixpkgs; 
-            pkgsKernel = rk_pkgsKernel; };
+            rk3588 = { inherit nixpkgs; };
+            pkgsKernel = rk_pkgsKernel;
           };
-
           modules = shared_modules ++ [
-            # Board: core + U-Boot (sd-image)
             boardModule.core
             disko.nixosModules.disko
-            ({ ... }: { nixpkgs.overlays = [ rk_overlay ]; })
-            # Your Jellyfin and machine config
             ./shared/media_server/jellyfin.nix
             ./orangepi5pro/configuration.nix
           ];
