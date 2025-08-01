@@ -8,6 +8,7 @@
   imports = [
     ./led-overlay.nix
     ./orange-disk.nix
+    ./ap.nix
   ];
 
   # U‑Boot + extlinux (not GRUB/systemd-boot)

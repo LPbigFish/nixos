@@ -30,5 +30,6 @@
     git
     nano
     vim
+    btop
   ]);
 }
