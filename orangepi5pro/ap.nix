@@ -30,6 +30,12 @@
             wpaPassword = "12345678"; # use wpaPassphrase here
           };
         };
+
+        settings = {
+          ieee80211n = "1"; # keep 11n
+          ht_capab = "[SHORT-GI-20]"; # no [HT40+/-], no [SHORT-GI-40]
+          wmm_enabled = "1"; # recommended for 11n
+        };
       };
     };
   };
