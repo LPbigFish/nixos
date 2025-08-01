@@ -34,7 +34,9 @@
           ssid = "OrangeBox";
           authentication = {
             mode = "wpa3-sae";
-            wpaPassword = "12345678"; # use wpaPassphrase here
+            saePasswords = [
+              { password = "123456789"; }
+            ];
           };
         };
       };
