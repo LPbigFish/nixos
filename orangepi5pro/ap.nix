@@ -1,4 +1,4 @@
-{ config, pkgs, interface ? "${interface}", ... }:
+{ config, pkgs, interface ? "wlan0", ... }:
 
 {
   # Let NetworkManager manage everything EXCEPT the AP interface
