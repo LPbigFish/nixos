@@ -3,7 +3,6 @@ let
   ffmpeg-rk = pkgs.jellyfin-ffmpeg.overrideAttrs (old: {
     configureFlags = old.configureFlags ++ [
       "--enable-rkmpp"
-      "--enable-rga"
     ];
   });
 in
