@@ -38,9 +38,14 @@
         wlan0 = {
           ssid = "OrangeBox";
           authentication = {
-            mode = "wpa3-sae-transition"; # WPA3 + WPA2 fallback
+            mode = "wpa3-sae-transition";
             wpaPassword = "123456789";
             saePasswords = [ { password = "123456789"; } ];
+          };
+          settings = {
+            ieee80211w = "1"; # PMF optional for transition
+            sae_pwe = "2"; # better Android compatibility
+            wpa_key_mgmt = "SAE WPA-PSK"; # <-- replace WPA-PSK-SHA256 with WPA-PSK
           };
         };
       };
