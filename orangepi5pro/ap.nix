@@ -22,6 +22,13 @@
       countryCode = "CZ"; # <-- set your 2-letter code (e.g., DE, GB)
       band = "2g"; # or "5g" if your chip supports it
       channel = 9; # pick a legal, uncongested channel
+
+      settings = {
+        ieee80211n = "1"; # keep 11n
+        ht_capab = "[SHORT-GI-20]"; # no [HT40+/-], no [SHORT-GI-40]
+        wmm_enabled = "1"; # recommended for 11n
+      };
+      
       networks = {
         wlan0 = {
           ssid = "OrangeBox";
@@ -29,12 +36,6 @@
             mode = "wpa2-sha256";
             wpaPassword = "12345678"; # use wpaPassphrase here
           };
-        };
-
-        settings = {
-          ieee80211n = "1"; # keep 11n
-          ht_capab = "[SHORT-GI-20]"; # no [HT40+/-], no [SHORT-GI-40]
-          wmm_enabled = "1"; # recommended for 11n
         };
       };
     };
