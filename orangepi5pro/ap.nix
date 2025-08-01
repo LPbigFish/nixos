@@ -33,7 +33,7 @@
         wlan0 = {
           ssid = "OrangeBox";
           authentication = {
-            mode = "wpa2-sha256";
+            mode = "wpa3-sae";
             wpaPassword = "12345678"; # use wpaPassphrase here
           };
         };
