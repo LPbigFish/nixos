@@ -51,24 +51,31 @@
   services.dnsmasq = {
     enable = true;
     settings = {
+      interface = "wlan0";
+      bind-interfaces = true;
+
+      # Be authoritative for this link → clients pick up changes faster
+      dhcp-authoritative = true;
+
+      # Local zone
       domain = "home.arpa";
       local = "/home.arpa/";
       expand-hosts = true;
 
-      # Serve only yourself as DNS to clients
+      # Hand out the Pi as gateway and DNS
       dhcp-option = [
         "3,192.168.50.1" # router
         "6,192.168.50.1" # DNS = the Pi
-        "15,home.arpa" # domain
-        "119,home.arpa" # search
+        "15,home.arpa" # domain (search)
+        "119,home.arpa" # search list (not all clients use it)
       ];
 
-      # Good for debugging
+      # Host record
+      host-record = [ "orangepi.home.arpa,192.168.50.1" ];
+
+      # Debugging
       log-queries = true;
       log-dhcp = true;
-
-      # Your host record
-      host-record = [ "orangepi.home.arpa,192.168.50.1" ];
     };
   };
 
