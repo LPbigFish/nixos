@@ -1,4 +1,6 @@
 { pkgs, ... }: {
+  hardware.opengl.enable = true;
+
   services.jellyfin = {
     enable = true;
     openFirewall = true;
