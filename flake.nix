@@ -89,19 +89,24 @@
         };
         orangepi5pro = nixpkgs.lib.nixosSystem {
           system = rk_system;
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ (import ./overlays/rk-overlay.nix) ];
+          };
           specialArgs = {
             inherit inputs;
-            rk3588 = { inherit nixpkgs; pkgsKernel = rk_pkgsKernel; };
+            rk3588 = { inherit nixpkgs; };
+            pkgsKernel = rk_pkgsKernel;
           };
-          modules = shared_modules ++ [
-            # Board: core + U‑Boot (sd-image). We stay off UEFI entirely.
-            boardModule.core
-            # Disko for declarative NVMe partitioning/mounts
-            disko.nixosModules.disko
-            ./shared/media_server/jellyfin.nix
-            ./orangepi5pro/configuration.nix
-          ];
         };
+        modules = shared_modules ++ [
+          # Board: core + U‑Boot (sd-image). We stay off UEFI entirely.
+          boardModule.core
+          # Disko for declarative NVMe partitioning/mounts
+          disko.nixosModules.disko
+          ./shared/media_server/jellyfin.nix
+          ./orangepi5pro/configuration.nix
+        ];
       };
     };
 }
