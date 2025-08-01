@@ -54,15 +54,28 @@
       interface = "wlan0";
       bind-interfaces = true;
 
-      # 192.168.50.0/27 → mask 255.255.255.224, usable .1-.30
-      # Serve .2-.30 to clients for 12h leases
-      dhcp-range = "192.168.50.2,192.168.50.30,255.255.255.224,12h";
+      # Use a private zone
+      domain = "home.arpa";
+      local = "/home.arpa/";
+      expand-hosts = true; # append domain to hostnames
 
-      # Default gateway & DNS given to clients
+      # DHCP range as before, but point DNS to the AP
+      dhcp-range = "192.168.50.2,192.168.50.30,255.255.255.224,12h";
       dhcp-option = [
-        "3,192.168.50.1" # router (option 3)
-        "6,1.1.1.1,9.9.9.9" # DNS servers (option 6)
+        "3,192.168.50.1" # router/gateway
+        "6,192.168.50.1" # DNS = AP (dnsmasq)
+        "15,home.arpa" # domain name
+        "119,home.arpa" # domain search list (short names)
       ];
+
+      # Upstream DNS (dnsmasq will forward non-local lookups)
+      server = [
+        "1.1.1.1"
+        "9.9.9.9"
+      ];
+
+      # Ensure the AP itself has a fixed name in DNS
+      host-record = [ "orangepi.home.arpa,192.168.50.1" ];
     };
   };
 
