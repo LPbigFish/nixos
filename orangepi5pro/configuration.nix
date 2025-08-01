@@ -71,10 +71,6 @@
     gnused
     gawk
     tmux
-
-    jellyfin
-    jellyfin-web
-    jellyfin-ffmpeg
   ];
 
   # Match your target release
