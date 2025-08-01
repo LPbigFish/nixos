@@ -11,6 +11,12 @@
     ./ap.nix
   ];
 
+  services.udev.extraRules = ''
+    KERNEL=="mpp_service", MODE="0660", GROUP="video"
+    KERNEL=="rga",         MODE="0660", GROUP="video"
+    SUBSYSTEM=="dma_heap", KERNEL=="system*", MODE="0666", GROUP="video"
+  '';
+
   # U‑Boot + extlinux (not GRUB/systemd-boot)
   boot.loader.grub.enable = false;
   boot.loader.systemd-boot.enable = false;
@@ -66,7 +72,6 @@
     gawk
     tmux
 
-    
     jellyfin
     jellyfin-web
     jellyfin-ffmpeg
