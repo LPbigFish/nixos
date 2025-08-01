@@ -5,7 +5,7 @@ let
   rockchip-mpp = stdenv.mkDerivation rec {
     pname = "rockchip-mpp";
     # Pick a known-good MPP rev; update if you like.
-    version = "v2.0.0";
+    version = "v1.0.9";
     src = fetchFromGitHub {
       owner = "rockchip-linux";
       repo  = "mpp";
