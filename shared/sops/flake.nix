@@ -20,7 +20,7 @@
           sops.defaultSopsFormat = "yaml";
 
           sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
-          sops.age.generateKeys = true;
+          sops.age.generateKey = true;
         
           sops.secrets = {
             rootPassword = {};
