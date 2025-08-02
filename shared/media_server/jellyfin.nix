@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   hardware.graphics.enable = true;
 
@@ -6,8 +6,6 @@
     enable = true;
     openFirewall = true;
   };
-
-  systemd.services.jellyfin.path = [ pkgs.jellyfin-ffmpeg ];
 
   users.users.jellyfin.extraGroups = [
     "video"
@@ -19,5 +17,16 @@
 
     pkgs.jellyfin
     pkgs.jellyfin-web
+    pkgs.jellyfin-ffmpeg
   ];
+
+  systemd.services.jellyfin.serviceConfig = {
+    SupplementaryGroups = [ "video" "render" ];
+    PrivateDevices = lib.mkForce false;
+    DeviceAllow = [
+      "/dev/mpp_service rw"
+      "/dev/rga rw"
+      "/dev/dri/renderD128 rw"
+    ];
+  };
 }
