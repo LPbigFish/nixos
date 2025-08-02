@@ -60,22 +60,19 @@ let
 
     installPhase = ''
             runHook preInstall
-            mkdir -p "$out/include" "$out/lib" "$out/lib/pkgconfig"
+            mkdir -p "$out/lib" "$out/include" "$out/lib/pkgconfig"
 
-            # headers
-            cp -r include/* "$out/include/"
+            cp -av include/* "$out/include/"
 
-            # prebuilt aarch64 shared lib provided by the repo
-            cp libs/Linux/gcc-aarch64/librga.so "$out/lib/"
-
-            # pkg-config file
+            cp -av libs/Linux/gcc-aarch64/* "$out/lib/"
             cat > "$out/lib/pkgconfig/librga.pc" <<EOF
       Name: librga
-      Description: Rockchip RGA userspace library (prebuilt)
-      Version: ${version}
+      Description: Rockchip Raster Graphic Accelerator userspace library
+      Version: 1.10.0
       Libs: -L$out/lib -lrga
       Cflags: -I$out/include
       EOF
+
             runHook postInstall
     '';
   };
