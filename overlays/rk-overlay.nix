@@ -3,6 +3,7 @@ let
   inherit (prev)
     lib
     stdenv
+    stdenvNoCC
     fetchFromGitHub
     cmake
     ninja
@@ -46,41 +47,65 @@ let
     '';
   };
 
-  librga = stdenv.mkDerivation rec {
+    librga = stdenvNoCC.mkDerivation rec {
     pname = "librga";
-    version = "v1.10.0"; # or another stable tag
+    version = "v1.10.0";
     src = fetchFromGitHub {
       owner = "airockchip";
-      repo = "librga";
-      rev = version;
-      sha256 = "sha256-8vDr/Il+Hf72r2fqI2r5K5v6lbnskY5Eb6XY18AYkJA="; # replace after first build
+      repo  = "librga";
+      rev   = version;
+      sha256 = "sha256-8vDr/Il+Hf72r2fqI2r5K5v6lbnskY5Eb6XY18AYkJA=";
     };
-    outputs = [
-      "out"
-      "dev"
-    ];
-    dontBuild = true;
+
+    outputs = [ "out" "dev" ];
     dontConfigure = true;
+    dontBuild = true;
 
     installPhase = ''
-          runHook preInstall
-          mkdir -p "$out/lib" "$dev/include" "$dev/lib/pkgconfig"
+      runHook preInstall
+      mkdir -p "$out/lib" "$dev/include" "$dev/lib/pkgconfig"
 
-          cp -av include/* "$dev/include/"
-          cp -av libs/Linux/gcc-aarch64/* "$out/lib/"
+      # headers + libs
+      cp -av include/*.h "$dev/include/"
+      cp -av libs/Linux/gcc-aarch64/librga.* "$out/lib/" 2>/dev/null || true
 
-          for pc in librga rga; do
-            cat > "$dev/lib/pkgconfig/$pc.pc" <<EOF
-      Name: $pc
-      Description: Rockchip Raster Graphic Accelerator userspace library
-      Version: 1.10.0
-      Libs: -L$out/lib -lrga
-      Cflags: -I$dev/include
-      EOF
-          done
-          runHook postInstall
+      # Some consumers expect <rga/...>
+      mkdir -p "$dev/include/rga"
+      for h in "$dev"/include/*.h; do
+        ln -s ../"$(basename "$h")" "$dev/include/rga/$(basename "$h")"
+      done
+
+      ver="1.10.0"
+      for name in librga rga; do
+        cat > "$dev/lib/pkgconfig/$name.pc" <<EOF
+prefix=/dummy
+exec_prefix=\$prefix
+libdir=/dummy/lib
+includedir=/dummy/include
+
+Name: $name
+Description: Rockchip Raster Graphic Accelerator userspace library
+Version: $ver
+Libs: -L\$libdir -lrga
+Cflags: -I\$includedir -I\$includedir/rga
+EOF
+      done
+      runHook postInstall
     '';
-    meta.platforms = [ "aarch64-linux" ];
+
+    # Regex-fix like mpp: set real prefix/libdir/includedir
+    postFixup = ''
+      shopt -s nullglob
+      for pc in "$dev"/lib/pkgconfig/*.pc; do
+        sed -E -i \
+          -e 's|^prefix=.*|prefix='"$out"'|' \
+          -e 's|^libdir=.*|libdir='"$out"'/lib|' \
+          -e 's|^includedir=.*|includedir='"$dev"'/include|' \
+          "$pc"
+      done
+    '';
+
+    meta.platforms = lib.platforms.aarch64;
   };
 in
 {
