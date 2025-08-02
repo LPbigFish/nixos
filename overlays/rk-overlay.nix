@@ -55,9 +55,17 @@ let
       rev   = version;
       sha256 = "sha256-8vDr/Il+Hf72r2fqI2r5K5v6lbnskY5Eb6XY18AYkJA=";  # replace after first build
     };
-    nativeBuildInputs = [ cmake ninja pkg-config ];
+    nativeBuildInputs = [ pkg-config ];
     buildInputs = [ libdrm ];
-    cmakeFlags = [ "-DCMAKE_BUILD_TYPE=Release" "-DBUILD_SHARED_LIBS=ON" ];
+
+    installPhase = ''
+      mkdir -p $out/lib $out/include
+      cp -a lib/*.so* $out/lib/
+      cp -a include/* $out/include/
+    '';
+
+    dontConfigure = true;
+    buildPhase = "make";
   };
 in
 {
