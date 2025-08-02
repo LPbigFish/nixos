@@ -22,6 +22,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-config.url = "./shared/sops";
+
+    inputs.devkit = {
+      url = "./shared/devkit";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -34,12 +39,14 @@
       disko,
       nixos-rk3588,
       sops-config,
+      devkit,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
 
       shared_modules = [
+        { nix.registry.devkit.flake = inputs.devkit; }
         sops-config.nixosModules.sops_configuration
         ./shared/generic.nix
         disko.nixosModules.disko
