@@ -73,7 +73,7 @@ let
             cat > "$dev/lib/pkgconfig/$pc.pc" <<EOF
       Name: $pc
       Description: Rockchip Raster Graphic Accelerator userspace library
-      Version: ${version}
+      Version: 1.10.0
       Libs: -L$out/lib -lrga
       Cflags: -I$dev/include
       EOF
