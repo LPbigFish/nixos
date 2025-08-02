@@ -69,10 +69,9 @@ let
           cp -av include/* "$dev/include/"
           cp -av libs/Linux/gcc-aarch64/* "$out/lib/"
 
-          # Provide both names, some trees check for "librga", others for "rga"
-          for pcname in librga rga; do
-            cat > "$dev/lib/pkgconfig/$pcname.pc" <<EOF
-      Name: $pcname
+          for pc in librga rga; do
+            cat > "$dev/lib/pkgconfig/$pc.pc" <<EOF
+      Name: $pc
       Description: Rockchip Raster Graphic Accelerator userspace library
       Version: ${version}
       Libs: -L$out/lib -lrga
@@ -90,7 +89,7 @@ in
   librga = librga;
 
   jellyfin-ffmpeg = prev.jellyfin-ffmpeg.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkg-config ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkg-config  librga.dev ];
     buildInputs = (old.buildInputs or [ ]) ++ [
       rockchip-mpp
       libdrm
