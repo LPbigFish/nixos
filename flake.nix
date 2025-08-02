@@ -46,7 +46,7 @@
       system = "x86_64-linux";
 
       shared_modules = [
-        { nix.registry.devkit.flake = inputs.devkit; }
+        devkit.nixosModules.registry
         sops-config.nixosModules.sops_configuration
         ./shared/generic.nix
         disko.nixosModules.disko
