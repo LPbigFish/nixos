@@ -22,7 +22,7 @@
           sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
           sops.age.generateKeys = true;
         
-          secrets = {
+          sops.secrets = {
             rootPassword = {};
             defaultUserPassword = {};
             wpaPassword = {};
