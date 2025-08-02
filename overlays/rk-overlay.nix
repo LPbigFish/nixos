@@ -48,24 +48,36 @@ let
 
   librga = stdenv.mkDerivation rec {
     pname = "librga";
-    version = "v1.10.0";  # or another stable tag
+    version = "v1.10.0"; # or another stable tag
     src = fetchFromGitHub {
       owner = "airockchip";
-      repo  = "librga";
-      rev   = version;
-      sha256 = "sha256-8vDr/Il+Hf72r2fqI2r5K5v6lbnskY5Eb6XY18AYkJA=";  # replace after first build
+      repo = "librga";
+      rev = version;
+      sha256 = "sha256-8vDr/Il+Hf72r2fqI2r5K5v6lbnskY5Eb6XY18AYkJA="; # replace after first build
     };
-    nativeBuildInputs = [ pkg-config ];
-    buildInputs = [ libdrm ];
+    dontBuild = true;
+    dontConfigure = true;
 
     installPhase = ''
-      mkdir -p $out/lib $out/include
-      cp -a lib/*.so* $out/lib/
-      cp -a include/* $out/include/
-    '';
+            runHook preInstall
+            mkdir -p "$out/include" "$out/lib" "$out/lib/pkgconfig"
 
-    dontConfigure = true;
-    buildPhase = "make";
+            # headers
+            cp -r include/* "$out/include/"
+
+            # prebuilt aarch64 shared lib provided by the repo
+            cp libs/Linux/gcc-aarch64/librga.so "$out/lib/"
+
+            # pkg-config file
+            cat > "$out/lib/pkgconfig/librga.pc" <<EOF
+      Name: librga
+      Description: Rockchip RGA userspace library (prebuilt)
+      Version: ${version}
+      Libs: -L$out/lib -lrga
+      Cflags: -I$out/include
+      EOF
+            runHook postInstall
+    '';
   };
 in
 {
@@ -80,6 +92,9 @@ in
       libdrm
       librga
     ];
-    configureFlags = (old.configureFlags or [ ]) ++ [ "--enable-rkmpp" "--enable-rkrga" ];
+    configureFlags = (old.configureFlags or [ ]) ++ [
+      "--enable-rkmpp"
+      "--enable-rkrga"
+    ];
   });
 }
