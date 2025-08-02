@@ -89,12 +89,17 @@ in
   librga = librga;
 
   jellyfin-ffmpeg = prev.jellyfin-ffmpeg.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkg-config  librga.dev ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkg-config ];
     buildInputs = (old.buildInputs or [ ]) ++ [
-      rockchip-mpp
-      libdrm
       librga
+      libdrm
+      rockchip-mpp
     ];
+    preConfigure = (old.preConfigure or "") + ''
+      export PKG_CONFIG_PATH=${librga.dev}/lib/pkgconfig:${rockchip-mpp.dev}/lib/pkgconfig:$PKG_CONFIG_PATH
+      echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
+      pkg-config --exists librga && echo "librga ok $(pkg-config --modversion librga)" || { echo "librga missing"; ls -l ${librga.dev}/lib/pkgconfig; }
+    '';
     configureFlags = (old.configureFlags or [ ]) ++ [
       "--enable-rkmpp"
       "--enable-rkrga"
