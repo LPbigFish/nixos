@@ -23,7 +23,7 @@
     };
     sops-config.url = "./shared/sops";
 
-    inputs.devkit = {
+    devkit = {
       url = "./shared/devkit";
       inputs.nixpkgs.follows = "nixpkgs";
     };
