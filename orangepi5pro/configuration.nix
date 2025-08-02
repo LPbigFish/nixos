@@ -49,11 +49,11 @@
       "wheel"
     ];
     createHome = true;
-    initialPassword = "1234";
+    hashedPasswordFile = config.sops.secrets.defaultUserPassword.path;
     packages = with pkgs; [ ];
   };
 
-  users.users.root.initialPassword = "1234";
+  users.users.root.hashedPasswordFile = config.sops.secrets.defaultUserPassword.path;
 
   environment.systemPackages = with pkgs; [
     util-linux

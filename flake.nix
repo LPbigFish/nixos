@@ -21,6 +21,7 @@
       url = "github:gnull/nixos-rk3588";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-config.url = "./shared/sops";
   };
 
   outputs =
@@ -32,12 +33,14 @@
       grub-conf,
       disko,
       nixos-rk3588,
+      sops-config,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
 
       shared_modules = [
+        sops-config.nixosModules.sops_configuration
         ./shared/generic.nix
         disko.nixosModules.disko
       ];

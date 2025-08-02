@@ -1,0 +1,9 @@
+keys:
+  - &primary age1fyfvzdpefunekr7tf0fdqa85l7jvk6x2psrrwa26ckleln57hysssvuyzq
+  - &orange age1phgfzrnur7r54gpchccw8p2hnqqenz39rlqpnveepwyt926v650qdxf5ut
+creation_rules:
+  - path_regex: secrets/secrets.yaml$
+    key_groups:
+      - age:
+        - *primary
+        - *orange
