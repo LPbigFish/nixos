@@ -53,7 +53,7 @@ let
       owner = "airockchip";
       repo  = "librga";
       rev   = version;
-      sha256 = lib.fakeSha256;  # replace after first build
+      sha256 = "sha256-8vDr/Il+Hf72r2fqI2r5K5v6lbnskY5Eb6XY18AYkJA=";  # replace after first build
     };
     nativeBuildInputs = [ cmake ninja pkg-config ];
     buildInputs = [ libdrm ];
