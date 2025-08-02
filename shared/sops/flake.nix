@@ -19,7 +19,8 @@
           sops.defaultSopsFile = ../../secrets/secrets.yaml;
           sops.defaultSopsFormat = "yaml";
 
-          sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
+          sops.age.keyFile = "/home/lpbigfish/.config/sops/age/keys.txt";
+
           sops.age.generateKey = true;
         
           sops.secrets = {
