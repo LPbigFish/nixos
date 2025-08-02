@@ -55,37 +55,32 @@ let
       rev = version;
       sha256 = "sha256-8vDr/Il+Hf72r2fqI2r5K5v6lbnskY5Eb6XY18AYkJA="; # replace after first build
     };
-    dontBuild = true;
-    dontConfigure = true;
-
-    # declare the usual split outputs
     outputs = [
       "out"
       "dev"
     ];
+    dontBuild = true;
+    dontConfigure = true;
 
     installPhase = ''
-            runHook preInstall
+          runHook preInstall
+          mkdir -p "$out/lib" "$dev/include" "$dev/lib/pkgconfig"
 
-            mkdir -p "$out/lib" "$dev/include" "$dev/lib/pkgconfig"
+          cp -av include/* "$dev/include/"
+          cp -av libs/Linux/gcc-aarch64/* "$out/lib/"
 
-            # headers → dev
-            cp -av include/* "$dev/include/"
-
-            # aarch64 pre-built shared libs → out
-            cp -av libs/Linux/gcc-aarch64/* "$out/lib/"
-
-            # pkg-config file → dev
-            cat > "$dev/lib/pkgconfig/librga.pc" <<EOF
-      Name: librga
+          # Provide both names, some trees check for "librga", others for "rga"
+          for pcname in librga rga; do
+            cat > "$dev/lib/pkgconfig/$pcname.pc" <<EOF
+      Name: $pcname
       Description: Rockchip Raster Graphic Accelerator userspace library
       Version: ${version}
       Libs: -L$out/lib -lrga
       Cflags: -I$dev/include
       EOF
-            runHook postInstall
+          done
+          runHook postInstall
     '';
-
     meta.platforms = [ "aarch64-linux" ];
   };
 in
