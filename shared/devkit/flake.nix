@@ -39,7 +39,7 @@
           ];
         };
 
-        cuda = import ./cuda.nix { inherit pkgs; };
+        #cuda = import ./cuda.nix { inherit pkgs; };
       });
 
       # Module that registers this flake as "devkit"
