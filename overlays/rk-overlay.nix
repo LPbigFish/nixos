@@ -96,7 +96,7 @@ in
       rockchip-mpp
     ];
     preConfigure = (old.preConfigure or "") + ''
-      export PKG_CONFIG_PATH=${librga.dev}/lib/pkgconfig:${rockchip-mpp.dev}/lib/pkgconfig:$PKG_CONFIG_PATH
+      export PKG_CONFIG_PATH=${librga.dev}/lib/pkgconfig:${rockchip-mpp}/lib/pkgconfig:$PKG_CONFIG_PATH
       echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
       pkg-config --exists librga && echo "librga ok $(pkg-config --modversion librga)" || { echo "librga missing"; ls -l ${librga.dev}/lib/pkgconfig; }
     '';
