@@ -25,7 +25,9 @@
         
           sops.secrets = {
             rootPassword = {};
-            defaultUserPassword = {};
+            defaultUserPassword = {
+              owner = config.users.users.lpbigfish.name;
+            };
             wpaPassword = {};
           };
         };

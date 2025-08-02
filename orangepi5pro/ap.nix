@@ -39,7 +39,7 @@
           ssid = "OrangeBox";
           authentication = {
             mode = "wpa2-sha1";
-            wpaPassword = config.sops.secrets."wpaPassword";
+            wpaPasswordFile = config.sops.secrets."wpaPassword".path;
           };
         };
       };
