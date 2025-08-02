@@ -48,7 +48,7 @@ let
 
   librga = stdenv.mkDerivation rec {
     pname = "librga";
-    version = "v1.10.4";  # or another stable tag
+    version = "v1.10.0";  # or another stable tag
     src = fetchFromGitHub {
       owner = "airockchip";
       repo  = "librga";
