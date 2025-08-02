@@ -21,14 +21,20 @@
   };
 
   systemd.services.jellyfin.serviceConfig = {
-    PrivateDevices = lib.mkForce false;   # expose host /dev
-    DevicePolicy   = lib.mkForce "auto";
+    # Jellyfin’s ffmpeg needs these /dev nodes
+    PrivateDevices = false;
     DeviceAllow = [
       "/dev/mpp_service rw"
       "/dev/rga rw"
-      "/dev/dri/renderD128 rw"
-      "/dev/dri/renderD129 rw"
-      "/dev/dri/renderD130 rw"
+      "/dev/dri rw"
+      "/dev/dma_heap rw"
+      "/dev/dma_heap/system rw"
+      "/dev/dma_heap/cma rw"
+      # Optional, if present on your kernel:
+      "/dev/dma_heap/system-uncached rw"
+      # Some kernels expose V4L2 nodes for RGA/VPU as /dev/video*
+      "/dev/video0 rw"
+      "/dev/video1 rw"
     ];
     SupplementaryGroups = [ "video" "render" ];
   };
