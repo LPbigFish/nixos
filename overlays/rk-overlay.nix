@@ -80,7 +80,7 @@ in
 {
   rockchip-mpp = rockchip-mpp;
 
-  libra = librga;
+  librga = librga;
 
   jellyfin-ffmpeg = prev.jellyfin-ffmpeg.overrideAttrs (old: {
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkg-config ];
