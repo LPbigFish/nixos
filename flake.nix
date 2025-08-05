@@ -45,6 +45,11 @@
     let
       system = "x86_64-linux";
 
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
       shared_modules = [
         devkit.nixosModules.registry
         sops-config.nixosModules.sops_configuration
@@ -52,17 +57,24 @@
         disko.nixosModules.disko
       ];
 
+      rk_overlay = (import ./overlays/rk-overlay.nix);
+
       rk_system = "aarch64-linux";
-      rk_pkgsKernel = import nixpkgs { system = rk_system; };
+      rk_pkgsKernel = import nixpkgs {
+        system = rk_system;
+        overlays = [
+          (import ./overlays/rk-overlay.nix)
+        ];
+        config.allowUnfree = true;
+      };
 
       boardModule = nixos-rk3588.nixosModules.boards.orangepi5;
 
-      rk_overlay = (import ./overlays/rk-overlay.nix);
     in
     {
       nixosConfigurations = {
         wsl = nixpkgs.lib.nixosSystem {
-          inherit system;
+          inherit system pkgs;
           specialArgs = { inherit inputs; };
           modules = shared_modules ++ [
             ./wsl/configuration.nix
@@ -71,7 +83,7 @@
         };
 
         laptop = nixpkgs.lib.nixosSystem {
-          inherit system;
+          inherit system pkgs;
           specialArgs = { inherit inputs; };
           modules = shared_modules ++ [
             grub-conf.nixosModules.grubConfiguration
@@ -86,7 +98,7 @@
         };
 
         minimal = nixpkgs.lib.nixosSystem {
-          inherit system;
+          inherit system pkgs;
           specialArgs = {
             inherit inputs;
             swapSize = "8G";
@@ -100,17 +112,8 @@
           ];
         };
         orangepi5pro = nixpkgs.lib.nixosSystem {
-          system = rk_system; # "aarch64-linux"
-          pkgs = import nixpkgs {
-            system = rk_system;
-            overlays = [
-              (import ./overlays/rk-overlay.nix)
-            ];
-            config = {
-              allowUnfree = true;
-              # optional: allowedUnfreePredicate = pkg: true;  # or narrow it down
-            };
-          };
+          system = rk_system;
+          pkgs = rk_pkgsKernel;
           specialArgs = {
             inherit inputs;
             rk3588 = {

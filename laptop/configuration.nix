@@ -84,7 +84,6 @@
   environment.systemPackages = with pkgs; [
     curl
     wget
-    nixfmt-rfc-style
   ];
 
   system.stateVersion = "25.05"; # Did you read the comment?

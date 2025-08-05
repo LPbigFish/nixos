@@ -6,106 +6,64 @@ let
     stdenvNoCC
     fetchFromGitHub
     cmake
+    meson
     ninja
     pkg-config
     libdrm
+    yasm
+    nasm
     ;
 
   rockchip-mpp = stdenv.mkDerivation rec {
     pname = "rockchip-mpp";
-    version = "1.0.9";
+    version = "jellyfin-mpp";
     src = fetchFromGitHub {
-      owner = "rockchip-linux";
+      owner = "nyanmisaka";
       repo = "mpp";
-      rev = version; # note: no leading 'v'
-      sha256 = "sha256-+1Gnx7n9nZVVt0S/hZEzXupADPX0JRmTGD1XBhLMZ7o=";
+      rev = "e5f505a21907a485038870b6d9a6bec97cfceaf3";
+      sha256 = lib.fakeSha256;
     };
 
     nativeBuildInputs = [
       cmake
-      ninja
       pkg-config
     ];
-    buildInputs = [ libdrm ];
 
     cmakeFlags = [
-      "-DRKPLATFORM=ON"
       "-DCMAKE_BUILD_TYPE=Release"
-      "-DCMAKE_INSTALL_LIBDIR=lib"
-      "-DCMAKE_INSTALL_INCLUDEDIR=include"
+      "-DBUILD_SHARED_LIBS=ON"
+      "-DBUILD_TEST=OFF"
     ];
 
-    # Fix double-slash paths in the generated .pc files
-    postFixup = ''
-      shopt -s nullglob
-      for pc in "$out"/lib/pkgconfig/*.pc; do
-        sed -i \
-          -e 's|^libdir=.*|libdir='"$out"'/lib|' \
-          -e 's|^includedir=.*|includedir='"$out"'/include|' \
-          "$pc"
-      done
+    installPhase = ''
+      make install DESTDIR=$out
     '';
   };
 
     librga = stdenvNoCC.mkDerivation rec {
     pname = "librga";
-    version = "v1.10.0";
+    version = "jellyfin-rga";
     src = fetchFromGitHub {
-      owner = "airockchip";
-      repo  = "librga";
-      rev   = version;
-      sha256 = "sha256-8vDr/Il+Hf72r2fqI2r5K5v6lbnskY5Eb6XY18AYkJA=";
+      owner = "nyanmisaka";
+      repo  = "rk-mirrors";
+      rev   = "571a880951583a3b2a04e7e1fa900861653befde";
+      sha256 = lib.fakeSha256;
     };
 
-    outputs = [ "out" "dev" ];
-    dontConfigure = true;
-    dontBuild = true;
+    nativeBuildInputs = [ meson ninja pkg-config ];
 
-    installPhase = ''
-      runHook preInstall
-      mkdir -p "$out/lib" "$dev/include" "$dev/lib/pkgconfig"
+    mesonFlags = [
+      "--libdir=lib"
+      "--buildtype=release"
+      "--default-library=shared"
+      "--Dcpp_args=-fpermissive"
+      "--Dlibdrm=false"
+      "--Dlibrga_demo=false"
+    ];
 
-      # headers + libs
-      cp -av include/*.h "$dev/include/"
-      cp -av libs/Linux/gcc-aarch64/librga.* "$out/lib/" 2>/dev/null || true
+    builPhase = "ninja -C build";
 
-      # Some consumers expect <rga/...>
-      mkdir -p "$dev/include/rga"
-      for h in "$dev"/include/*.h; do
-        ln -s ../"$(basename "$h")" "$dev/include/rga/$(basename "$h")"
-      done
-
-      ver="1.10.0"
-      for name in librga rga; do
-        cat > "$dev/lib/pkgconfig/$name.pc" <<EOF
-prefix=/dummy
-exec_prefix=\$prefix
-libdir=/dummy/lib
-includedir=/dummy/include
-
-Name: $name
-Description: Rockchip Raster Graphic Accelerator userspace library
-Version: $ver
-Libs: -L\$libdir -lrga
-Cflags: -I\$includedir -I\$includedir/rga
-EOF
-      done
-      runHook postInstall
-    '';
-
-    # Regex-fix like mpp: set real prefix/libdir/includedir
-    postFixup = ''
-      shopt -s nullglob
-      for pc in "$dev"/lib/pkgconfig/*.pc; do
-        sed -E -i \
-          -e 's|^prefix=.*|prefix='"$out"'|' \
-          -e 's|^libdir=.*|libdir='"$out"'/lib|' \
-          -e 's|^includedir=.*|includedir='"$dev"'/include|' \
-          "$pc"
-      done
-    '';
-
-    meta.platforms = lib.platforms.aarch64;
+    installPhase = "ninja -C build install DESTDIR=$out";
   };
 in
 {
@@ -114,20 +72,35 @@ in
   librga = librga;
 
   jellyfin-ffmpeg = prev.jellyfin-ffmpeg.overrideAttrs (old: {
-    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkg-config ];
+    version = "1.0.0";
+
+    src = final.fetchFromGitHub {
+      owner = "nyanmikasa";
+      repo = "ffmpeg-rockchip";
+      rev = "e2bbfe4b31fc5328a625e266344a0bf3c2c45f60";
+      sha256 = lib.fakeSha256;
+    };
+
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkg-config yasm nasm ];
     buildInputs = (old.buildInputs or [ ]) ++ [
       librga
       libdrm
       rockchip-mpp
     ];
-    preConfigure = (old.preConfigure or "") + ''
-      export PKG_CONFIG_PATH=${librga.dev}/lib/pkgconfig:${rockchip-mpp}/lib/pkgconfig:$PKG_CONFIG_PATH
-      echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
-      pkg-config --exists librga && echo "librga ok $(pkg-config --modversion librga)" || { echo "librga missing"; ls -l ${librga.dev}/lib/pkgconfig; }
-    '';
+
     configureFlags = (old.configureFlags or [ ]) ++ [
+      "--enable-gpl"
+      "--enable-version3"
+      "--enable-libdrm"
       "--enable-rkmpp"
       "--enable-rkrga"
     ];
+
+    postInstall = ''
+      echo "Testing build..."
+      $out/bin/ffmpeg -decoders | grep rkmpp || true
+      $out/bin/ffmpeg -encoders | grep rkmpp || true
+      $out/bin/ffmpeg -filter | grep rkrga || true
+    '';
   });
 }

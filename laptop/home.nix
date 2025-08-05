@@ -25,12 +25,13 @@
       hunspell
       hunspellDicts.cs_CZ
     ])
-    ++ (with pkgs.jetbrains; [
-      idea-ultimate
-      clion
-      rust-rover
-      rider
-    ]);
+    #++ (with pkgs.jetbrains; [
+    #  idea-ultimate
+    #  clion
+    #  rust-rover
+    #  rider
+    #])
+    ;
 
   gtk = {
     enable = true;

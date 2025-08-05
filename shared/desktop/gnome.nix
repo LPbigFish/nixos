@@ -4,6 +4,6 @@
       enable = true;  
       wayland = true; 
     };
-    gnome.enable = true;
   };
+  services.desktopManager.gnome.enable = true;
 }

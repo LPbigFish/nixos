@@ -27,9 +27,10 @@
   ];
 
   environment.systemPackages = lib.mkBefore (with pkgs; [
-    git
     nano
     vim
     btop
+    nixd
+    nixfmt-rfc-style
   ]);
 }
