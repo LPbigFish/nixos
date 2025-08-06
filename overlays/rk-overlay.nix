@@ -77,20 +77,20 @@ let
     '';
 
     postInstall = ''
-            mkdir -p $out/lib/pkgconfig
+        mkdir -p $out/lib/pkgconfig
 
-            cat > $out/lib/pkgconfig/rockchip_mpp.pc <<EOF
-          prefix=$out
-          exec_prefix=\$""{prefix}
-          libdir=\$""{exec_prefix}/lib
-          includedir=\$""{prefix}/include
+        cat > $out/lib/pkgconfig/rockchip_mpp.pc <<EOF
+      prefix=$out
+      exec_prefix=$"{"prefix"}
+      libdir=$"{"exec_prefix"}/lib
+      includedir=$"{"prefix"}/include
 
-          Name: rockchip_mpp
-          Description: Rockchip MPP Library
-          Version: 1.0.8
-          Libs: -L\$""{libdir} -lrockchip_mpp
-          Cflags: -I\$""{includedir}
-          EOF
+      Name: rockchip_mpp
+      Description: Rockchip MPP Library
+      Version: 1.0.8
+      Libs: -L$"{"libdir"} -lrockchip_mpp
+      Cflags: -I$"{"includedir"}
+      EOF
     '';
 
     postFixup = ''
