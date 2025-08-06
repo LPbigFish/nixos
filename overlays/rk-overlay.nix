@@ -33,9 +33,9 @@ let
       "--libdir=lib"
       "--buildtype=release"
       "--default-library=shared"
-      "--Dcpp_args=-fpermissive"
-      "--Dlibdrm=false"
-      "--Dlibrga_demo=false"
+      "-Dcpp_args=-fpermissive"
+      "-Dlibdrm=false"
+      "-Dlibrga_demo=false"
     ];
 
     builPhase = "ninja -C build";
