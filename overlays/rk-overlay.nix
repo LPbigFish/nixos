@@ -73,6 +73,10 @@ let
     installPhase = ''
       make install DESTDIR=$out
     '';
+
+    patches = [
+      ./fix-pkgconfig-paths.patch
+    ];
   };
 in
 {
