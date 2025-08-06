@@ -73,11 +73,6 @@ let
     installPhase = ''
       make install DESTDIR=$out
     '';
-
-    postFixup = ''
-      substituteInPlace $out/lib/pkgconfig/*.pc \
-        --replace '$'"{prefix}//" '$'"{prefix}/"
-    '';
   };
 in
 {
