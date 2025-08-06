@@ -14,14 +14,14 @@ let
     nasm
     ;
 
-  rockchip-mpp = stdenv.mkDerivation rec {
+  rockchip-mpp = stdenv.mkDerivation {
     pname = "rockchip-mpp";
     version = "jellyfin-mpp";
     src = fetchFromGitHub {
       owner = "nyanmisaka";
       repo = "mpp";
       rev = "e5f505a21907a485038870b6d9a6bec97cfceaf3";
-      sha256 = lib.fakeSha256;
+      sha256 = "sha256-W7P/mRgunDdYeFVUXn0qWN+ExKlZ2eAtPcT0sGFa+1Q=";
     };
 
     nativeBuildInputs = [
@@ -33,6 +33,8 @@ let
       "-DCMAKE_BUILD_TYPE=Release"
       "-DBUILD_SHARED_LIBS=ON"
       "-DBUILD_TEST=OFF"
+      "-DBUILD_DEMO=OFF"
+      "-DBUILD_SAMPLES=OFF"
     ];
 
     installPhase = ''
@@ -40,7 +42,7 @@ let
     '';
   };
 
-    librga = stdenvNoCC.mkDerivation rec {
+    librga = stdenvNoCC.mkDerivation {
     pname = "librga";
     version = "jellyfin-rga";
     src = fetchFromGitHub {
