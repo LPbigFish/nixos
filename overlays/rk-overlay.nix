@@ -65,6 +65,9 @@ let
       "-DBUILD_TEST=OFF"
       "-DBUILD_DEMO=OFF"
       "-DBUILD_SAMPLES=OFF"
+      "-DCMAKE_INSTALL_PREFIX=${placeholder "out"}"
+      "-DCMAKE_INSTALL_FULL_LIBDIR=${placeholder "out"}/lib"
+      "-DCMAKE_INSTALL_FULL_INCLUDEDIR=${placeholder "out"}/include"
     ];
 
     installPhase = ''
