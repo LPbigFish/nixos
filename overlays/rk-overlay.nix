@@ -75,7 +75,7 @@ let
     installPhase = ''
       make install DESTDIR=$out
     '';
-    
+
     postInstall = ''
         mkdir -p $out/lib/pkgconfig
 
@@ -92,9 +92,9 @@ let
       Cflags: -I$"{"includedir"}
       EOF
 
-        echo "===== rockchip_mpp.pc content ====="
-        cat $out/lib/pkgconfig/rockchip_mpp.pc
-        echo "==================================="
+        echo "===== rockchip_mpp.pc content =====" > &2
+        cat $out/lib/pkgconfig/rockchip_mpp.pc > &2
+        echo "===================================" > &2
     '';
 
     postFixup = ''
