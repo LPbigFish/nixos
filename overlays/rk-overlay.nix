@@ -20,7 +20,7 @@ let
       owner = "nyanmisaka";
       repo = "rk-mirrors";
       rev = "571a880951583a3b2a04e7e1fa900861653befde";
-      sha256 = lib.fakeSha256;
+      sha256 = "sha256-W7P/mRgunDdYeFVUXn0qWN+ExKlZ2eAtPcT0sGFa+1Q=";
     };
 
     nativeBuildInputs = [
