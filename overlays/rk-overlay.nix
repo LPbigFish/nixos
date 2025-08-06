@@ -68,12 +68,11 @@ let
       "-DCMAKE_INSTALL_PREFIX=${placeholder "out"}"
       "-DCMAKE_INSTALL_INCLUDEDIR=include"
       "-DCMAKE_INSTALL_LIBDIR=lib"
-      "-DCMAKE_INSTALL_FULL_INCLUDEDIR=${placeholder "out"}/include"
-      "-DCMAKE_INSTALL_FULL_LIBDIR=${placeholder "out"}/lib"
+      "-DCMAKE_INSTALL_FULL_INCLUDEDIR=include"
     ];
 
     installPhase = ''
-      make install DESTDIR=$out
+      make install
     '';
 
     postInstall = ''
@@ -91,10 +90,6 @@ let
       Libs: -L$"{"libdir"} -lrockchip_mpp
       Cflags: -I$"{"includedir"}
       EOF
-
-        echo "===== rockchip_mpp.pc content =====" > &2
-        cat $out/lib/pkgconfig/rockchip_mpp.pc > &2
-        echo "===================================" > &2
     '';
 
     postFixup = ''
