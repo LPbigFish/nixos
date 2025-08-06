@@ -1,7 +1,7 @@
 final: prev:
 let
   inherit (prev)
-    lib
+    gcc
     stdenv
     stdenvNoCC
     fetchFromGitHub
@@ -24,6 +24,7 @@ let
     };
 
     nativeBuildInputs = [
+      gcc
       meson
       ninja
       pkg-config
