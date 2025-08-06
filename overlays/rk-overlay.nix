@@ -1,7 +1,6 @@
 final: prev:
 let
   inherit (prev)
-    lib
     gcc
     stdenv
     fetchFromGitHub
@@ -74,7 +73,7 @@ let
 
     postFixup = ''
       substituteInPlace $out/lib/pkgconfig/*.pc \
-        --replace '${prefix}//' '${prefix}/'
+        --replace '$'"{prefix}//" '$'"{prefix}/"
     '';
   };
 in
