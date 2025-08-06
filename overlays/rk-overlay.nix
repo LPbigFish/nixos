@@ -49,7 +49,7 @@ let
     src = fetchFromGitHub {
       owner = "nyanmisaka";
       repo = "mpp";
-      rev = "e5f505a21907a485038870b6d9a6bec97cfceaf3";
+      rev = "fda5a02e8f88e79ef110e7912c20326a1fea51fb";
       sha256 = "sha256-W7P/mRgunDdYeFVUXn0qWN+ExKlZ2eAtPcT0sGFa+1Q=";
     };
 
