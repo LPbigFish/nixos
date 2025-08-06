@@ -76,6 +76,23 @@ let
       make install DESTDIR=$out
     '';
 
+    postInstall = ''
+        mkdir -p $out/lib/pkgconfig
+
+        cat > $out/lib/pkgconfig/rockchip_mpp.pc <<EOF
+      prefix=$out
+      exec_prefix=\$""{prefix}
+      libdir=\$""{exec_prefix}/lib
+      includedir=\$""{prefix}/include
+
+      Name: rockchip_mpp
+      Description: Rockchip MPP Library
+      Version: 1.0.8
+      Libs: -L\$""{libdir} -lrockchip_mpp
+      Cflags: -I\$""{includedir}
+      EOF
+    '';
+
     postFixup = ''
       echo "Fixing .pc files to remove accidental // in paths..."
       for pc in $out/lib/pkgconfig/*.pc; do
