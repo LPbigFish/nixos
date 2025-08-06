@@ -13,6 +13,36 @@ let
     yasm
     nasm
     ;
+  librga = stdenvNoCC.mkDerivation {
+    pname = "librga";
+    version = "jellyfin-rga";
+    src = fetchFromGitHub {
+      owner = "nyanmisaka";
+      repo = "rk-mirrors";
+      rev = "571a880951583a3b2a04e7e1fa900861653befde";
+      sha256 = lib.fakeSha256;
+    };
+
+    nativeBuildInputs = [
+      meson
+      ninja
+      pkg-config
+    ];
+
+    mesonFlags = [
+      "--libdir=lib"
+      "--buildtype=release"
+      "--default-library=shared"
+      "--Dcpp_args=-fpermissive"
+      "--Dlibdrm=false"
+      "--Dlibrga_demo=false"
+    ];
+
+    builPhase = "ninja -C build";
+
+    installPhase = "ninja -C build install DESTDIR=$out";
+  };
+
 
   rockchip-mpp = stdenv.mkDerivation {
     pname = "rockchip-mpp";
@@ -25,6 +55,7 @@ let
     };
 
     nativeBuildInputs = [
+      librga
       cmake
       pkg-config
     ];
@@ -40,32 +71,6 @@ let
     installPhase = ''
       make install DESTDIR=$out
     '';
-  };
-
-    librga = stdenvNoCC.mkDerivation {
-    pname = "librga";
-    version = "jellyfin-rga";
-    src = fetchFromGitHub {
-      owner = "nyanmisaka";
-      repo  = "rk-mirrors";
-      rev   = "571a880951583a3b2a04e7e1fa900861653befde";
-      sha256 = lib.fakeSha256;
-    };
-
-    nativeBuildInputs = [ meson ninja pkg-config ];
-
-    mesonFlags = [
-      "--libdir=lib"
-      "--buildtype=release"
-      "--default-library=shared"
-      "--Dcpp_args=-fpermissive"
-      "--Dlibdrm=false"
-      "--Dlibrga_demo=false"
-    ];
-
-    builPhase = "ninja -C build";
-
-    installPhase = "ninja -C build install DESTDIR=$out";
   };
 in
 {
@@ -83,7 +88,11 @@ in
       sha256 = lib.fakeSha256;
     };
 
-    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [ pkg-config yasm nasm ];
+    nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
+      pkg-config
+      yasm
+      nasm
+    ];
     buildInputs = (old.buildInputs or [ ]) ++ [
       librga
       libdrm
