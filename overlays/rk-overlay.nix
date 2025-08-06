@@ -90,15 +90,6 @@ in
   librga = librga;
 
   jellyfin-ffmpeg = prev.jellyfin-ffmpeg.overrideAttrs (old: {
-    version = "1.0.0";
-
-    src = final.fetchFromGitHub {
-      owner = "nyanmisaka";
-      repo = "ffmpeg-rockchip";
-      rev = "e2bbfe4b31fc5328a625e266344a0bf3c2c45f60";
-      sha256 = "sha256-p+NNcZdYAgZvw0GZrOGKW4wocwPQBjlD7kHbb+59zi0=";
-    };
-
     nativeBuildInputs = (old.nativeBuildInputs or [ ]) ++ [
       pkg-config
       yasm
