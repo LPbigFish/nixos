@@ -124,6 +124,7 @@ in
       "--enable-libdrm"
       "--enable-rkmpp"
       "--enable-rkrga"
+      "PKG_CONFIG_PATH=${rockchip-mpp}/lib/pkgconfig"
     ];
 
     postInstall = ''
