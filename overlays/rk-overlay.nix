@@ -77,20 +77,23 @@ let
     '';
 
     postInstall = ''
-        mkdir -p $out/lib/pkgconfig
+            mkdir -p $out/lib/pkgconfig
 
-        cat > $out/lib/pkgconfig/rockchip_mpp.pc <<EOF
-      prefix=$out
-      exec_prefix=\$""{prefix}
-      libdir=\$""{exec_prefix}/lib
-      includedir=\$""{prefix}/include
+            cat > $out/lib/pkgconfig/rockchip_mpp.pc <<EOF
+          prefix=$out
+          exec_prefix=\$""{prefix}
+          libdir=\$""{exec_prefix}/lib
+          includedir=\$""{prefix}/include
 
-      Name: rockchip_mpp
-      Description: Rockchip MPP Library
-      Version: 1.0.8
-      Libs: -L\$""{libdir} -lrockchip_mpp
-      Cflags: -I\$""{includedir}
-      EOF
+          Name: rockchip_mpp
+          Description: Rockchip MPP Library
+          Version: 1.0.8
+          Libs: -L\$""{libdir} -lrockchip_mpp
+          Cflags: -I\$""{includedir}
+          EOF
+      mkdir -p $out/lib/pkgconfig
+      ln -s ${rockchip-mpp}/lib/pkgconfig/*.pc $out/lib/pkgconfig/
+      ln -s ${librga}/lib/pkgconfig/*.pc $out/lib/pkgconfig/
     '';
 
     postFixup = ''
@@ -124,7 +127,6 @@ in
       "--enable-libdrm"
       "--enable-rkmpp"
       "--enable-rkrga"
-      "PKG_CONFIG_PATH=${rockchip-mpp}/lib/pkgconfig"
     ];
 
     postInstall = ''
