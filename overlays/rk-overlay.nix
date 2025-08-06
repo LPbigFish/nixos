@@ -1,6 +1,7 @@
 final: prev:
 let
   inherit (prev)
+    lib
     gcc
     stdenv
     fetchFromGitHub
@@ -50,7 +51,7 @@ let
       owner = "nyanmisaka";
       repo = "mpp";
       rev = "fda5a02e8f88e79ef110e7912c20326a1fea51fb";
-      sha256 = "sha256-W7P/mRgunDdYeFVUXn0qWN+ExKlZ2eAtPcT0sGFa+1Q=";
+      sha256 = lib.fakeSha256;
     };
 
     nativeBuildInputs = [
