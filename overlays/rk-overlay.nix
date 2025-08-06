@@ -82,7 +82,7 @@ in
     version = "1.0.0";
 
     src = final.fetchFromGitHub {
-      owner = "nyanmikasa";
+      owner = "nyanmisaka";
       repo = "ffmpeg-rockchip";
       rev = "e2bbfe4b31fc5328a625e266344a0bf3c2c45f60";
       sha256 = lib.fakeSha256;
