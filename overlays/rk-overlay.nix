@@ -74,9 +74,11 @@ let
       make install DESTDIR=$out
     '';
 
-    patches = [
-      ./fix-pkgconfig-paths.patch
-    ];
+    postFixup = ''
+      for pc in $out/lib/pkgconfig/*.pc; do
+        sed -i 's|'$'"{prefix}//|'$'"{prefix}/|g' "$pc"
+      done
+    '';
   };
 in
 {
