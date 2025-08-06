@@ -15,23 +15,21 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages =
-    (with pkgs; [
-      mullvad-vpn
-      brave
-      gnome-tweaks
-      nil
-      libreoffice-qt
-      hunspell
-      hunspellDicts.cs_CZ
-    ])
-    #++ (with pkgs.jetbrains; [
-    #  idea-ultimate
-    #  clion
-    #  rust-rover
-    #  rider
-    #])
-    ;
+  home.packages = with pkgs; [
+    mullvad-vpn
+    brave
+    gnome-tweaks
+    nil
+    libreoffice-qt
+    hunspell
+    hunspellDicts.cs_CZ
+  ];
+  #++ (with pkgs.jetbrains; [
+  #  idea-ultimate
+  #  clion
+  #  rust-rover
+  #  rider
+  #])
 
   gtk = {
     enable = true;
@@ -39,10 +37,10 @@
       name = "Papirus";
       package = pkgs.papirus-icon-theme;
     };
-    theme = {
-      name = "Orchis-Dark-Compact";
-      package = pkgs.orchis-theme;
-    };
+    #gtk3.theme = {
+    #  name = "Orchis-Dark-Compact";
+    #  package = pkgs.orchis-theme;
+    #};
   };
 
   programs = {
@@ -76,7 +74,7 @@
   };
 
   home.sessionVariables = {
-    # EDITOR = "nano";
+    #EDITOR = "nano";
   };
 
   # Let Home Manager install and manage itself.

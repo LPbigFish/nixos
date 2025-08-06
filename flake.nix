@@ -52,7 +52,7 @@
 
       shared_modules = [
         devkit.nixosModules.registry
-        sops-config.nixosModules.sops_configuration
+        #sops-config.nixosModules.sops_configuration
         ./shared/generic.nix
         disko.nixosModules.disko
       ];

@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   ...
@@ -67,7 +66,6 @@
     ];
     createHome = true;
     initialPassword = "1234";
-    packages = with pkgs; [ ];
   };
 
   users.users.root.initialPassword = "1234";
