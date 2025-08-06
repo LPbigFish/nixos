@@ -51,7 +51,7 @@ let
       owner = "nyanmisaka";
       repo = "mpp";
       rev = "fda5a02e8f88e79ef110e7912c20326a1fea51fb";
-      sha256 = lib.fakeSha256;
+      sha256 = "sha256-hhvziSG7U9Pte59E860dOm78SjVBzMgHPs2zZNH77qk=";
     };
 
     nativeBuildInputs = [
