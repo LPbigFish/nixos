@@ -3,7 +3,6 @@ let
   inherit (prev)
     gcc
     stdenv
-    stdenvNoCC
     fetchFromGitHub
     cmake
     meson
@@ -13,7 +12,7 @@ let
     yasm
     nasm
     ;
-  librga = stdenvNoCC.mkDerivation {
+  librga = stdenv.mkDerivation {
     pname = "librga";
     version = "jellyfin-rga";
     src = fetchFromGitHub {
@@ -39,11 +38,11 @@ let
       "-Dlibrga_demo=false"
     ];
 
-    builPhase = "ninja -C build";
-
-    installPhase = "ninja -C build install DESTDIR=$out";
+    doCheck = false;
+    installPhase = ''
+      ninja -C build install
+    '';
   };
-
 
   rockchip-mpp = stdenv.mkDerivation {
     pname = "rockchip-mpp";
