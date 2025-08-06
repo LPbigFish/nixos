@@ -91,9 +91,6 @@ let
           Libs: -L\$""{libdir} -lrockchip_mpp
           Cflags: -I\$""{includedir}
           EOF
-      mkdir -p $out/lib/pkgconfig
-      ln -s ${rockchip-mpp}/lib/pkgconfig/*.pc $out/lib/pkgconfig/
-      ln -s ${librga}/lib/pkgconfig/*.pc $out/lib/pkgconfig/
     '';
 
     postFixup = ''
@@ -128,6 +125,11 @@ in
       "--enable-rkmpp"
       "--enable-rkrga"
     ];
+
+    preConfigure = (old.preConfigure or "") + ''
+      export PKG_CONFIG_PATH=${rockchip-mpp}/lib/pkgconfig:$PKG_CONFIG_PATH
+      echo "PKG_CONFIG_PATH=$PKG_CONFIG_PATH"
+    '';
 
     postInstall = ''
       echo "Testing build..."
