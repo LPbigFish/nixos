@@ -29,6 +29,8 @@ let
       pkg-config
     ];
 
+    mesonBuildDir = ".";
+
     mesonFlags = [
       "--libdir=lib"
       "--buildtype=release"
@@ -39,9 +41,6 @@ let
     ];
 
     doCheck = false;
-    installPhase = ''
-      ninja -C build install
-    '';
   };
 
   rockchip-mpp = stdenv.mkDerivation {
