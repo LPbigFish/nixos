@@ -29,7 +29,7 @@ let
       pkg-config
     ];
 
-    mesonBuildDir = ".";
+    mesonBuildDir = "build";
 
     mesonFlags = [
       "--libdir=lib"
