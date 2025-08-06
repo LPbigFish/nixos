@@ -66,8 +66,10 @@ let
       "-DBUILD_DEMO=OFF"
       "-DBUILD_SAMPLES=OFF"
       "-DCMAKE_INSTALL_PREFIX=${placeholder "out"}"
-      "-DCMAKE_INSTALL_FULL_LIBDIR=${placeholder "out"}/lib"
+      "-DCMAKE_INSTALL_INCLUDEDIR=include"
+      "-DCMAKE_INSTALL_LIBDIR=lib"
       "-DCMAKE_INSTALL_FULL_INCLUDEDIR=${placeholder "out"}/include"
+      "-DCMAKE_INSTALL_FULL_LIBDIR=${placeholder "out"}/lib"
     ];
 
     installPhase = ''
@@ -75,6 +77,7 @@ let
     '';
 
     postFixup = ''
+      echo "Fixing .pc files to remove accidental // in paths..."
       for pc in $out/lib/pkgconfig/*.pc; do
         sed -i 's|'$'"{prefix}//|'$'"{prefix}/|g' "$pc"
       done
