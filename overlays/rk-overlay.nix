@@ -1,6 +1,7 @@
 final: prev:
 let
   inherit (prev)
+    lib
     gcc
     stdenv
     fetchFromGitHub
@@ -51,7 +52,7 @@ let
       owner = "rockchip-linux";
       repo = "mpp";
       rev = "ab796560522c767b610ef1ef7930a73d2f8c77eb";
-      sha256 = "sha256-+1Gnx7n9nZVVt0S/hZEzXupADPX0JRmTGD1XBhLMZ7o=";
+      sha256 = lib.fakeSha256;
     };
 
     nativeBuildInputs = [
