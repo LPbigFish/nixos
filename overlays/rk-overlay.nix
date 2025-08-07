@@ -46,12 +46,12 @@ let
 
   rockchip-mpp = stdenv.mkDerivation {
     pname = "rockchip-mpp";
-    version = "jellyfin-mpp";
+    version = "1.0.9";
     src = fetchFromGitHub {
-      owner = "nyanmisaka";
+      owner = "rockchip-linux";
       repo = "mpp";
-      rev = "fda5a02e8f88e79ef110e7912c20326a1fea51fb";
-      sha256 = "sha256-hhvziSG7U9Pte59E860dOm78SjVBzMgHPs2zZNH77qk=";
+      rev = version; # note: no leading 'v'
+      sha256 = "sha256-+1Gnx7n9nZVVt0S/hZEzXupADPX0JRmTGD1XBhLMZ7o=";
     };
 
     nativeBuildInputs = [
