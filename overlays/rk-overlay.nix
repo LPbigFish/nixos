@@ -55,55 +55,27 @@ let
     };
 
     nativeBuildInputs = [
-      libdrm
-      librga
-	libdrm
       cmake
+      ninja
       pkg-config
     ];
+    buildInputs = [ libdrm ];
 
     cmakeFlags = [
+      "-DRKPLATFORM=ON"
       "-DCMAKE_BUILD_TYPE=Release"
-      "-DBUILD_SHARED_LIBS=ON"
-      "-DBUILD_TEST=OFF"
-      "-DBUILD_DEMO=OFF"
-      "-DBUILD_SAMPLES=OFF"
-<<<<<<< HEAD
-      "-Dlibdrm=true"
-=======
-      "-Dlib"
->>>>>>> 4fb8bef (Nameservers)
-      "-DCMAKE_INSTALL_PREFIX=${placeholder "out"}"
-      "-DCMAKE_INSTALL_INCLUDEDIR=include"
       "-DCMAKE_INSTALL_LIBDIR=lib"
-      "-DCMAKE_INSTALL_FULL_INCLUDEDIR=include"
+      "-DCMAKE_INSTALL_INCLUDEDIR=include"
     ];
 
-    installPhase = ''
-      make install
-    '';
-
-    postInstall = ''
-        mkdir -p $out/lib/pkgconfig
-
-        cat > $out/lib/pkgconfig/rockchip_mpp.pc <<EOF
-      prefix=$out
-      exec_prefix=$"{"prefix"}
-      libdir=$"{"exec_prefix"}/lib
-      includedir=$"{"prefix"}/include
-
-      Name: rockchip_mpp
-      Description: Rockchip MPP Library
-      Version: 1.0.8
-      Libs: -L$"{"libdir"} -lrockchip_mpp
-      Cflags: -I$"{"includedir"}
-      EOF
-    '';
-
+    # Fix double-slash paths in the generated .pc files
     postFixup = ''
-      echo "Fixing .pc files to remove accidental // in paths..."
-      for pc in $out/lib/pkgconfig/*.pc; do
-        sed -i 's|'$'"{prefix}//|'$'"{prefix}/|g' "$pc"
+      shopt -s nullglob
+      for pc in "$out"/lib/pkgconfig/*.pc; do
+        sed -i \
+          -e 's|^libdir=.*|libdir='"$out"'/lib|' \
+          -e 's|^includedir=.*|includedir='"$out"'/include|' \
+          "$pc"
       done
     '';
   };
