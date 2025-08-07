@@ -55,6 +55,7 @@ let
     };
 
     nativeBuildInputs = [
+      libdrm
       librga
 	libdrm
       cmake
@@ -67,7 +68,11 @@ let
       "-DBUILD_TEST=OFF"
       "-DBUILD_DEMO=OFF"
       "-DBUILD_SAMPLES=OFF"
+<<<<<<< HEAD
       "-Dlibdrm=true"
+=======
+      "-Dlib"
+>>>>>>> 4fb8bef (Nameservers)
       "-DCMAKE_INSTALL_PREFIX=${placeholder "out"}"
       "-DCMAKE_INSTALL_INCLUDEDIR=include"
       "-DCMAKE_INSTALL_LIBDIR=lib"
@@ -121,9 +126,6 @@ in
     ];
 
     configureFlags = (old.configureFlags or [ ]) ++ [
-      "--enable-gpl"
-      "--enable-version3"
-      "--enable-libdrm"
       "--enable-rkmpp"
       "--enable-rkrga"
     ];
