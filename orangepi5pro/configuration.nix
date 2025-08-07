@@ -28,7 +28,7 @@
   hardware.deviceTree.name = lib.mkForce "rockchip/rk3588s-orangepi-5-pro.dtb";
 
   # Serial console (UART2, 1.5M) is handy for debugging
-  boot.kernelParams = [ "console=ttyS2,1500000n8" ];
+  boot.kernelParams = [ "console=ttyS2,1500000n8" "cma=512M" ];
 
   # SD card carries /boot (U‑Boot + kernels/extlinux)
   fileSystems."/boot" = {
@@ -70,6 +70,7 @@
     gnused
     gawk
     tmux
+    binutils
   ];
 
   # Match your target release

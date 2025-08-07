@@ -24,6 +24,7 @@ let
 
     nativeBuildInputs = [
       gcc
+      libdrm
       meson
       ninja
       pkg-config
@@ -36,7 +37,7 @@ let
       "--buildtype=release"
       "--default-library=shared"
       "-Dcpp_args=-fpermissive"
-      "-Dlibdrm=false"
+      "-Dlibdrm=true"
       "-Dlibrga_demo=false"
     ];
 
@@ -55,6 +56,7 @@ let
 
     nativeBuildInputs = [
       librga
+	libdrm
       cmake
       pkg-config
     ];
@@ -65,6 +67,7 @@ let
       "-DBUILD_TEST=OFF"
       "-DBUILD_DEMO=OFF"
       "-DBUILD_SAMPLES=OFF"
+      "-Dlibdrm=true"
       "-DCMAKE_INSTALL_PREFIX=${placeholder "out"}"
       "-DCMAKE_INSTALL_INCLUDEDIR=include"
       "-DCMAKE_INSTALL_LIBDIR=lib"
