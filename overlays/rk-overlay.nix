@@ -52,7 +52,7 @@ let
       owner = "rockchip-linux";
       repo = "mpp";
       rev = "ab796560522c767b610ef1ef7930a73d2f8c77eb";
-      sha256 = lib.fakeSha256;
+      sha256 = "sha256-y1vWGz7VjwL02klPQWwoIh5ExpvS/vsDUHcMtMznVcI=";
     };
 
     nativeBuildInputs = [
