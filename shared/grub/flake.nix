@@ -7,13 +7,12 @@
 
   outputs =
     {
-      self,
       dedsec-grub-theme,
       ...
     }:
     {
       nixosModules.grubConfiguration =
-        { config, ... }:
+        { ... }:
         {
           imports = [
             dedsec-grub-theme.nixosModule

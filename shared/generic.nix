@@ -1,7 +1,6 @@
 {
   lib,
   pkgs,
-  config,
   ...
 }:
 {
@@ -34,6 +33,7 @@
     nixfmt-rfc-style
     git
     screen
+    sudo-rs
   ]);
 
   networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];

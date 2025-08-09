@@ -35,16 +35,16 @@
       name = "Papirus";
       package = pkgs.papirus-icon-theme;
     };
-    #gtk3.theme = {
-    #  name = "Orchis-Dark-Compact";
-    #  package = pkgs.orchis-theme;
-    #};
+    theme = {
+      name = "Orchis-Dark-Compact";
+      package = pkgs.orchis-theme;
+    };
   };
 
   programs = {
     vscode = {
       enable = true;
-      package = pkgs.vscode-fhs;
+      package = pkgs.vscode;
     };
     gnome-shell = {
       enable = true;

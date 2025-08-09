@@ -5,8 +5,8 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
-  outputs = { self, nix-flatpak, ... }: {
-    nixosModules.flatpak = { config, pkgs, ...}: {
+  outputs = { nix-flatpak, ... }: {
+    nixosModules.flatpak = { ... }: {
       imports = [
         nix-flatpak.nixosModules.nix-flatpak
       ];

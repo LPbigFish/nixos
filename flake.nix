@@ -33,13 +33,6 @@
     {
       self,
       nixpkgs,
-      nixos-wsl,
-      flatpak-module,
-      grub-conf,
-      disko,
-      nixos-rk3588,
-      sops-config,
-      devkit,
       ...
     }@inputs:
     let
@@ -51,13 +44,11 @@
       };
 
       shared_modules = [
-        devkit.nixosModules.registry
+        inputs.devkit.nixosModules.registry
         #sops-config.nixosModules.sops_configuration
         ./shared/generic.nix
-        disko.nixosModules.disko
+        inputs.disko.nixosModules.disko
       ];
-
-      rk_overlay = (import ./overlays/rk-overlay.nix);
 
       rk_system = "aarch64-linux";
       rk_pkgsKernel = import nixpkgs {
@@ -68,7 +59,7 @@
         config.allowUnfree = true;
       };
 
-      boardModule = nixos-rk3588.nixosModules.boards.orangepi5;
+      boardModule = inputs.nixos-rk3588.nixosModules.boards.orangepi5;
 
     in
     {
@@ -78,7 +69,7 @@
           specialArgs = { inherit inputs; };
           modules = shared_modules ++ [
             ./wsl/configuration.nix
-            nixos-wsl.nixosModules.default
+            inputs.nixos-wsl.nixosModules.default
           ];
         };
 
@@ -86,8 +77,8 @@
           inherit system pkgs;
           specialArgs = { inherit inputs; };
           modules = shared_modules ++ [
-            grub-conf.nixosModules.grubConfiguration
-            flatpak-module.nixosModules.flatpak
+            inputs.grub-conf.nixosModules.grubConfiguration
+            inputs.flatpak-module.nixosModules.flatpak
             ./disk-config.nix
             ./shared/gaming.nix
             ./shared/graphics_drivers
@@ -104,7 +95,7 @@
             swapSize = "8G";
           };
           modules = shared_modules ++ [
-            grub-conf.nixosModules.grubConfiguration
+            inputs.grub-conf.nixosModules.grubConfiguration
             ./shared/graphics_drivers
             ./disk-config.nix
             ./minimal/configuration.nix
@@ -123,7 +114,7 @@
           };
           modules = shared_modules ++ [
             boardModule.core
-            disko.nixosModules.disko
+            inputs.disko.nixosModules.disko
             ./shared/media_server/jellyfin.nix
             ./orangepi5pro/configuration.nix
           ];
