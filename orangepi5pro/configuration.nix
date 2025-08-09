@@ -41,19 +41,6 @@
   networking.hostName = "orangepi5pro";
   services.openssh.enable = true;
 
-  users.users.lpbigfish = {
-    isNormalUser = true;
-    description = "LPbigFish";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    createHome = true;
-    initialPassword = "1234";
-  };
-
-  users.users.root.initialPassword = "1234";
-
   environment.systemPackages = with pkgs; [
     util-linux
     curl

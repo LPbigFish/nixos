@@ -46,9 +46,10 @@
 
       shared_modules = [
         inputs.devkit.nixosModules.registry
-        #sops-config.nixosModules.sops_configuration
-        ./shared/generic.nix
+        inputs.sops-config.nixosModules.sops_configuration
         inputs.disko.nixosModules.disko
+        ./shared/generic.nix
+        ./shared/user-group.nix
       ];
 
       rk_system = "aarch64-linux";

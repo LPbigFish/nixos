@@ -16,19 +16,35 @@
             inputs.sops-nix.nixosModules.sops
           ];
 
-          sops.defaultSopsFile = ../../secrets/secrets.yaml;
-          sops.defaultSopsFormat = "yaml";
+          environment.systemPackages = with pkgs; [
+            sops
+            ssh-to-age
+            ssh-to-pgp
+            age
+            gnupg
+          ];
 
-          sops.age.keyFile = "/home/lpbigfish/.config/sops/age/keys.txt";
+          sops = {
+            defaultSopsFile = ../../secrets/secrets.yaml;
+            defaultSopsFormat = "yaml";
 
-          sops.age.generateKey = true;
-        
-          sops.secrets = {
-            rootPassword = {};
-            defaultUserPassword = {
-              owner = config.users.users.lpbigfish.name;
+            age = {
+              sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+              keyFile = "/nix/persist/var/lib/sops-nix/key.txt";
+              generateKey = true;
             };
-            wpaPassword = {};
+
+            secrets = {
+              lpbigfishPassword = {
+                owner = config.users.users.lpbigfish.name;
+                neededForUsers = true;
+              };
+              rootPassword = { 
+                owner = config.users.users.root.name;
+                neededForUsers = true;
+              };
+              wpaPassword = { };
+            };
           };
         };
     };

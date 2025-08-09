@@ -57,24 +57,12 @@
     pulse.enable = true;
   };
 
-  users.users.lpbigfish = {
-    isNormalUser = true;
-    description = "LPbigFish";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-    ];
-    createHome = true;
-    initialPassword = "1234";
-  };
-
-  users.users.root.initialPassword = "1234";
-
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs; };
     users = {
       "lpbigfish" = import ./home.nix;
     };
+    backupFileExtension = "backup";
   };
 
   # List packages installed in system profile. To search, run:
