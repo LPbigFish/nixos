@@ -1,7 +1,6 @@
 final: prev:
 let
   inherit (prev)
-    lib
     gcc
     stdenv
     fetchFromGitHub
