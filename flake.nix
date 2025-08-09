@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    flake-utils.url  = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,7 +11,6 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     flatpak-module = {
       url = "./shared/flatpak";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     grub-conf.url = "./shared/grub";
     disko = {
@@ -22,10 +22,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-config.url = "./shared/sops";
-
+    
     devkit = {
       url = "./shared/devkit";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
 

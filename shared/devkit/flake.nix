@@ -1,48 +1,49 @@
 {
   description = "Dev shell toolkit";
 
+  inputs = {
+    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
   outputs =
-    { self, nixpkgs, ... }:
-    let
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-      ];
-      forAll =
-        f:
-        nixpkgs.lib.genAttrs systems (
-          system:
-          let
-            pkgs = import nixpkgs { inherit system; };
-          in
-          f pkgs
-        );
-    in
     {
-      # Reusable dev shells
-      devShells = forAll (pkgs: {
-        rust = pkgs.mkShell {
-          RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
-          packages = with pkgs; [
-            cargo
-            rustc
-            rustfmt
-            lldb
-          ];
+      self,
+      nixpkgs,
+      flake-utils,
+      ...
+    }@inputs:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ inputs.rust-overlay.overlays.default ];
         };
+      in
+      {
+        devShells = {
+          rust = import ./rust.nix { inherit pkgs; };
 
-        apps = pkgs.mkShell {
-          packages = with pkgs; [
-            cmake
-            gcc
-            nasm
-          ];
+          apps = pkgs.mkShell {
+            packages = with pkgs; [
+              cmake
+              gcc
+              nasm
+            ];
+          };
+
+          cuda = import ./cuda.nix { inherit pkgs; };
         };
+      }
+    )
+    // {
 
-        #cuda = import ./cuda.nix { inherit pkgs; };
-      });
-
-      # Module that registers this flake as "devkit"
       nixosModules.registry =
         { ... }:
         {
