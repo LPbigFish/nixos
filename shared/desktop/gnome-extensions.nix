@@ -8,18 +8,18 @@
     gsconnect
     wifi-qrcode
     status-area-horizontal-spacing
-    quick-settings-tweaker
-    sound-output-device-chooser
     add-to-desktop
     emoji-copy
-    wintile-beyond
     lockscreen-extension
     customize-clock-on-lock-screen
+    appindicator
+    gtile
+    bluetooth-quick-connect
+    hide-top-bar
   ];
 
-  uuidExtensions = builtins.map (x: x.extensionUuid) extensions;
+  extensionUuidList = builtins.map (x: x.extensionUuid) extensions;
 in
 {
-  inherit extensions;
-  extensionUuidList = uuidExtensions;
+  inherit extensions extensionUuidList;
 }

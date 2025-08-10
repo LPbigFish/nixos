@@ -2,7 +2,18 @@
   pkgs,
   gnomeExtensions,
   ...
-}:{
+}:
+let
+  light_wp = builtins.fetchurl {
+    url = "https://raw.githubusercontent.com/LPbigFish/nixos/refs/heads/main/.github/images/light_image.jpg";
+    sha256 = "1b8lfq0mg3swi45zcxlg71zv3svw1f3ff4qdgxwv3w9sbpfjn0k7";
+  };
+  dark_wp = builtins.fetchurl {
+    url = "https://raw.githubusercontent.com/LPbigFish/nixos/refs/heads/main/.github/images/dark_image.jpg";
+    sha256 = "1d0yxj5d1mak9fvxsh49g6vcx0q5almjyhqqay06cw21s1qdjqw8";
+  };
+in
+{
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "lpbigfish";
@@ -30,7 +41,8 @@
       idea-ultimate
       clion
       rider
-    ]) ++ gnomeExtensions.extensions;
+    ])
+    ++ gnomeExtensions.extensions;
 
   gtk = {
     enable = true;
@@ -74,6 +86,10 @@
       };
 
       "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+      "org/gnome/desktop/background" = {
+        picture-uri = "file://${light_wp}";
+        picture-uri-dark = "file://${dark_wp}";
+      };
     };
   };
 
