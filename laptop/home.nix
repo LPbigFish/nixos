@@ -1,9 +1,8 @@
 {
   pkgs,
+  gnomeExtensions,
   ...
-}:
-
-{
+}:{
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "lpbigfish";
@@ -15,6 +14,10 @@
   # environment.
   home.packages =
     (with pkgs; [
+      (discord.override {
+        withOpenASAR = true;
+        withVencord = true;
+      })
       mullvad-vpn
       brave
       gnome-tweaks
@@ -27,7 +30,7 @@
       idea-ultimate
       clion
       rider
-    ]);
+    ]) ++ gnomeExtensions.extensions;
 
   gtk = {
     enable = true;
@@ -48,10 +51,6 @@
     };
     gnome-shell = {
       enable = true;
-      extensions = [
-        { package = pkgs.gnomeExtensions.user-themes; }
-        { package = pkgs.gnomeExtensions.lockscreen-extension; }
-      ];
     };
     git = {
       enable = true;
@@ -63,6 +62,18 @@
       nix-direnv = {
         enable = true;
       };
+    };
+  };
+
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = gnomeExtensions.extensionUuidList;
+      };
+
+      "org/gnome/desktop/interface".color-scheme = "prefer-dark";
     };
   };
 

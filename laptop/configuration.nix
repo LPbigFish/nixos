@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  gnomeExtensions,
   ...
 }:
 {
@@ -58,7 +59,7 @@
   };
 
   home-manager = {
-    extraSpecialArgs = { inherit inputs pkgs; };
+    extraSpecialArgs = { inherit inputs pkgs gnomeExtensions; };
     users = {
       "lpbigfish" = import ./home.nix;
     };

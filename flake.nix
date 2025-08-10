@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-    flake-utils.url  = "github:numtide/flake-utils";
+    flake-utils.url = "github:numtide/flake-utils";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -22,7 +22,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-config.url = "./shared/sops";
-    
+
     devkit = {
       url = "./shared/devkit";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -77,7 +77,11 @@
 
         laptop = nixpkgs.lib.nixosSystem {
           inherit system pkgs;
-          specialArgs = { inherit inputs; };
+          specialArgs = {
+            inherit inputs;
+            gnomeExtensions =
+              (import ./shared/desktop/gnome-extensions.nix { inherit pkgs; });
+          };
           modules = shared_modules ++ [
             inputs.grub-conf.nixosModules.grubConfiguration
             inputs.flatpak-module.nixosModules.flatpak
