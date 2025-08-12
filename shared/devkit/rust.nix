@@ -1,21 +1,11 @@
-{ pkgs, extraPkgs ? [], ... }:
+{ pkgs, ... }:
 let
   inherit (pkgs.lib) getExe;
-  toolchain =
-    if pkgs ? rust-bin then
-      [ pkgs.rust-bin.stable.latest.default ]
-    else
-      (with pkgs; [
-        rustc
-        cargo
-        clippy
-        rustfmt
-      ]);
 in
-pkgs.mkShellNoCC {
-  packages =
-    toolchain
-    ++ (with pkgs; [
+pkgs.mkShell {
+  packages = with pkgs; [
+      # rust-overlay included
+      rust-bin.stable.latest.default
       rust-analyzer
       lldb
       sccache
@@ -29,8 +19,7 @@ pkgs.mkShellNoCC {
       cargo-outdated
       cargo-audit
       cargo-deny
-    ])
-    ++ extraPkgs;
+    ];
 
   RUSTC_WRAPPER = getExe pkgs.sccache;
 

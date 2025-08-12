@@ -90,6 +90,9 @@ in
         picture-uri = "file://${light_wp}";
         picture-uri-dark = "file://${dark_wp}";
       };
+      "org/gnome/settings-daemon/peripherals/keyboard" = {
+        numlock-state = "on";
+      };
     };
   };
 

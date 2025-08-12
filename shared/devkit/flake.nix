@@ -8,6 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     flake-utils.url = "github:numtide/flake-utils";
+    #rust-dev = {
+    #  url = ./rust-flake.nix;
+    #  inputs.nixpkgs.follows = "nixpkgs";
+    #};
   };
 
   outputs =
