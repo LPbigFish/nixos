@@ -23,7 +23,7 @@ pkgs.mkShell {
 
   RUSTC_WRAPPER = getExe pkgs.sccache;
 
-  CARGO_INCREMENTAL = "1";
+  #CARGO_INCREMENTAL = "1";
   RUST_BACKTRACE = "1";
 
   shellHook = ''
