@@ -21,20 +21,34 @@
     direnv.enable = true;
   };
 
-  fonts.packages = [
-    pkgs.nerd-fonts.meslo-lg
+  fonts = {
+    packages = [
+      pkgs.nerd-fonts.meslo-lg
+    ];
+    fontconfig = {
+      defaultFonts = {
+        sansSerif = [ "MesloLGL Nerd Font" ];
+        monospace = [ "MesloLGL Nerd Font Mono 12" ];
+      };
+    };
+  };
+
+  environment.systemPackages = lib.mkBefore (
+    with pkgs;
+    [
+      nano
+      vim
+      btop
+      nixd
+      nixfmt-rfc-style
+      git
+      screen
+      sudo-rs
+    ]
+  );
+
+  networking.nameservers = [
+    "1.1.1.1"
+    "8.8.8.8"
   ];
-
-  environment.systemPackages = lib.mkBefore (with pkgs; [
-    nano
-    vim
-    btop
-    nixd
-    nixfmt-rfc-style
-    git
-    screen
-    sudo-rs
-  ]);
-
-  networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
 }
