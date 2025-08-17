@@ -28,7 +28,7 @@
     fontconfig = {
       defaultFonts = {
         sansSerif = [ "MesloLGL Nerd Font" ];
-        monospace = [ "MesloLGL Nerd Font Mono 12" ];
+        monospace = [ "MesloLGL Nerd Font Mono" ];
       };
     };
   };
