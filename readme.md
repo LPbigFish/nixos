@@ -1,3 +1,13 @@
+### SOPS SETUP
+
+```
+sudo ssh-keygen -t ed25519 -f /etc/ssh/ssh_host_ed25519_key -C <email>
+
+sudo ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub # Write to the .sops.yaml on primary machine
+
+sops updatekeys secrets/secrets.yaml
+```
+
 ### Normal system
 
 ```
@@ -17,7 +27,6 @@ sudo apt install -y curl xz-utils
 
 sh <(curl -L https://nixos.org/nix/install) --daemon
 
-# New root login shell and source nix-daemon profile so 'nix' is in PATH:
 sudo -i
 . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 nix --version
@@ -32,7 +41,7 @@ nix run github:nix-community/disko#disko -- \
 mkdir -p /mnt/boot
 mount /dev/mmcblk1p1 /mnt/boot
 
-# Install NixOS from the flake (on non‑NixOS we pull the installer tools)
+# Install NixOS from the flake
 nix shell nixpkgs#nixos-install-tools -c nixos-install --root /mnt --flake .#opi5pro
 ```
 If activation fails:

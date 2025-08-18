@@ -2,6 +2,7 @@ keys:
   - &primary age1fyfvzdpefunekr7tf0fdqa85l7jvk6x2psrrwa26ckleln57hysssvuyzq
   - &orange age1phgfzrnur7r54gpchccw8p2hnqqenz39rlqpnveepwyt926v650qdxf5ut
   - &lenovo age12ky2dfcwe9zm3lth6epkvy4mth93xs6snpcne744knqenflk4s0s0puu96
+  - &wsl age12dxc4l2hd8vuu064the3k6dp74ay49zwvs8k9flq7sr66wxxyehsqlh5gl
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
@@ -9,3 +10,4 @@ creation_rules:
         - *primary
         - *orange
         - *lenovo
+        - *wsl

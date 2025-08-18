@@ -23,13 +23,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    wget
-    curl
-    nixfmt-rfc-style
-    nil
     dbeaver-bin
     docker-compose
-    git
   ];
 
   users.users.lpbigfish.extraGroups = [ "docker" ];
