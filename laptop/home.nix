@@ -64,7 +64,6 @@ in
   };
 
   programs = {
-    adb.enable = true;
     vscode = {
       enable = true;
       package = pkgs.vscode;

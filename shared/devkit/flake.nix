@@ -23,6 +23,8 @@
       nixosModules.registry =
         { ... }:
         {
+          programs.adb.enable = true;
+
           nix.settings.experimental-features = [
             "nix-command"
             "flakes"
