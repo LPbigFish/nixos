@@ -23,11 +23,7 @@
     };
     sops-config.url = "./shared/sops";
 
-    devkit = {
-      url = "./shared/devkit";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
+    devkit.url = "./shared/devkit";
   };
 
   outputs =

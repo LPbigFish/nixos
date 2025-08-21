@@ -11,6 +11,7 @@
       extraGroups = [
         "networkmanager"
         "wheel"
+        "adbusers"
       ];
       createHome = true;
       hashedPasswordFile = config.sops.secrets.lpbigfishPassword.path;

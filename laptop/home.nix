@@ -42,6 +42,7 @@ in
       libreoffice-qt
       hunspell
       hunspellDicts.cs_CZ
+      android-studio
     ])
     ++ (with pkgs.jetbrains; [
       idea-ultimate
@@ -63,6 +64,7 @@ in
   };
 
   programs = {
+    adb.enable = true;
     vscode = {
       enable = true;
       package = pkgs.vscode;

@@ -11,6 +11,11 @@
           path = ./rust;
           description = "Rust dev template";
         };
+        
+        android = {
+          path = ./android;
+          description = "Android dev template";
+        };
       };
     }
     // {
