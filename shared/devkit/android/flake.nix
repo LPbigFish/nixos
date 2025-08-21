@@ -10,11 +10,12 @@
     {
       nixpkgs,
       flake-utils,
+      ...
     }:
     flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = import nixpkgs { inherit system; };
+        pkgs = import nixpkgs { inherit system; config.allowUnfree = true; };
 
         # Native libraries often needed by Compose Desktop / Skiko / AWT on Linux
         composeDesktopLibs = with pkgs; [
