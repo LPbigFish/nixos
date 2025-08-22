@@ -42,6 +42,7 @@
       nixd
       nixfmt-rfc-style
       git
+      git-lfs
       screen
       sudo-rs
     ]
