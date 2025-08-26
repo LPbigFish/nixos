@@ -6,20 +6,18 @@
 # https://github.com/nix-community/NixOS-WSL
 
 {
-  config,
-  lib,
   pkgs,
-  inputs,
   ...
 }:
 {
   wsl.enable = true;
   wsl.defaultUser = "lpbigfish";
 
-  graphics-driver-selection.gpu = "none";
+  graphics-driver-selection.gpu = "nvidia";
 
   virtualisation.docker = {
     enable = true;
+    enableOnBoot = true;
   };
 
   environment.systemPackages = with pkgs; [

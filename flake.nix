@@ -83,7 +83,6 @@
             inputs.flatpak-module.nixosModules.flatpak
             ./disk-config.nix
             ./shared/gaming.nix
-            ./shared/graphics_drivers
             ./shared/desktop/gnome.nix
             ./laptop/configuration.nix
             ./hardware-configuration.nix
@@ -98,7 +97,6 @@
           };
           modules = shared_modules ++ [
             inputs.grub-conf.nixosModules.grubConfiguration
-            ./shared/graphics_drivers
             ./disk-config.nix
             ./minimal/configuration.nix
             ./hardware-configuration.nix
