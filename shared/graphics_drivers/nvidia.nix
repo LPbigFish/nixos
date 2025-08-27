@@ -58,10 +58,11 @@ lib.mkIf (cfg.gpu == "nvidia") {
     ncurses5
     stdenv.cc
     binutils
+    nvidia-container-toolkit
   ];
 
   environment.variables = {
-    NVIDIA_DRIVER_CAPABILITIES = "compute,untility";
+    NVIDIA_DRIVER_CAPABILITIES = "compute,utility";
     NVIDIA_VISIBLE_DEVICES = "all";
 
     CUDA_PATH = "${pkgs.cudatoolkit}";

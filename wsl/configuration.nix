@@ -18,7 +18,18 @@
   virtualisation.docker = {
     enable = true;
     enableOnBoot = true;
+    daemon.settings = {
+      "default-runtime" = "nvidia";
+      "runtimes" = {
+        "nvidia" = {
+          "path" = "/run/current-system/sw/bin/nvidia-container-runtime";
+          "args" = [];
+        };
+      };
+    };
   };
+
+  systemd.services.docker.environment.LD_LIBRARY_PATH = "/usr/lib/wsl/lib";
 
   environment.systemPackages = with pkgs; [
     dbeaver-bin
