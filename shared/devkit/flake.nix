@@ -16,6 +16,11 @@
           path = ./android;
           description = "Android dev template";
         };
+
+        node = {
+          path = ./node;
+          description = "NodeJS dev template";
+        };
       };
     }
     // {
