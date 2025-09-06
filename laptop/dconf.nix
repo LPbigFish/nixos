@@ -6,9 +6,11 @@ with lib.hm.gvariant;
 {
   dconf.settings = {
     "org/gnome/Console" = {
-      font-scale = 0.7000000000000001;
+      custom-font = "MesloLGL Nerd Font Mono 12";
+      font-scale = 0.7;
       last-window-maximised = false;
       last-window-size = mkTuple [ 732 528 ];
+      use-system-font = false;
     };
 
     "org/gnome/Music" = {
@@ -60,12 +62,17 @@ with lib.hm.gvariant;
       gtk-enable-primary-paste = false;
       gtk-theme = "Orchis-Dark";
       icon-theme = "Papirus";
+      monospace-font-name = "MesloLGL Nerd Font Mono 11";
       show-battery-percentage = true;
       toolkit-accessibility = false;
     };
 
     "org/gnome/desktop/notifications" = {
       application-children = [ "org-gnome-software" "gnome-power-panel" "org-gnome-console" ];
+    };
+
+    "org/gnome/desktop/notifications/application/discord" = {
+      application-id = "discord.desktop";
     };
 
     "org/gnome/desktop/notifications/application/gnome-power-panel" = {
@@ -85,7 +92,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/peripherals/mouse" = {
-      speed = 0.3047210300429184;
+      speed = 0.304721;
     };
 
     "org/gnome/desktop/peripherals/touchpad" = {
@@ -203,6 +210,7 @@ with lib.hm.gvariant;
 
     "org/gnome/shell/extensions/caffeine" = {
       indicator-position-max = 1;
+      user-enabled = true;
     };
 
     "org/gnome/shell/extensions/custom-accent-colors" = {
@@ -239,8 +247,24 @@ with lib.hm.gvariant;
       workspace-agnostic-urgent-windows = false;
     };
 
-    "org/gnome/shell/extensions/emoji-copy" = {
-      recently-used = [ "\10084\65039u200d\128293" "\128514" "\10084\65039" "\128525" "\128557" "\128522" "\128530" "\128536" "\128553" "\129300" "\9786\65039" ];
+    "org/gnome/shell/extensions/gsconnect" = {
+      name = "DESKTOP-E323AF";
+    };
+
+    "org/gnome/shell/extensions/gtile" = {
+      follow-cursor = false;
+      show-icon = false;
+    };
+
+    "org/gnome/shell/extensions/lockscreen-extension" = {
+      background-size-1 = "center";
+      blur-brightness-1 = 0.5347821729564439;
+      blur-radius-1 = 22;
+      gradient-direction-1 = "none";
+      hide-lockscreen-extension-button = true;
+      primary-color-1 = "#c9c9c9ff";
+      secondary-color-1 = "#0f0f0fff";
+      user-background-1 = true;
     };
 
     "org/gnome/shell/extensions/status-area-horizontal-spacing" = {
@@ -254,7 +278,7 @@ with lib.hm.gvariant;
     "org/gnome/software" = {
       check-timestamp = mkInt64 1755424140;
       first-run = false;
-      flatpak-purge-timestamp = mkInt64 1755380809;
+      flatpak-purge-timestamp = mkInt64 1757178265;
     };
 
     "org/gnome/tweaks" = {
