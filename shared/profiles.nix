@@ -1,13 +1,13 @@
 { nixpkgs, inputs }:
 let
   system = "x86_64-linux";
+  rk_system = "aarch64-linux";
 
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
   };
 
-  rk_system = "aarch64-linux";
   rk_pkgsKernel = import nixpkgs {
     system = rk_system;
     overlays = [
@@ -15,8 +15,6 @@ let
     ];
     config.allowUnfree = true;
   };
-
-  boardModule = inputs.nixos-rk3588.nixosModules.boards.orangepi5;
 
   shared_modules = [
     inputs.devkit.nixosModules.registry
@@ -74,7 +72,7 @@ let
         };
       };
       modules = shared_modules ++ [
-        boardModule.core
+        inputs.nixos-rk3588.nixosModules.boards.orangepi5.core
         inputs.disko.nixosModules.disko
         ./shared/media_server/jellyfin.nix
         ./orangepi5pro/configuration.nix
