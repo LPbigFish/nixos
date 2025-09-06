@@ -33,7 +33,6 @@ in
         withOpenASAR = true;
         withVencord = true;
       })
-      modrinth-app
       zsh-powerlevel10k
       mullvad-vpn
       brave
