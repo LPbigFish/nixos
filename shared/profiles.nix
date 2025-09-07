@@ -28,7 +28,7 @@ let
     wsl = {
       inherit system pkgs;
       modules = shared_modules ++ [
-        ./wsl/configuration.nix
+        ../wsl/configuration.nix
         inputs.nixos-wsl.nixosModules.default
       ];
       specialArgs = { };
@@ -41,9 +41,9 @@ let
       modules = shared_modules ++ [
         inputs.grub-conf.nixosModules.grubConfiguration
         inputs.flatpak-module.nixosModules.flatpak
-        ../disk-config.nix
         ./gaming.nix
         ./desktop/gnome.nix
+        ../disk-config.nix
         ../laptop/configuration.nix
         ../hardware-configuration.nix
       ];
@@ -52,9 +52,9 @@ let
       inherit system pkgs;
       modules = shared_modules ++ [
         inputs.grub-conf.nixosModules.grubConfiguration
-        ./disk-config.nix
-        ./minimal/configuration.nix
-        ./hardware-configuration.nix
+        ../disk-config.nix
+        ../minimal/configuration.nix
+        ../hardware-configuration.nix
       ];
       specialArgs = {
         swapSize = "8G";
@@ -74,8 +74,8 @@ let
       modules = shared_modules ++ [
         inputs.nixos-rk3588.nixosModules.boards.orangepi5.core
         inputs.disko.nixosModules.disko
-        ./shared/media_server/jellyfin.nix
-        ./orangepi5pro/configuration.nix
+        ./media_server/jellyfin.nix
+        ../orangepi5pro/configuration.nix
       ];
     };
   };

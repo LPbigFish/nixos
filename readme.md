@@ -8,6 +8,11 @@ sudo ssh-to-age -i /etc/ssh/ssh_host_ed25519_key.pub # Write to the .sops.yaml o
 sops updatekeys secrets/secrets.yaml
 ```
 
+If sops fails to generate the key correctly
+```
+sudo ssh-to-age -private-key -i /etc/ssh/ssh_host_ed25519_key -o /nix/persist/var/lib/sops-nix/key.txt
+```
+
 ### Normal system
 
 ```

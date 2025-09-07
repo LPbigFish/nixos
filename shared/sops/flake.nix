@@ -39,13 +39,19 @@
                 owner = config.users.users.lpbigfish.name;
                 neededForUsers = true;
               };
-              rootPassword = { 
+              rootPassword = {
                 owner = config.users.users.root.name;
                 neededForUsers = true;
               };
               wpaPassword = { };
+
+              nextcloudAdminpass = {
+                sopsFile = ../../secrets/nextcloud.yaml;
+              };
             };
           };
+
+          environment.variables.SOPS_AGE_KEY_FILE = config.sops.age.keyFile;
         };
     };
 }
