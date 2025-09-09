@@ -11,7 +11,7 @@ let
   rk_pkgsKernel = import nixpkgs {
     system = rk_system;
     overlays = [
-      (import ./overlays/rk-overlay.nix)
+      (import ../overlays/rk-overlay.nix)
     ];
     config.allowUnfree = true;
   };
