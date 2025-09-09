@@ -3,14 +3,19 @@
 
   outputs =
     {
-      self,
-      nixpkgs,
-      sops-nix,
       ...
     }@inputs:
     {
       nixosModules.sops_configuration =
-        { config, pkgs, ... }:
+        {
+          config,
+          pkgs,
+          lib,
+          ...
+        }:
+        let
+          nextcloudUser = config.users.users ? "nextcloud";
+        in
         {
           imports = [
             inputs.sops-nix.nixosModules.sops
@@ -45,8 +50,9 @@
               };
               wpaPassword = { };
 
-              nextcloudAdminpass = {
+              nextcloudAdminpass = lib.mkIf nextcloudUser {
                 sopsFile = ../../secrets/nextcloud.yaml;
+                owner = config.users.users.nextcloud.name;
               };
             };
           };
