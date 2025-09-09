@@ -29,14 +29,20 @@
             gnupg
           ];
 
+          services.openssh.hostKeys = [
+            {
+              path = "/etc/ssh/ssh_host_ed25519_key";
+              type = "ed25519";
+            }
+          ];
+
           sops = {
             defaultSopsFile = ../../secrets/secrets.yaml;
             defaultSopsFormat = "yaml";
 
             age = {
               sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-              keyFile = "/nix/persist/var/lib/sops-nix/key.txt";
-              generateKey = true;
+              generateKey = false;
             };
 
             secrets = {
@@ -57,7 +63,15 @@
             };
           };
 
-          fileSystems."/etc/ssh".neededForBoot = true;
+          fileSystems."/etc/ssh" = {
+            device = "/nix/persist/etc/ssh";
+            fsType = "none";
+            options = [
+              "bind"
+              "X-mount.mkdir"
+            ];
+            neededForBoot = true;
+          };
         };
     };
 }
