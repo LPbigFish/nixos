@@ -45,6 +45,7 @@
       git-lfs
       screen
       sudo-rs
+      nvd
     ]
   );
 

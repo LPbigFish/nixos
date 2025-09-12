@@ -75,6 +75,7 @@ let
         inputs.nixos-rk3588.nixosModules.boards.orangepi5.core
         inputs.disko.nixosModules.disko
         ./media_server/jellyfin.nix
+        ./media_server/nextcloud.nix
         ../orangepi5pro/configuration.nix
       ];
     };
