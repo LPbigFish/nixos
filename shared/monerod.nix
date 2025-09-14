@@ -13,7 +13,6 @@
       proxy=127.0.0.1:9050
       tx-proxy=tor,127.0.0.1:9050
       out-peers=4
-      limit-rate-up=20
     '';
   };
 }

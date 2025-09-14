@@ -1,6 +1,7 @@
 keys:
   - &primary age1fyfvzdpefunekr7tf0fdqa85l7jvk6x2psrrwa26ckleln57hysssvuyzq
   - &orange age1546c2ausu2edta05gctcgvpc44acwqwjzprnv3fzjdwrphaqsu9qm78k4c
+  - &orange2 age1eezq6dhs9pac77kj4xdfwvu4lgs9w2klmmxjfrmwghs44zgzapaqr235c6
   - &lenovo age12ky2dfcwe9zm3lth6epkvy4mth93xs6snpcne744knqenflk4s0s0puu96
   - &wsl age1fxjynyzl83dlcj06509k8pc6ndpekgf5lajmkupx5j3ptv6ceehqr4hly6
 creation_rules:
@@ -9,5 +10,6 @@ creation_rules:
       - age:
         - *primary
         - *orange
+        - *orange2
         - *lenovo
         - *wsl
