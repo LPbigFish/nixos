@@ -13,6 +13,7 @@
       proxy=127.0.0.1:9050
       tx-proxy=tor,127.0.0.1:9050
       out-peers=16
+      anonymous-inbound=127.0.0.1:18080,127.0.0.1:9050
     '';
   };
 }
