@@ -1,4 +1,7 @@
-{ ... }:
+{ config, ... }:
+let
+  onionLink = builtins.readFile config.sops.secrets.onionLink.path;
+in
 {
   services.monero = {
     enable = true;
@@ -18,7 +21,7 @@
       p2p-bind-port=18090
       hide-my-port=1
 
-      anonymous-inbound=127.0.0.1:18090,127.0.0.1:9050
+      anonymous-inbound=${onionLink}:18090,127.0.0.1:9050
     '';
   };
 }

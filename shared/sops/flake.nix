@@ -56,6 +56,8 @@
               };
               wpaPassword = { };
 
+              onionLink = { };
+
               nextcloudAdminpass = lib.mkIf nextcloudUser {
                 sopsFile = ../../secrets/nextcloud.yaml;
                 owner = config.users.users.nextcloud.name;
