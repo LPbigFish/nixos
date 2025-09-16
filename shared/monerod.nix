@@ -14,7 +14,7 @@
       p2p-bind-ip=127.0.0.1
 
       proxy=127.0.0.1:9050
-      tx-proxy=tor,127.0.0.1:9050,disable_noise
+      tx-proxy=tor,127.0.0.1:9050
       #out-peers=16
 
       anonymous-inbound=tqexzzd7uxikxjzvmag7vbbj7x3xkt4litzjkywmi4us25du3ie32zad.onion:18084,127.0.0.1:18084,64
