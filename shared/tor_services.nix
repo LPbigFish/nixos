@@ -11,6 +11,7 @@
         {
           # Monerod
           port = 18089;
+          path = "/var/lib/tor/onion/monerod-rpc";
           target = {
             addr = "127.0.0.1";
             port = 18089;
