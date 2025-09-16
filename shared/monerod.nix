@@ -6,6 +6,7 @@
 
     rpc = {
       address = "127.0.0.1";
+      port = 18089;
       restricted = true;
     };
 
