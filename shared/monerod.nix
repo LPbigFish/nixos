@@ -12,8 +12,13 @@
 
     extraConfig = ''
       proxy=127.0.0.1:9050
-      tx-proxy=tor,127.0.0.1:9050
+      tx-proxy=tor,127.0.0.1:9050,disable_noise
       out-peers=16
+
+      #anonymous-inbound=<P2P_ONION>.onion:18084,127.0.0.1:18084
+
+      hide-my-port=1
+      no-igd=1
     '';
   };
 }
