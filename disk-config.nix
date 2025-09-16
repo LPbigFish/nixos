@@ -1,4 +1,7 @@
-{ swapSize ? "8G", ... }:
+{
+  swapSize ? "8G",
+  ...
+}:
 {
   disko.devices.disk.main = {
     type = "disk";
@@ -39,6 +42,13 @@
               };
               "@home" = {
                 mountpoint = "/home";
+                mountOptions = [
+                  "compress=zstd"
+                  "noatime"
+                ];
+              };
+              "@persist" = {
+                mountpoint = "/nix/persist";
                 mountOptions = [
                   "compress=zstd"
                   "noatime"
