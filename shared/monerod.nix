@@ -21,8 +21,6 @@
 
       hide-my-port=1
       no-igd=1
-
-      log-level=2
     '';
   };
 }
