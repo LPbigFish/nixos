@@ -11,14 +11,19 @@
     };
 
     extraConfig = ''
+      p2p-bind-ip=127.0.0.1
+      p2p-bind-port=18084
+
       proxy=127.0.0.1:9050
       tx-proxy=tor,127.0.0.1:9050,disable_noise
-      out-peers=16
+      #out-peers=16
 
-      anonymous-inbound=tqexzzd7uxikxjzvmag7vbbj7x3xkt4litzjkywmi4us25du3ie32zad.onion.onion:18084,127.0.0.1:18084
+      anonymous-inbound=tqexzzd7uxikxjzvmag7vbbj7x3xkt4litzjkywmi4us25du3ie32zad.onion.onion:18084,127.0.0.1:18084,64
 
       hide-my-port=1
       no-igd=1
+
+      log-level=2
     '';
   };
 }
