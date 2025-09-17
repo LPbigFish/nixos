@@ -28,7 +28,7 @@
       tx-proxy=tor,127.0.0.1:9050
       #out-peers=16
 
-      "anonymous-inbound=$ONION-ANON"
+      "anonymous-inbound=$ONION_ANON"
 
       hide-my-port=1
       no-igd=1
