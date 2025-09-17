@@ -26,7 +26,8 @@
 
       proxy=127.0.0.1:9050
       tx-proxy=tor,127.0.0.1:9050
-      #out-peers=16
+      out-peers=16
+      in-peers=32
 
       anonymous-inbound=$ONION_ANON
 
