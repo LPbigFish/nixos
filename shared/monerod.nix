@@ -1,8 +1,19 @@
-{ ... }:
+{ config, ... }:
 {
+  sops.secrets.moneroEnv = {
+    sopsFile = ../secrets/monero.env;
+    format = "dotenv";
+    owner = "monero";
+    group = "monero";
+    mode = "0400";
+    restartUnits = [ "monero.service" ];
+  };
+
   services.monero = {
     enable = true;
     prune = true;
+
+    environmentFile = config.sops.secrets.moneroEnv.path;
 
     rpc = {
       address = "127.0.0.1";
@@ -10,14 +21,14 @@
       restricted = true;
     };
 
-    extraConfig = ''
+    extraConfig =''
       p2p-bind-ip=127.0.0.1
 
       proxy=127.0.0.1:9050
       tx-proxy=tor,127.0.0.1:9050
       #out-peers=16
 
-      anonymous-inbound=tqexzzd7uxikxjzvmag7vbbj7x3xkt4litzjkywmi4us25du3ie32zad.onion:18084,127.0.0.1:18084,64
+      "anonymous-inbound=$ONION-ANON"
 
       hide-my-port=1
       no-igd=1
