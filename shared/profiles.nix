@@ -20,7 +20,7 @@ let
     inputs.devkit.nixosModules.registry
     inputs.sops-config.nixosModules.sops_configuration
     inputs.disko.nixosModules.disko
-    ./default.nix
+    ./.
     ./user-group.nix
   ];
 

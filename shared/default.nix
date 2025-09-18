@@ -21,6 +21,8 @@
     direnv.enable = true;
   };
 
+  services.timesyncd.enable = true;
+
   fonts = {
     packages = [
       pkgs.nerd-fonts.meslo-lg
