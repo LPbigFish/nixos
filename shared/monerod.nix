@@ -25,8 +25,6 @@
       p2p-bind-ip=127.0.0.1
 
       confirm-external-bind=1
-      rpc-allow-ip=127.0.0.1
-      rpc-allow-ip=192.168.18.0/24
 
       proxy=127.0.0.1:9050
       tx-proxy=tor,127.0.0.1:9050
