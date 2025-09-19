@@ -21,12 +21,6 @@
       restricted = true;
     };
 
-    mining = {
-      enable = true;
-      threads = 2;
-      address = "8B4xALhnmhkWdwSKx7HYXVaK9B9WD44TAUHVgVbBziLY9rmJJNqWwX7JzwEqB93Ep6fZZwz1kL1SKCxKJ48xWfE8Tz1FfSY";
-    };
-
     extraConfig =''
       p2p-bind-ip=127.0.0.1
 
