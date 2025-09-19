@@ -40,5 +40,5 @@
     '';
   };
 
-  networking.firewall.allowedTCPPorts = [ 18089 ];
+  networking.firewall.interfaces.enP4p65s0.allowedTCPPorts = [ 18089 ];
 }
