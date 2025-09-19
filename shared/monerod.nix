@@ -21,6 +21,12 @@
       restricted = true;
     };
 
+    mining = {
+      enable = true;
+      threads = 2;
+      address = "$MINING_ADDRESS";
+    };
+
     extraConfig =''
       p2p-bind-ip=127.0.0.1
 
@@ -28,6 +34,8 @@
       tx-proxy=tor,127.0.0.1:9050
       out-peers=16
       in-peers=32
+
+      log-level=4
 
       anonymous-inbound=$ONION_ANON
 
