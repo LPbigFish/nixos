@@ -29,7 +29,7 @@
       out-peers=16
       in-peers=32
 
-      log-level=1
+      log-level=0
 
       anonymous-inbound=ibdfo3maxu2z7t5zlrfkd5i5bvz7vp5k2jir44b3l2ncpjtcs5x6knqd.onion:18084,127.0.0.1:18084,64
 
