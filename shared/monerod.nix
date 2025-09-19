@@ -35,7 +35,7 @@
       out-peers=16
       in-peers=32
 
-      log-level=4
+      log-level=3
 
       anonymous-inbound=$ONION_ANON
 
