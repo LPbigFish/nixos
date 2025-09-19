@@ -24,7 +24,7 @@
     mining = {
       enable = true;
       threads = 2;
-      address = "$MINING_ADDRESS";
+      address = "8B4xALhnmhkWdwSKx7HYXVaK9B9WD44TAUHVgVbBziLY9rmJJNqWwX7JzwEqB93Ep6fZZwz1kL1SKCxKJ48xWfE8Tz1FfSY";
     };
 
     extraConfig =''
@@ -37,7 +37,7 @@
 
       log-level=3
 
-      anonymous-inbound=$ONION_ANON
+      anonymous-inbound=ibdfo3maxu2z7t5zlrfkd5i5bvz7vp5k2jir44b3l2ncpjtcs5x6knqd.onion:18084,127.0.0.1:18084,64
 
       hide-my-port=1
       no-igd=1
