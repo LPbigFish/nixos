@@ -11,7 +11,7 @@ let
   rk_pkgsKernel = import nixpkgs {
     system = rk_system;
     overlays = [
-      #(import ../overlays/rk-overlay.nix)
+      (import ../overlays/rk-overlay.nix)
     ];
     config.allowUnfree = true;
   };
@@ -76,7 +76,7 @@ let
         inputs.disko.nixosModules.disko
         ./tor_services.nix
         ./monerod.nix
-        ./media_server/jellyfin.nix
+        #./media_server/jellyfin.nix
         # ./media_server/nextcloud.nix
         ../orangepi5pro/configuration.nix
       ];
