@@ -19,6 +19,14 @@
       address = "0.0.0.0";
       port = 18089;
       restricted = true;
+      user = "$RPC_USER";
+      password = "$RPC_PASS";
+    };
+
+    mining = {
+      enable = true;
+      address = "$MINING_ADDRESS";
+      threads = 4;
     };
 
     extraConfig = ''
@@ -33,7 +41,7 @@
 
       log-level=1
 
-      anonymous-inbound=ibdfo3maxu2z7t5zlrfkd5i5bvz7vp5k2jir44b3l2ncpjtcs5x6knqd.onion:18084,127.0.0.1:18084,64
+      anonymous-inbound=$ONION_ANON
 
       hide-my-port=1
       no-igd=1
