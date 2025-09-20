@@ -18,7 +18,6 @@
     rpc = {
       address = "0.0.0.0";
       port = 18089;
-      restricted = true;
       user = "$RPC_USER";
       password = "$RPC_PASS";
     };
