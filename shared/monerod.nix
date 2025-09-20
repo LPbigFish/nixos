@@ -26,7 +26,7 @@
     mining = {
       enable = true;
       address = "$MINING_ADDRESS";
-      threads = 4;
+      threads = 2;
     };
 
     extraConfig = ''
