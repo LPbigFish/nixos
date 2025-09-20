@@ -34,6 +34,7 @@
   environment.systemPackages = with pkgs; [
     dbeaver-bin
     docker-compose
+    xmrig
   ];
 
   users.users.lpbigfish.extraGroups = [ "docker" ];
