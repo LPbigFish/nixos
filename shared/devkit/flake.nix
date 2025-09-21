@@ -21,6 +21,10 @@
           path = ./node;
           description = "NodeJS dev template";
         };
+        python = {
+          path = ./python;
+          description = "Python dev template";
+        };
       };
     }
     // {
