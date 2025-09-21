@@ -45,7 +45,6 @@ let
         ./desktop/gnome.nix
         ../disk-config.nix
         ../laptop/configuration.nix
-        ../hardware-configuration.nix
       ];
     };
     minimal = {
@@ -54,7 +53,6 @@ let
         inputs.grub-conf.nixosModules.grubConfiguration
         ../disk-config.nix
         ../minimal/configuration.nix
-        ../hardware-configuration.nix
       ];
       specialArgs = {
         swapSize = "8G";

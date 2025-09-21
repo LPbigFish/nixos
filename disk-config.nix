@@ -52,6 +52,7 @@
                 mountOptions = [
                   "compress=zstd"
                   "noatime"
+                  "X-mount.mkdir"
                 ];
               };
               "@swap" = {

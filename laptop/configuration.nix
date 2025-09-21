@@ -8,6 +8,7 @@
   imports = [
     # Include the results of the hardware scan.
     inputs.home-manager.nixosModules.default
+    ./hardware-configuration.nix
   ];
 
   graphics-driver-selection.gpu = "intel";
@@ -77,6 +78,8 @@
     curl
     wget
     scrcpy
+    openconnect
+    networkmanager-openconnect
   ];
 
   system.stateVersion = "25.05"; # Did you read the comment?
