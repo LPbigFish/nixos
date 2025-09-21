@@ -42,6 +42,7 @@ in
       hunspell
       hunspellDicts.cs_CZ
       android-studio
+      davinci-resolve
       rquickshare
     ])
     ++ (with pkgs.jetbrains; [
