@@ -17,8 +17,7 @@
 
     rpc = {
       address = "0.0.0.0";
-      port = 18089;
-      restricted = true;
+      port = 18081;
       user = "$RPC_USER";
       password = "$RPC_PASS";
     };
@@ -48,5 +47,5 @@
     '';
   };
 
-  networking.firewall.interfaces.enP4p65s0.allowedTCPPorts = [ 18089 ];
+  networking.firewall.interfaces.enP4p65s0.allowedTCPPorts = [ 18081 18089 ];
 }
