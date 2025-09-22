@@ -37,7 +37,6 @@ in
       mullvad-vpn
       brave
       gnome-tweaks
-      nil
       libreoffice-qt
       hunspell
       hunspellDicts.cs_CZ
@@ -48,6 +47,7 @@ in
       idea-ultimate
       clion
       rider
+      datagrip
     ])
     ++ gnomeExtensions.extensions;
 
