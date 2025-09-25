@@ -8,7 +8,6 @@
   sops.secrets."cloudflared-creds.json" = {
     sopsFile = ../../secrets/tunnel.json;
     path = "/var/lib/cloudflared/tunnel.json";
-    format = "json";
   };
 
   services.nextcloud = {
