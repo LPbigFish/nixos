@@ -14,19 +14,15 @@
     enable = true;
     package = pkgs.nextcloud31;
 
-    hostName = "127.0.0.1";
+    hostName = "rybak.website";
 
     config.adminuser = "lpbigfish";
     config.adminpassFile = config.sops.secrets.nextcloudAdminpass.path;
 
     settings = {
       "trusted_domains" = [ "rybak.website" ];
-      "trusted_proxies" = [ "10.10.0.1" ];
-      "overwrite.cli.url" = "https://rybak.website/nextcloud";
+      "overwrite.cli.url" = "https://rybak.website/";
       "overwritehost" = "rybak.website";
-      "overwriteprotocol" = "https";
-      "overwritewebroot" = "/nextcloud";
-      "htaccess.RewriteBase" = "/nextcloud";
     };
 
     maxUploadSize = "2G";
@@ -65,11 +61,11 @@
     tunnels."25b602b7-1da8-4039-a7ad-f51630ccfc12" = {
       credentialsFile = "/var/lib/cloudflared/tunnel.json";
       ingress = {
-        "*.rybak.website" = "http://127.0.0.1:80";
+        "*.rybak.website" = "https://127.0.0.1:443";
       };
       default = "http_status:404";
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 8080 ];
+  networking.firewall.allowedTCPPorts = [ 80 443 ];
 }
