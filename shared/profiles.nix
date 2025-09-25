@@ -77,7 +77,7 @@ let
         ./tor_services.nix
         ./monerod.nix
         #./media_server/jellyfin.nix
-        # ./media_server/nextcloud.nix
+        ./media_server/nextcloud.nix
         ../orangepi5pro/configuration.nix
       ];
     };
