@@ -14,7 +14,7 @@
     enable = true;
     package = pkgs.nextcloud31;
 
-    hostName = "rybak.website";
+    hostName = "nextcloud.rybak.website";
 
     
 
@@ -73,7 +73,7 @@
     tunnels."25b602b7-1da8-4039-a7ad-f51630ccfc12" = {
       credentialsFile = "/var/lib/cloudflared/tunnel.json";
       ingress = {
-        "*.rybak.website" = "https://127.0.0.1:443";
+        "nextcloud.rybak.website" = "https://127.0.0.1:443";
       };
       default = "http_status:404";
     };
