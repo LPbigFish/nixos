@@ -5,7 +5,7 @@
     owner = config.users.users.nextcloud.name;
   };
 
-  sops.secrets.cloudflared-creds = {
+  sops.secrets."cloudflared-creds.json" = {
     sopsFile = ../../secrets/tunnel.json;
     format = "json";
   };
@@ -62,7 +62,7 @@
   services.cloudflared = {
     enable = true;
     tunnels."25b602b7-1da8-4039-a7ad-f51630ccfc12" = {
-      credentialsFile = "${config.sops.secrets.cloudflared-creds.path}";
+      credentialsFile = "${config.sops.secrets."cloudflared-creds.json".path}";
       ingress = {
         "*.rybak.website" = "http://127.0.0.1:80";
       };
