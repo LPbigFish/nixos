@@ -16,8 +16,6 @@
 
     hostName = "nextcloud.rybak.website";
 
-    https = true;
-
     config.adminuser = "lpbigfish";
     config.adminpassFile = config.sops.secrets.nextcloudAdminpass.path;
 
@@ -56,28 +54,16 @@
     };
   };
 
-  services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {
-    forceSSL = true;
-    enableACME = true;
-  };
-
-  security.acme = {
-    acceptTerms = true;
-    certs = { 
-      ${config.services.nextcloud.hostName}.email = "lpbyblock@gmail.com";
-    }; 
-  };
-
   services.cloudflared = {
     enable = true;
     tunnels."25b602b7-1da8-4039-a7ad-f51630ccfc12" = {
       credentialsFile = "/var/lib/cloudflared/tunnel.json";
       ingress = {
-        "nextcloud.rybak.website" = "https://127.0.0.1:443";
+        "nextcloud.rybak.website" = "https://127.0.0.1:80";
       };
       default = "http_status:404";
     };
   };
 
-  networking.firewall.allowedTCPPorts = [ 80 443 ];
+  networking.firewall.allowedTCPPorts = [ 80 ];
 }
