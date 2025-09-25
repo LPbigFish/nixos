@@ -22,7 +22,7 @@
     config.adminpassFile = config.sops.secrets.nextcloudAdminpass.path;
 
     settings = {
-      "trusted_domains" = [ "rybak.website" ];
+      "trusted_domains" = [ "nextcloud.rybak.website" ];
     };
 
     maxUploadSize = "2G";
