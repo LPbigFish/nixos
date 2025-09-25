@@ -8,7 +8,6 @@
   sops.secrets.cloudflared-creds = {
     sopsFile = ../../secrets/tunnel.json;
     format = "json";
-    owner = "cloudflared";
   };
 
   services.nextcloud = {
@@ -59,8 +58,6 @@
         ;
     };
   };
-
-  services.redis.enable = true;
 
   services.cloudflared = {
     enable = true;
