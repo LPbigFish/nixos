@@ -1,5 +1,16 @@
 { pkgs, config, ... }:
 {
+  sops.secrets.nextcloudAdminpass = {
+    sopsFile = ../../secrets/nextcloud.yaml;
+    owner = config.users.users.nextcloud.name;
+  };
+
+  sops.secrets.cloudflared-creds = {
+    sopsFile = ../../secrets/tunnel.json;
+    format = "json";
+    owner = "cloudflared";
+  };
+
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud31;
@@ -7,14 +18,6 @@
     hostName = "rybak.website";
 
     config.adminpassFile = config.sops.secrets.nextcloudAdminpass.path;
-
-    database.createLocally = true;
-    config = {
-      dbtype = "pgsql";
-      dbpassFile = config.sops.secrets.nextcloudAdminpass.path;
-    };
-
-    https = true;
 
     settings = {
       "trusted_domains" = [ "rybak.website" ];
@@ -57,22 +60,14 @@
 
   services.redis.enable = true;
 
-  services.nginx = {
+  services.cloudflared = {
     enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    clientMaxBodySize = "2G";
-    virtualHosts."nextcloud-internal" = {
-      forceSSL = false;
-      listen = [
-        { addr = "10.10.0.2"; port = 8080; ssl = false; }
-      ];
+    tunnels."25b602b7-1da8-4039-a7ad-f51630ccfc12" = {
+      credentialsFile = "${config.sops.secrets.cloudflared-creds.path}";
+      ingress = {
+        "*.rybak.website" = "http://127.0.0.1:80";
+      };
+      default = "http_status:404";
     };
-  };
-
-  networking.firewall = {
-    allowedTCPPorts = [ ];
-    interfaces.wg0.allowedTCPPorts = [ 8080 ];
   };
 }
