@@ -16,7 +16,7 @@
 
     hostName = "nextcloud.rybak.website";
 
-    
+    https = true;
 
     config.adminuser = "lpbigfish";
     config.adminpassFile = config.sops.secrets.nextcloudAdminpass.path;
