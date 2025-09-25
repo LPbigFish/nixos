@@ -14,7 +14,7 @@
     enable = true;
     package = pkgs.nextcloud31;
 
-    hostName = "rybak.website";
+    hostName = "127.0.0.1";
 
     config.adminuser = "lpbigfish";
     config.adminpassFile = config.sops.secrets.nextcloudAdminpass.path;
