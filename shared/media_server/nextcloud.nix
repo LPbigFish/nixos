@@ -59,7 +59,7 @@
     tunnels."25b602b7-1da8-4039-a7ad-f51630ccfc12" = {
       credentialsFile = "/var/lib/cloudflared/tunnel.json";
       ingress = {
-        "nextcloud.rybak.website" = "https://127.0.0.1:80";
+        "nextcloud.rybak.website" = "http://127.0.0.1:80";
       };
       default = "http_status:404";
     };
