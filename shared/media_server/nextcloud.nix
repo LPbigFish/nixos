@@ -40,6 +40,8 @@
       "OC\\Preview\\HEIC"
     ];
 
+    config.dbtype = "sqlite";
+
     configureRedis = true;
 
     extraAppsEnable = true;
