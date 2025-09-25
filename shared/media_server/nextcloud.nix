@@ -16,6 +16,7 @@
 
     hostName = "rybak.website";
 
+    config.adminuser = "lpbigfish";
     config.adminpassFile = config.sops.secrets.nextcloudAdminpass.path;
 
     settings = {
@@ -69,4 +70,6 @@
       default = "http_status:404";
     };
   };
+
+  networking.firewall.allowedTCPPorts = [ 80 8080 ];
 }
