@@ -16,6 +16,8 @@
 
     hostName = "rybak.website";
 
+    
+
     config.adminuser = "lpbigfish";
     config.adminpassFile = config.sops.secrets.nextcloudAdminpass.path;
 
@@ -52,6 +54,18 @@
         registration
         ;
     };
+  };
+
+  services.nginx.virtualHosts.${config.services.nextcloud.hostName} = {
+    forceSSL = true;
+    enableACME = true;
+  };
+
+  security.acme = {
+    acceptTerms = true;
+    certs = { 
+      ${config.services.nextcloud.hostName}.email = "lpbyblock@gmail.com";
+    }; 
   };
 
   services.cloudflared = {
