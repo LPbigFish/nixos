@@ -21,8 +21,6 @@
 
     settings = {
       "trusted_domains" = [ "rybak.website" ];
-      "overwrite.cli.url" = "https://rybak.website/";
-      "overwritehost" = "rybak.website";
     };
 
     maxUploadSize = "2G";
