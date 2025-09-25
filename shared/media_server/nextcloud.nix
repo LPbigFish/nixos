@@ -5,8 +5,7 @@
     owner = config.users.users.nextcloud.name;
   };
 
-  sops.secrets."cloudflared-creds.json" = {
-    sopsFile = ../../secrets/tunnel.json;
+  sops.secrets."tunnel.json" = {
     path = "/var/lib/cloudflared/tunnel.json";
   };
 
