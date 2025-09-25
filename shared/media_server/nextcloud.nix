@@ -6,6 +6,7 @@
   };
 
   sops.secrets."tunnel.json" = {
+    sopsFile = ../../secrets/tunnel.yaml;
     path = "/var/lib/cloudflared/tunnel.json";
   };
 
