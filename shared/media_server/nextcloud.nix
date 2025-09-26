@@ -17,7 +17,7 @@
     hostName = "nextcloud.rybak.website";
 
     config.adminuser = "lpbigfish";
-    config.adminpassFile = config.sops.secrets.nextcloudAdminpass.path;
+    config.adminpassFile = "${config.sops.secrets.nextcloudAdminpass.path}";
 
     settings = {
       "trusted_domains" = [ "nextcloud.rybak.website" ];
