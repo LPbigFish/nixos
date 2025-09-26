@@ -21,6 +21,10 @@
 
     settings = {
       "trusted_domains" = [ "nextcloud.rybak.website" ];
+      overwriteprotocol = "https";
+      trusted_proxies = [ "127.0.0.1" "::1" ];
+      overwritehost = "nextcloud.rybak.website";
+      "overwrite.cli.url" = "https://nextcloud.rybak.website";
     };
 
     maxUploadSize = "2G";
@@ -35,11 +39,6 @@
     ];
 
     config.dbtype = "sqlite";
-
-    settings = {
-      overwriteprotocol = "https";
-      trusted_proxies = [ "127.0.0.1" "::1" ];
-    };
 
     configureRedis = true;
 
