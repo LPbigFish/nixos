@@ -12,6 +12,7 @@
 
   services.nextcloud = {
     enable = true;
+    
     package = pkgs.nextcloud31;
 
     hostName = "nextcloud.rybak.website";
