@@ -69,6 +69,4 @@
       default = "http_status:404";
     };
   };
-
-  networking.firewall.allowedTCPPorts = [ 80 ];
 }
