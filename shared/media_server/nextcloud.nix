@@ -36,6 +36,14 @@
 
     config.dbtype = "sqlite";
 
+    config = {
+      trusted_domains = [ "nextcloud.rybak.website" ];
+      overwritehost = "nextcloud.rybak.website";
+      overwriteprotocol = "https";
+      overwrite.cli.url = "https://nextcloud.rybak.website";
+      trustedProxies = [ "127.0.0.1" "::1" ];
+    };
+
     configureRedis = true;
 
     extraAppsEnable = true;
