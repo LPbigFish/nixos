@@ -25,6 +25,7 @@
       trusted_proxies = [ "127.0.0.1" "::1" ];
       overwritehost = "nextcloud.rybak.website";
       "overwrite.cli.url" = "https://nextcloud.rybak.website";
+      "overwritewebroot" = "\/";
     };
 
     maxUploadSize = "2G";
