@@ -1,29 +1,32 @@
 { pkgs, config, ... }:
 {
+  sops.secrets.nextcloudAdminpass = {
+    sopsFile = ../../secrets/nextcloud.yaml;
+    owner = config.users.users.nextcloud.name;
+  };
+
+  sops.secrets."tunnel.json" = {
+    sopsFile = ../../secrets/tunnel.yaml;
+    path = "/var/lib/cloudflared/tunnel.json";
+  };
+
   services.nextcloud = {
     enable = true;
+    
     package = pkgs.nextcloud31;
 
-    hostName = "rybak.website";
+    hostName = "nextcloud.rybak.website";
 
-    config.adminpassFile = config.sops.secrets.nextcloudAdminpass.path;
-
-    database.createLocally = true;
-    config = {
-      dbtype = "pgsql";
-      dbpassFile = config.sops.secrets.nextcloudAdminpass.path;
-    };
-
-    https = true;
+    config.adminuser = "lpbigfish";
+    config.adminpassFile = "${config.sops.secrets.nextcloudAdminpass.path}";
 
     settings = {
-      "trusted_domains" = [ "rybak.website" ];
-      "trusted_proxies" = [ "10.10.0.1" ];
-      "overwrite.cli.url" = "https://rybak.website/nextcloud";
-      "overwritehost" = "rybak.website";
-      "overwriteprotocol" = "https";
-      "overwritewebroot" = "/nextcloud";
-      "htaccess.RewriteBase" = "/nextcloud";
+      "trusted_domains" = [ "nextcloud.rybak.website" ];
+      overwriteprotocol = "https";
+      trusted_proxies = [ "127.0.0.1" "::1" ];
+      overwritehost = "nextcloud.rybak.website";
+      "overwrite.cli.url" = "https://nextcloud.rybak.website";
+      "overwritewebroot" = "\/";
     };
 
     maxUploadSize = "2G";
@@ -36,6 +39,8 @@
       "OC\\Preview\\XBitmap"
       "OC\\Preview\\HEIC"
     ];
+
+    config.dbtype = "sqlite";
 
     configureRedis = true;
 
@@ -55,24 +60,14 @@
     };
   };
 
-  services.redis.enable = true;
-
-  services.nginx = {
+  services.cloudflared = {
     enable = true;
-    recommendedGzipSettings = true;
-    recommendedOptimisation = true;
-    recommendedProxySettings = true;
-    clientMaxBodySize = "2G";
-    virtualHosts."nextcloud-internal" = {
-      forceSSL = false;
-      listen = [
-        { addr = "10.10.0.2"; port = 8080; ssl = false; }
-      ];
+    tunnels."25b602b7-1da8-4039-a7ad-f51630ccfc12" = {
+      credentialsFile = "/var/lib/cloudflared/tunnel.json";
+      ingress = {
+        "nextcloud.rybak.website" = "http://127.0.0.1:80";
+      };
+      default = "http_status:404";
     };
-  };
-
-  networking.firewall = {
-    allowedTCPPorts = [ ];
-    interfaces.wg0.allowedTCPPorts = [ 8080 ];
   };
 }

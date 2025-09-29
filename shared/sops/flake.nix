@@ -10,12 +10,8 @@
         {
           config,
           pkgs,
-          lib,
           ...
         }:
-        let
-          nextcloudUser = config.users.users ? "nextcloud";
-        in
         {
           imports = [
             inputs.sops-nix.nixosModules.sops
@@ -55,13 +51,6 @@
                 neededForUsers = true;
               };
               wpaPassword = { };
-
-              onionLink = { };
-
-              nextcloudAdminpass = lib.mkIf nextcloudUser {
-                sopsFile = ../../secrets/nextcloud.yaml;
-                owner = config.users.users.nextcloud.name;
-              };
             };
           };
 
