@@ -11,7 +11,7 @@
   };
 
   services.terraria = {
-    enable = true;
+    enable = false;
     port = 13054;
     maxPlayers = 2;
     openFirewall = true;
