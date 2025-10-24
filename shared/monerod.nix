@@ -22,11 +22,11 @@
       password = "$RPC_PASS";
     };
 
-    mining = {
-      enable = true;
-      address = "$MINING_ADDRESS";
-      threads = 2;
-    };
+    # mining = {
+    #  enable = false;
+    #  address = "$MINING_ADDRESS";
+    #  threads = 2;
+    # };
 
     extraConfig = ''
       p2p-bind-ip=127.0.0.1
