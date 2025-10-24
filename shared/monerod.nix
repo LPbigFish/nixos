@@ -23,7 +23,7 @@
     };
 
     mining = {
-      enable = true;
+      enable = false;
       address = "$MINING_ADDRESS";
       threads = 2;
     };
