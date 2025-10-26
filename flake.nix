@@ -21,9 +21,15 @@
       url = "github:gnull/nixos-rk3588";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    vim-conf = {
+      url = "./shared/nvim";
+    };
+
     sops-config.url = "./shared/sops";
 
     devkit.url = "./shared/devkit";
+
   };
 
   outputs =

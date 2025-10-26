@@ -20,6 +20,7 @@ let
     inputs.devkit.nixosModules.registry
     inputs.sops-config.nixosModules.sops_configuration
     inputs.disko.nixosModules.disko
+    inputs.vim-conf.nixosModules.nvimConfiguration
     ./.
     ./user-group.nix
   ];

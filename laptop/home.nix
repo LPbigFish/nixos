@@ -48,6 +48,7 @@ in
       clion
       rider
       datagrip
+      pycharm-professional
     ])
     ++ gnomeExtensions.extensions;
 
