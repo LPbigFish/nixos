@@ -13,7 +13,7 @@
   services.nextcloud = {
     enable = true;
     
-    package = pkgs.nextcloud31;
+    package = pkgs.nextcloud32;
 
     hostName = "nextcloud.rybak.website";
 
@@ -46,7 +46,7 @@
 
     extraAppsEnable = true;
     extraApps = {
-      inherit (pkgs.nextcloud31.packages.apps)
+      inherit (pkgs.nextcloud32.packages.apps)
         calendar
         cospend
         deck
