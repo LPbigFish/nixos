@@ -155,6 +155,10 @@ with lib.hm.gvariant;
       night-light-schedule-automatic = false;
     };
 
+    "org/gnome/settings-daemon/plugins/power" = {
+      power-button-action= "hibernate";
+    };
+
     "org/gnome/shell" = {
       disable-user-extensions = false;
       disabled-extensions = [ "wintile-beyond@GrylledCheez.xyz" ];
