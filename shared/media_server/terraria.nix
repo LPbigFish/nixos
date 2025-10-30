@@ -18,6 +18,7 @@
     openFirewall = true;
     password = "";
     worldPath = "/var/lib/terraria/Worlds/Tota.wld";
+    dataDir = "/srv/terraria";
   };
 
   systemd.tmpfiles.rules = [
