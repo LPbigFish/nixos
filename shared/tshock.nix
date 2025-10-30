@@ -116,11 +116,6 @@ in
   # === CONFIGURATION ===
   #
   config = lib.mkIf cfg.enable {
-    # Permit old sdk
-    nixpkgs.config.permittedInsecurePackages = [
-      "dotnet-sdk-6.0.428"
-    ];
-
     # Create the user and group
     users.users.tshock = {
       description = "TShock server service user";
