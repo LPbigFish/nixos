@@ -17,11 +17,7 @@
     maxPlayers = 2;
     openFirewall = true;
     password = "";
-    worldPath = "/srv/terraria/Tota.wld";
+    worldPath = "Tota.wld";
     dataDir = "/srv/terraria";
   };
-
-  systemd.tmpfiles.rules = [
-      "d /var/lib/terraria 0750 terraria terraria - -"
-    ];
 }
