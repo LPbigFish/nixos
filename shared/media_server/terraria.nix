@@ -17,7 +17,6 @@
     maxPlayers = 2;
     openFirewall = true;
     password = "";
-    worldPath = "Tota.wld";
     dataDir = "/srv/terraria";
   };
 }
