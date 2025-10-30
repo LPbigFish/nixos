@@ -17,12 +17,14 @@ let
   };
 
   shared_modules = [
+    inputs.playit-nixos-module.nixosModules.default
     inputs.devkit.nixosModules.registry
     inputs.sops-config.nixosModules.sops_configuration
     inputs.disko.nixosModules.disko
     inputs.vim-conf.nixosModules.nvimConfiguration
     ./.
     ./user-group.nix
+    ./tshock.nix
   ];
 
   configurations = {
@@ -75,7 +77,7 @@ let
         inputs.disko.nixosModules.disko
         ./tor_services.nix
         ./monerod.nix
-        ./terraria.nix
+        ./media_server/terraria.nix
         #./media_server/jellyfin.nix
         ./media_server/nextcloud.nix
         ../orangepi5pro/configuration.nix

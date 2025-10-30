@@ -26,6 +26,7 @@
       url = "./shared/nvim";
     };
 
+    playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
     sops-config.url = "./shared/sops";
 
     devkit.url = "./shared/devkit";
