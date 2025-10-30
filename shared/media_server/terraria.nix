@@ -12,7 +12,7 @@
     secretPath = config.sops.secrets.secret_key.path;
   };
 
-  services.tshock = {
+  services.terraria = {
     enable = true;
     port = 13054;
     maxPlayers = 2;

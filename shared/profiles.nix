@@ -6,20 +6,15 @@ let
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
-    config.permittedInsecurePackages = [
-      "dotnet-sdk-6.0.428"
-    ];
   };
 
   rk_pkgsKernel = import nixpkgs {
     system = rk_system;
     overlays = [
       (import ../overlays/rk-overlay.nix)
+      (import ../overlays/terraria-overlay.nix)
     ];
     config.allowUnfree = true;
-    config.permittedInsecurePackages = [
-      "dotnet-sdk-6.0.428"
-    ];
   };
 
   shared_modules = [
@@ -30,7 +25,6 @@ let
     inputs.vim-conf.nixosModules.nvimConfiguration
     ./.
     ./user-group.nix
-    ./tshock.nix
   ];
 
   configurations = {
