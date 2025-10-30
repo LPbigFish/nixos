@@ -24,4 +24,9 @@
     allowedUDPPorts = [ 7777 ];
     allowedTCPPorts = [ 7777 ];
   };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/terraria 0750 terraria terraria - -"
+    "d /var/lib/terraria/Worlds 0750 terraria terraria - -"
+  ];
 }
