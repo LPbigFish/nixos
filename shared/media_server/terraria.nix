@@ -1,9 +1,15 @@
 { config, ... }:
 {
+  sops.secrets.secret_key = {
+    owner = "playit";
+    sopsFile = "../../secrets/terraria.yaml";
+  };
+
   services.playit = {
     enable = true;
     user = "playit";
     group = "playit";
+    secretPath = config.sops.secrets.secret_key.path;
   };
 
   services.tshock = {
