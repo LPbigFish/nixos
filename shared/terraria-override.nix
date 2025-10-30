@@ -163,6 +163,7 @@ in
         description = "Terraria server user";
         group = "terraria";
         home = cfg.dataDir;
+        isSystemUser = true;
         # Let tmpfiles (or existing dir) control mode/creation if desired.
         createHome = lib.mkDefault true;
       };
