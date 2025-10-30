@@ -18,5 +18,6 @@
     maxPlayers = 2;
     openFirewall = true;
     password = ""; # ADD SEPARATELY
+    worldPath = "/var/lib/terraria/wld/Tota.wld";
   };
 }
