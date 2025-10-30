@@ -1,12 +1,17 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   cfg = config.services.terraria;
 
   worldSizeMap = {
-    small  = 1;
+    small = 1;
     medium = 2;
-    large  = 3;
+    large = 3;
   };
 
 in
@@ -68,7 +73,11 @@ in
     };
 
     autoCreatedWorldSize = lib.mkOption {
-      type = lib.types.enum [ "small" "medium" "large" ];
+      type = lib.types.enum [
+        "small"
+        "medium"
+        "large"
+      ];
       default = "medium";
       description = "Size of an auto-created world (used only when worldPath is set and missing).";
     };
@@ -111,51 +120,82 @@ in
   config = lib.mkIf cfg.enable (
     let
       tmuxSock = "${cfg.dataDir}/terraria.sock";
-      tmuxExec = "${lib.getExe pkgs.tmux} -S ${lib.escapeShellArg tmuxSock}";
+      tmuxCmd = "${lib.getExe pkgs.tmux} -S ${lib.escapeShellArg tmuxSock}";
+      session = "terraria";
 
-      # Build a clean argv list; no embedded quotes.
-      flagsList =
-        [
-          "-port"       (toString cfg.port)
-          "-maxPlayers" (toString cfg.maxPlayers)
-        ]
-        ++ lib.optionals (cfg.password != null)          [ "-password" cfg.password ]
-        ++ lib.optionals (cfg.messageOfTheDay != null)   [ "-motd"     cfg.messageOfTheDay ]
-        ++ lib.optionals (cfg.worldPath != null)         [ "-world"    cfg.worldPath
-                                                           "-autocreate" (toString (builtins.getAttr cfg.autoCreatedWorldSize worldSizeMap)) ]
-        ++ lib.optionals (cfg.banListPath != null)       [ "-banlist"  cfg.banListPath ]
-        ++ lib.optionals cfg.secure                       [ "-secure" ]
-        ++ lib.optionals cfg.noUPnP                       [ "-noupnp" ];
+      # Build the clean argv list (no quotes inside values)
+      worldSizeMap = {
+        small = 1;
+        medium = 2;
+        large = 3;
+      };
+      flagsList = [
+        "-port"
+        (toString cfg.port)
+        "-maxPlayers"
+        (toString cfg.maxPlayers)
+      ]
+      ++ lib.optionals (cfg.password != null) [
+        "-password"
+        cfg.password
+      ]
+      ++ lib.optionals (cfg.messageOfTheDay != null) [
+        "-motd"
+        cfg.messageOfTheDay
+      ]
+      ++ lib.optionals (cfg.worldPath != null) [
+        "-world"
+        cfg.worldPath
+        "-autocreate"
+        (toString (builtins.getAttr cfg.autoCreatedWorldSize worldSizeMap))
+      ]
+      ++ lib.optionals (cfg.banListPath != null) [
+        "-banlist"
+        cfg.banListPath
+      ]
+      ++ lib.optionals cfg.secure [ "-secure" ]
+      ++ lib.optionals cfg.noUPnP [ "-noupnp" ];
 
-      # Tiny launcher so systemd/tmux don't mangle args. We expand the flags
-      # with proper shell-escaping here.
       launcher = pkgs.writeShellScript "terraria-launch" ''
         set -euo pipefail
         export HOME=${lib.escapeShellArg cfg.dataDir}
         cd ${lib.escapeShellArg cfg.dataDir}
 
-        # Print args for debugging once
-        echo "Starting Terraria: ${lib.escapeShellArg (cfg.package.outPath)}/bin/TerrariaServer ${lib.concatMapStringsSep " " lib.escapeShellArg flagsList}"
+        # Show final argv once for debugging in the tmux pane
+        echo "Launching: ${cfg.package}/bin/TerrariaServer ${
+          lib.concatMapStringsSep " " lib.escapeShellArg flagsList
+        }"
 
         exec ${cfg.package}/bin/TerrariaServer ${lib.concatMapStringsSep " " lib.escapeShellArg flagsList}
       '';
 
-      # Graceful stop helper: either exit at prompt or send "exit"
       stopScript = pkgs.writeShellScript "terraria-stop" ''
-        if ! [ -d "/proc/$1" ]; then
+        set -euo pipefail
+
+        # If no tmux server/session, nothing to do.
+        if ! ${tmuxCmd} has-session -t ${session} 2>/dev/null; then
           exit 0
         fi
 
-        lastline=$(${tmuxExec} capture-pane -p | grep . | tail -n1 || true)
+        # Peek at the last non-empty line to detect the world-selection prompt
+        lastline="$(${tmuxCmd} capture-pane -pt ${session}:0 -J -p | grep . | tail -n1 || true)"
 
         if [[ "$lastline" =~ ^'Choose World' ]]; then
-          ${tmuxExec} kill-session || true
+          ${tmuxCmd} kill-session -t ${session} || true
         else
-          ${tmuxExec} send-keys Enter exit Enter
+          ${tmuxCmd} send-keys -t ${session}:0 Enter exit Enter
         fi
 
-        # Wait for process
-        tail --pid="$1" -f /dev/null
+        # Wait until tmux session disappears (don’t rely on PIDs)
+        for i in $(seq 1 100); do
+          if ! ${tmuxCmd} has-session -t ${session} 2>/dev/null; then
+            exit 0
+          fi
+          sleep 0.1
+        done
+
+        # Force kill if still around
+        ${tmuxCmd} kill-session -t ${session} || true
       '';
     in
     {
@@ -163,11 +203,8 @@ in
         description = "Terraria server user";
         group = "terraria";
         home = cfg.dataDir;
-        isSystemUser = true;
-        # Let tmpfiles (or existing dir) control mode/creation if desired.
         createHome = lib.mkDefault true;
       };
-
       users.groups.terraria = { };
 
       systemd.services.terraria = {
@@ -175,27 +212,29 @@ in
         wantedBy = [ "multi-user.target" ];
         after = [ "network.target" ];
 
+        # KEY CHANGES:
         serviceConfig = {
           User = "terraria";
           Group = "terraria";
 
-          # We run Terraria inside a tmux session so you can attach.
-          Type = "forking";
-          GuessMainPID = true;
+          # tmux backgrounds; we don’t track a PID
+          Type = "oneshot";
+          RemainAfterExit = true;
 
-          # Terraria writes config/logs/world; 007 to keep group readable if needed.
           UMask = 007;
-
-          # Make HOME/CWD explicit so default world discovery works:
           WorkingDirectory = cfg.dataDir;
           Environment = [ "HOME=${cfg.dataDir}" ];
-
-          # Ensure the data dir mount exists before starting
           RequiresMountsFor = [ cfg.dataDir ];
 
-          # Use a launcher to avoid quoting issues
-          ExecStart = "${tmuxExec} new -d ${launcher}";
-          ExecStop  = "${stopScript} $MAINPID";
+          # Create (or replace) a named session running our launcher
+          ExecStart =
+            "${tmuxCmd} has-session -t ${session} 2>/dev/null && ${tmuxCmd} kill-session -t ${session} || true; "
+            + "${tmuxCmd} new-session -d -s ${session} ${lib.escapeShellArg launcher}";
+
+          ExecStop = "${stopScript}";
+          # Optional: capture server output in journal too (keeps tmux output separate)
+          # StandardOutput = "journal";
+          # StandardError  = "journal";
         };
       };
 
