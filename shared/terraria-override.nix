@@ -204,6 +204,7 @@ in
         group = "terraria";
         home = cfg.dataDir;
         createHome = lib.mkDefault true;
+        isSystemUser = true;
       };
       users.groups.terraria = { };
 
