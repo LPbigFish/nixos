@@ -7,13 +7,6 @@
 
 let
   cfg = config.services.terraria;
-
-  worldSizeMap = {
-    small = 1;
-    medium = 2;
-    large = 3;
-  };
-
 in
 {
   ###### Options ######
@@ -123,7 +116,7 @@ in
       tmuxCmd = "${lib.getExe pkgs.tmux} -S ${lib.escapeShellArg tmuxSock}";
       session = "terraria";
 
-      # Build the clean argv list (no quotes inside values)
+      # flagsList built exactly like before (no quotes inside values)
       worldSizeMap = {
         small = 1;
         medium = 2;
@@ -161,7 +154,6 @@ in
         export HOME=${lib.escapeShellArg cfg.dataDir}
         cd ${lib.escapeShellArg cfg.dataDir}
 
-        # Show final argv once for debugging in the tmux pane
         echo "Launching: ${cfg.package}/bin/TerrariaServer ${
           lib.concatMapStringsSep " " lib.escapeShellArg flagsList
         }"
@@ -169,32 +161,35 @@ in
         exec ${cfg.package}/bin/TerrariaServer ${lib.concatMapStringsSep " " lib.escapeShellArg flagsList}
       '';
 
+      startScript = pkgs.writeShellScript "terraria-start" ''
+        set -euo pipefail
+        # kill any stale session with the same name (ignore errors)
+        ${tmuxCmd} has-session -t ${session} 2>/dev/null && ${tmuxCmd} kill-session -t ${session} || true
+        # create a fresh detached session running our launcher
+        exec ${tmuxCmd} new-session -d -s ${session} ${lib.escapeShellArg launcher}
+      '';
+
       stopScript = pkgs.writeShellScript "terraria-stop" ''
         set -euo pipefail
-
         # If no tmux server/session, nothing to do.
         if ! ${tmuxCmd} has-session -t ${session} 2>/dev/null; then
           exit 0
         fi
-
-        # Peek at the last non-empty line to detect the world-selection prompt
+        # Look at last line to decide whether a world is loaded
         lastline="$(${tmuxCmd} capture-pane -pt ${session}:0 -J -p | grep . | tail -n1 || true)"
-
         if [[ "$lastline" =~ ^'Choose World' ]]; then
           ${tmuxCmd} kill-session -t ${session} || true
         else
           ${tmuxCmd} send-keys -t ${session}:0 Enter exit Enter
         fi
-
-        # Wait until tmux session disappears (don’t rely on PIDs)
+        # Wait until the session disappears
         for i in $(seq 1 100); do
           if ! ${tmuxCmd} has-session -t ${session} 2>/dev/null; then
             exit 0
           fi
           sleep 0.1
         done
-
-        # Force kill if still around
+        # Force kill if needed
         ${tmuxCmd} kill-session -t ${session} || true
       '';
     in
@@ -213,12 +208,11 @@ in
         wantedBy = [ "multi-user.target" ];
         after = [ "network.target" ];
 
-        # KEY CHANGES:
         serviceConfig = {
           User = "terraria";
           Group = "terraria";
 
-          # tmux backgrounds; we don’t track a PID
+          # tmux backgrounds; we don't track a PID
           Type = "oneshot";
           RemainAfterExit = true;
 
@@ -227,15 +221,8 @@ in
           Environment = [ "HOME=${cfg.dataDir}" ];
           RequiresMountsFor = [ cfg.dataDir ];
 
-          # Create (or replace) a named session running our launcher
-          ExecStart =
-            "${tmuxCmd} has-session -t ${session} 2>/dev/null && ${tmuxCmd} kill-session -t ${session} || true; "
-            + "${tmuxCmd} new-session -d -s ${session} ${lib.escapeShellArg launcher}";
-
-          ExecStop = "${stopScript}";
-          # Optional: capture server output in journal too (keeps tmux output separate)
-          # StandardOutput = "journal";
-          # StandardError  = "journal";
+          ExecStart = startScript;
+          ExecStop = stopScript;
         };
       };
 
