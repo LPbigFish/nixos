@@ -17,12 +17,7 @@
     maxPlayers = 2;
     openFirewall = true;
     password = "";
-    worldPath = "/var/lib/terraria/wld/Toťa.wld";
-  };
-
-  networking.firewall = {
-    allowedUDPPorts = [ 7777 ];
-    allowedTCPPorts = [ 7777 ];
+    worldPath = "/var/lib/terraria/Worlds/Tota.wld";
   };
 
   systemd.tmpfiles.rules = [
