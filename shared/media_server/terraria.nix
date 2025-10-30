@@ -19,4 +19,9 @@
     password = ""; # ADD SEPARATELY
     worldPath = "/var/lib/terraria/wld/Tota.wld";
   };
+
+  networking.firewall = {
+    allowedUDPPorts = [ 7777 ];
+    allowedTCPPorts = [ 7777 ];
+  };
 }
