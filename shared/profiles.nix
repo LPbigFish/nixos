@@ -22,17 +22,14 @@ let
     inputs.sops-config.nixosModules.sops_configuration
     inputs.disko.nixosModules.disko
     inputs.vim-conf.nixosModules.nvimConfiguration
-    ./.
-    ./user-group.nix
-    ./tshock.nix
-    (
-      { }:
-      {
+    ({ nixpkgs, ... }: {
         nixpkgs.config.permittedInsecurePackages = [
           "dotnet-sdk-6.0.428"
         ];
-      }
-    )
+    })
+    ./.
+    ./user-group.nix
+    ./tshock.nix
   ];
 
   configurations = {
