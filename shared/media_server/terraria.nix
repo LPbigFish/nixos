@@ -16,8 +16,8 @@
     enable = true;
     maxPlayers = 2;
     openFirewall = true;
-    password = ""; # ADD SEPARATELY
-    worldPath = "/var/lib/terraria/wld/Tota.wld";
+    password = "";
+    worldPath = "/var/lib/terraria/wld/Toťa.wld";
   };
 
   networking.firewall = {
@@ -26,7 +26,6 @@
   };
 
   systemd.tmpfiles.rules = [
-    "d /var/lib/terraria 0750 terraria terraria - -"
-    "d /var/lib/terraria/Worlds 0750 terraria terraria - -"
-  ];
+      "d /var/lib/terraria 0750 terraria terraria - -"
+    ];
 }
