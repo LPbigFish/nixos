@@ -2,7 +2,7 @@
 {
   sops.secrets.secret_key = {
     owner = "playit";
-    sopsFile = "../../secrets/terraria.yaml";
+    sopsFile = ../../secrets/terraria.yaml;
   };
 
   services.playit = {
