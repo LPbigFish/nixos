@@ -37,22 +37,28 @@ stdenv.mkDerivation rec {
   installPhase = ''
     runHook preInstall
 
-    # Copy all game files into a libexec dir
+    # Create the target dir
     mkdir -p $out/libexec/terraria-server
-    cp -r . $out/libexec/terraria-server/
+
+    # The log says 'source root is 1449'. This means we are INSIDE 1449.
+    # We need to copy the *contents* of the 'Linux' subdir.
+    cp -r ./Linux/* $out/libexec/terraria-server/
 
     # --- IMPORTANT BIT (from the guide) ---
-    # Enter the directory and remove the problematic/x86-specific DLLs.
-    # This forces mono to use its own system-wide (aarch64) libraries.
+    # Now the files are directly in $out/libexec/terraria-server
     echo "Removing bundled Mono/System libraries..."
     cd $out/libexec/terraria-server
-    rm System* Mono* monoconfig mscorlib.dll
+
+    # Use 'rm -f' to ignore "no such file or directory" errors,
+    # which is safer for globs and future package updates.
+    rm -f System* Mono* monoconfig mscorlib.dll
 
     # --- Create the wrapper script ---
     mkdir -p $out/bin
     cat > $out/bin/TerrariaServer << EOF
     #!${runtimeShell}
     # Change to the directory with the game files
+    # This path is now correct because we copied the contents of 'Linux'
     cd "$out/libexec/terraria-server"
 
     # Execute using mono with flags from the guide
