@@ -18,12 +18,16 @@ let
   };
 
   shared_modules = [
+    {
+      disabledModules = [ "services/games/terraria.nix" ];
+    }
     inputs.playit-nixos-module.nixosModules.default
     inputs.devkit.nixosModules.registry
     inputs.sops-config.nixosModules.sops_configuration
     inputs.disko.nixosModules.disko
     inputs.vim-conf.nixosModules.nvimConfiguration
     ./.
+    ./terraria-override.nix
     ./user-group.nix
   ];
 

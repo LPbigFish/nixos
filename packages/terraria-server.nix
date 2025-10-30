@@ -1,15 +1,19 @@
-{
-  lib,
-  stdenv,
-  fetchurl,
+{ lib
+, stdenv
+, fetchurl
+, unzip
 
-  # --- Dependencies for aarch64/Mono ---
-  unzip,        # To extract the zip
-  mono,         # The .NET runtime
-  runtimeShell, # For the wrapper script
-  libgdiplus,   # For Mono's System.Drawing
-  SDL2,         # For FNA (graphics/audio library)
-  zlib          # General dependency
+, mono
+, libgdiplus
+, SDL2
+, openal
+, faudio
+, libogg
+, libvorbis
+, libpng
+, libjpeg
+, zlib
+, runtimeShell
 }:
 
 stdenv.mkDerivation rec {
@@ -19,65 +23,74 @@ stdenv.mkDerivation rec {
 
   src = fetchurl {
     url = "https://terraria.org/api/download/pc-dedicated-server/terraria-server-${urlVersion}.zip";
+    # same hash you used:
     sha256 = "sha256-Mk+5s9OlkyTLXZYVT0+8Qcjy2Sb5uy2hcC8CML0biNY=";
   };
 
-  nativeBuildInputs = [
-    unzip
-  ];
+  # We only need unzip at build time
+  nativeBuildInputs = [ unzip ];
 
-  # These are runtime dependencies for mono and FNA.dll
+  # Runtime deps for Mono & native libs FNA may touch
   buildInputs = [
     mono
     libgdiplus
     SDL2
+    openal
+    faudio
+    libogg
+    libvorbis
+    libpng
+    libjpeg
     zlib
   ];
+
+  # No configure/build phases
+  dontConfigure = true;
+  dontBuild = true;
 
   installPhase = ''
     runHook preInstall
 
-    # Create the target dir
     mkdir -p $out/libexec/terraria-server
+    # upstream puts content in ./Linux
+    cp -r Linux/* $out/libexec/terraria-server/
 
-    # The log says 'source root is 1449'. This means we are INSIDE 1449.
-    # We need to copy the *contents* of the 'Linux' subdir.
-    cp -r ./Linux/* $out/libexec/terraria-server/
-
-    # --- IMPORTANT BIT (from the guide) ---
-    # Now the files are directly in $out/libexec/terraria-server
-    echo "Removing bundled Mono/System libraries..."
     cd $out/libexec/terraria-server
 
-    # Use 'rm -f' to ignore "no such file or directory" errors,
-    # which is safer for globs and future package updates.
-    rm -f System* Mono* monoconfig mscorlib.dll
+    # Toss the vendor x86_64 native libs and vendor .NET framework DLLs
+    rm -rf lib64
+    rm -f System*.dll Mono*.dll monoconfig monomachineconfig mscorlib.dll WindowsBase.dll
 
-    # --- Create the wrapper script ---
+    # Make sure the Mono launcher script exists only for reference; we run the .exe
+    chmod -f +x TerrariaServer || true
+    chmod -f +x TerrariaServer.bin.x86_64 || true
+
+    # Create wrapper
     mkdir -p $out/bin
-    cat > $out/bin/TerrariaServer << EOF
+    cat > $out/bin/TerrariaServer <<EOF
     #!${runtimeShell}
-    # Change to the directory with the game files
-    # This path is now correct because we copied the contents of 'Linux'
+    set -euo pipefail
     cd "$out/libexec/terraria-server"
 
-    # Execute using mono with flags from the guide
-    # Pass all user-provided arguments ("$@") to the server
-    echo "Starting TerrariaServer.exe with Mono..."
-    exec ${mono}/bin/mono --server --gc=sgen -O=all ./TerrariaServer.exe "$@"
-    EOF
+    # Native libs path (keep order simple; add more if you see missing .so’s)
+    export LD_LIBRARY_PATH="${SDL2}/lib:${openal}/lib:${faudio}/lib:${libvorbis}/lib:${libogg}/lib:${libpng}/lib:${libjpeg}/lib:${zlib}/lib''${LD_LIBRARY_PATH:+:''${LD_LIBRARY_PATH}}"
 
-    # Make the wrapper executable
+
+    # If you want more Mono verbosity for debugging, uncomment:
+    # export MONO_LOG_LEVEL=info
+
+    exec ${mono}/bin/mono --server --gc=sgen -O=all ./TerrariaServer.exe "\$@"
+    EOF
     chmod +x $out/bin/TerrariaServer
 
     runHook postInstall
   '';
 
   meta = with lib; {
+    description = "Dedicated server for Terraria (runs with Mono on aarch64)";
     homepage = "https://terraria.org";
-    description = "Dedicated server for Terraria (aarch64/Mono version)"; # Updated description
-    platforms = [ "aarch64-linux" ]; # <-- The key platform change
     license = licenses.unfree;
+    platforms = [ "aarch64-linux" ];
     mainProgram = "TerrariaServer";
   };
 }
