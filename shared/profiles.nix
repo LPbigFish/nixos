@@ -6,6 +6,9 @@ let
   pkgs = import nixpkgs {
     inherit system;
     config.allowUnfree = true;
+    config.permittedInsecurePackages = [
+      "dotnet-sdk-6.0.428"
+    ];
   };
 
   rk_pkgsKernel = import nixpkgs {
@@ -14,6 +17,9 @@ let
       (import ../overlays/rk-overlay.nix)
     ];
     config.allowUnfree = true;
+    config.permittedInsecurePackages = [
+      "dotnet-sdk-6.0.428"
+    ];
   };
 
   shared_modules = [
@@ -22,11 +28,6 @@ let
     inputs.sops-config.nixosModules.sops_configuration
     inputs.disko.nixosModules.disko
     inputs.vim-conf.nixosModules.nvimConfiguration
-    ({ nixpkgs, ... }: {
-        nixpkgs.config.permittedInsecurePackages = [
-          "dotnet-sdk-6.0.428"
-        ];
-    })
     ./.
     ./user-group.nix
     ./tshock.nix
