@@ -200,6 +200,7 @@ in
         home = cfg.dataDir;
         createHome = lib.mkDefault true;
         isSystemUser = true;
+        shell = pkgs.bashInteractive;
       };
       users.groups.terraria = { };
 
