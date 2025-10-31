@@ -108,9 +108,9 @@ in
       description = "Directory for worlds, configs and tmux socket.";
     };
 
-    services.terraria.bindAddress = lib.mkOption {
+    bindAddress = lib.mkOption {
       type = lib.types.str;
-      default = "127.0.0.1"; # bind only for Playit
+      default = "127.0.0.1";
       description = "IP address Terraria listens on (e.g., 127.0.0.1 or 0.0.0.0).";
     };
   };
