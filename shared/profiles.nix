@@ -2,18 +2,21 @@
 let
   system = "x86_64-linux";
   rk_system = "aarch64-linux";
+  
+  overlays = [
+    (import ../overlays/rk-overlay.nix)
+    (import ../overlays/terraria-overlay.nix)
+    inputs.nix-minecraft.overlay
+  ];
 
   pkgs = import nixpkgs {
-    inherit system;
+    inherit system overlays;
     config.allowUnfree = true;
   };
 
   rk_pkgsKernel = import nixpkgs {
+    inherit overlays;
     system = rk_system;
-    overlays = [
-      (import ../overlays/rk-overlay.nix)
-      (import ../overlays/terraria-overlay.nix)
-    ];
     config.allowUnfree = true;
   };
 
@@ -26,6 +29,7 @@ let
     inputs.sops-config.nixosModules.sops_configuration
     inputs.disko.nixosModules.disko
     inputs.vim-conf.nixosModules.nvimConfiguration
+    inputs.nix-minecraft.nixosModules.minecraft-servers
     ./.
     ./terraria-override.nix
     ./user-group.nix
@@ -81,8 +85,9 @@ let
         inputs.disko.nixosModules.disko
         ./tor_services.nix
         ./monerod.nix
-        ./media_server/terraria.nix
+        #./media_server/terraria.nix
         #./media_server/jellyfin.nix
+        ./media_server/minecraft.nix
         ./media_server/nextcloud.nix
         ../orangepi5pro/configuration.nix
       ];

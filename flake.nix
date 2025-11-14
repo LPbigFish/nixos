@@ -25,7 +25,7 @@
     vim-conf = {
       url = "./shared/nvim";
     };
-
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
     sops-config.url = "./shared/sops";
 

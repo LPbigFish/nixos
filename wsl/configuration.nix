@@ -35,6 +35,7 @@
     dbeaver-bin
     docker-compose
     xmrig
+    packwiz
   ];
 
   users.users.lpbigfish.extraGroups = [ "docker" ];
