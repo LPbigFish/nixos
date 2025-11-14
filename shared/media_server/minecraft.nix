@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   modpack = pkgs.fetchPackwizModpack {
     url = "https://raw.githubusercontent.com/LPbigFish/FabricMods/refs/heads/main/pack.toml";
@@ -22,7 +22,9 @@ in {
 
       serverProperties = {
         difficulty = 3;
-        max-players = 10;
+        max-players = 12;
+        level-seed = "-7266280065385116388";
+        online-mode = false;
       };
 
       jvmOpts = "-Xmx4096M";
