@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 let
   modpack = pkgs.fetchPackwizModpack {
-    url = "https://raw.githubusercontent.com/LPbigFish/FabricMods/b9f3447a875e9b35627a3844ff87d57bbff71e83/pack.toml";
-    packHash = "sha256-1im8bk0c5rcnphl1hibkypy678bjx60a65kbf92mrs6s2xmky8wd";
+    url = "https://raw.githubusercontent.com/LPbigFish/FabricMods/refs/heads/main/pack.toml";
+    packHash = lib.fakeSha256;
   };
 in {
   services.minecraft-servers = {
@@ -17,8 +17,15 @@ in {
       };
 
       symlinks = {
-        #mods = "${modpack}/mods";
+        mods = "${modpack}/mods";
       };
+
+      serverProperties = {
+        difficulty = 3;
+        max-players = 10;
+      };
+
+      jvmOpts = "-Xmx4096M";
     };
   };
 
