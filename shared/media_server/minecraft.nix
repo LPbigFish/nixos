@@ -25,7 +25,6 @@ in {
         max-players = 12;
         spawn-protection = 0;
         level-seed = "-7266280065385116388";
-        online-mode = false;
       };
 
       jvmOpts = "-Xmx4096M";
