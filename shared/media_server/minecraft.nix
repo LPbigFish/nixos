@@ -1,8 +1,8 @@
 { pkgs, ... }:
 let
   modpack = pkgs.fetchPackwizModpack {
-    url = "https://github.com/LPbigFish/FabricMods/blob/main/pack.toml";
-    packHash = "sha256-0qq0v021ziq3jb6yf24p06ynxhzib5x3szf1vbsjxhn5365k6lz1";
+    url = "https://raw.githubusercontent.com/LPbigFish/FabricMods/refs/heads/main/pack.toml";
+    packHash = "sha256-1im8bk0c5rcnphl1hibkypy678bjx60a65kbf92mrs6s2xmky8wd";
   };
 in {
   services.minecraft-servers = {
@@ -13,7 +13,7 @@ in {
       enable = true;
 
       package = pkgs.fabricServers.fabric-1_21_10.override {
-        loaderVersion = "0.18.0";
+        loaderVersion = "0.17.3";
       };
 
       symlinks = {
