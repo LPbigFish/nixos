@@ -17,7 +17,7 @@ in {
       };
 
       symlinks = {
-        mods = "${modpack}/mods";
+        #mods = "${modpack}/mods";
       };
     };
   };
