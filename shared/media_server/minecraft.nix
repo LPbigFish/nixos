@@ -21,7 +21,7 @@ in {
       };
 
       serverProperties = {
-        difficulty = 3;
+        difficulty = 2;
         max-players = 12;
         spawn-protection = 0;
         level-seed = "-7266280065385116388";
