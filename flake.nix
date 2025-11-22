@@ -53,7 +53,7 @@
                 enable = true;
                 flake = "github:LPbigFish/nixos#${name}";
                 persistent = true;
-                dates = "daily";
+                dates = "weekly";
                 operation = "switch";
               };
             }
