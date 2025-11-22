@@ -1,8 +1,8 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   modpack = pkgs.fetchPackwizModpack {
     url = "https://raw.githubusercontent.com/LPbigFish/FabricMods/611d51c64d25ec16703308590a3d8369ddc7507e/pack.toml";
-    packHash = lib.fakeSha256;
+    packHash = "sha256-1SwHhNF9eFH6v8R0SjOb5pWZnQF+GL4ttpINEqwjwJM=";
   };
 in {
   services.minecraft-servers = {
