@@ -10,9 +10,9 @@
     };
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     flatpak-module = {
-      url = "./shared/flatpak";
+      url = "./modules/flatpak";
     };
-    grub-conf.url = "./shared/grub";
+    grub-conf.url = "./modules/grub";
     disko = {
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,13 +23,13 @@
     };
 
     vim-conf = {
-      url = "./shared/nvim";
+      url = "./modules/nvim";
     };
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
-    sops-config.url = "./shared/sops";
+    sops-config.url = "./modules/sops";
 
-    devkit.url = "./shared/devkit";
+    devkit.url = "./modules/devkit";
 
   };
 
@@ -60,7 +60,7 @@
           ];
         };
 
-      configs = import ./shared/profiles.nix { inherit inputs nixpkgs; };
+      configs = import ./modules/profiles.nix { inherit inputs nixpkgs; };
     in
     {
       nixosConfigurations = nixpkgs.lib.mapAttrs mkHost configs;
