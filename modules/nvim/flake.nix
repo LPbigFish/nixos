@@ -5,7 +5,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   }; 
-  outputs = { self, nixvim, nixpkgs, flake-utils }: {
+  outputs = { nixvim, ... }: {
     nixosModules.nvimConfiguration = { pkgs, ... }: {
         imports = [ nixvim.nixosModules.nixvim ];
 
@@ -15,6 +15,7 @@
           plugins = {
             treesitter.enable = true;
             telescope.enable = true;
+            web-devicons.enable = true;
           };
 
           extraPlugins = with pkgs.vimPlugins; [
