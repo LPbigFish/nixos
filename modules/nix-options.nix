@@ -18,13 +18,7 @@
 
     optimise = {
       automatic = true;
-      dates = [ "03:45" ];
-    };
-
-    gc = {
-      automatic = true;
-      options = "-d --keep 2";
-      dates = "03:15";
+      dates = "weekly";
     };
   };
 }

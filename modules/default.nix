@@ -12,6 +12,11 @@
   programs = {
     nh = {
       enable = true;
+      clean = {
+        enable = true;
+        dates = "daily";
+        extraArgs = "--keep 1 --no-gcroots";
+      };
       flake = "/home/lpbigfish/.config/nixos";
     };
     nix-ld = {
