@@ -5,7 +5,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   }; 
-  outputs = { nixvim, ... }: {
+  outputs = { self, nixpkgs, nixvim }: {
     nixosModules.nvimConfiguration = { pkgs, ... }: {
         imports = [ nixvim.nixosModules.nixvim ];
 

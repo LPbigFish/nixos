@@ -74,8 +74,10 @@ in
     };
     git = {
       enable = true;
-      userEmail = "lpbyblock@gmail.com";
-      userName = "LPbigFish";
+      settings.user = {
+        email = "lpbyblock@gmail.com";
+        name = "LPbigFish";
+      };
     };
     direnv = {
       enable = true;
@@ -137,7 +139,7 @@ in
 
   # Home Manager is pretty good at managing dotfiles
   home.file = {
-    "~/.p10k.zsh".source = ../shared/.p10k.zsh;
+    "~/.p10k.zsh".source = ../modules/.p10k.zsh;
   };
 
   home.sessionVariables = {

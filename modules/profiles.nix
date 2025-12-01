@@ -11,7 +11,10 @@ let
 
   pkgs = import nixpkgs {
     inherit system overlays;
-    config.allowUnfree = true;
+    config = {
+      allowUnfree = true;
+      nvidia.acceptLicense = true;
+    };
   };
 
   rk_pkgsKernel = import nixpkgs {
