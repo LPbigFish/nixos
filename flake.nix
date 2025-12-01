@@ -26,7 +26,7 @@
       url = "./modules/nvim";
     };
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-    playit-nixos-module.url = "github:pedorich-n/playit-nixos-module";
+    
     sops-config.url = "./modules/sops";
 
     devkit.url = "./modules/devkit";

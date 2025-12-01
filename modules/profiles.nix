@@ -27,7 +27,6 @@ let
     {
       disabledModules = [ "services/games/terraria.nix" ];
     }
-    inputs.playit-nixos-module.nixosModules.default
     inputs.devkit.nixosModules.registry
     inputs.sops-config.nixosModules.sops_configuration
     inputs.disko.nixosModules.disko
