@@ -3,7 +3,7 @@ keys:
   - &orange age1546c2ausu2edta05gctcgvpc44acwqwjzprnv3fzjdwrphaqsu9qm78k4c
   - &orange2 age1eezq6dhs9pac77kj4xdfwvu4lgs9w2klmmxjfrmwghs44zgzapaqr235c6
   - &lenovo age12ky2dfcwe9zm3lth6epkvy4mth93xs6snpcne744knqenflk4s0s0puu96
-  - &wsl age1fxjynyzl83dlcj06509k8pc6ndpekgf5lajmkupx5j3ptv6ceehqr4hly6
+  - &wsl age16atecwdh657qvzxxy94udpthf2mf4wxywsaf07tex3tzuw7fpc5qzhcrms
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
