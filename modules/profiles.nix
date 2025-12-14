@@ -5,7 +5,7 @@ let
   
   overlays = [
     (import ../overlays/rk-overlay.nix)
-    (import ../overlays/terraria-overlay.nix)
+    (import ../overlays/generic-overlay.nix)
     inputs.nix-minecraft.overlay
   ];
 

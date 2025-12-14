@@ -3,8 +3,6 @@ let
   cfg = config.graphics-driver-selection;
 in
 lib.mkIf (cfg.gpu == "nvidia") {
-  hardware.nvidia-container-toolkit.enable = true;
-
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -58,16 +56,5 @@ lib.mkIf (cfg.gpu == "nvidia") {
     ncurses5
     stdenv.cc
     binutils
-    nvidia-container-toolkit
   ];
-
-  environment.variables = {
-    NVIDIA_DRIVER_CAPABILITIES = "compute,utility";
-    NVIDIA_VISIBLE_DEVICES = "all";
-
-    CUDA_PATH = "${pkgs.cudatoolkit}";
-    LD_LIBRARY_PATH = "/usr/lib/wsl/lib:${pkgs.linuxPackages.nvidia_x11}/lib:${pkgs.ncurses5}/lib";
-    EXTRA_LDFLAGS = "-L/lib -L${pkgs.linuxPackages.nvidia_x11}/lib";
-    EXTRA_CCFLAGS = "-I/usr/include";
-  };
 }
