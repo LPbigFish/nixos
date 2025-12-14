@@ -46,6 +46,19 @@ let
       ];
       specialArgs = { };
     };
+    main = {
+      inherit system pkgs;
+      specialArgs = {
+        gnomeExtensions = (import ./desktop/gnome-extensions.nix { inherit pkgs; });
+      };
+      modules = shared_modules ++ [
+        inputs.grub-conf.nixosModules.grubConfiguration
+        inputs.flatpak-module.nixosModules.flatpak
+        ./gaming.nix
+        ./desktop/gnome.nix
+        ../main/configuration.nix
+      ];
+    };
     laptop = {
       inherit system pkgs;
       specialArgs = {
@@ -89,7 +102,7 @@ let
         ./monerod.nix
         #./media_server/terraria.nix
         #./media_server/jellyfin.nix
-        ./media_server/minecraft.nix
+        #./media_server/minecraft.nix
         ./media_server/nextcloud.nix
         ../orangepi5pro/configuration.nix
       ];
