@@ -7,6 +7,7 @@
   home.username = "lpbigfish";
   home.homeDirectory = "/home/lpbigfish";
   home.enableNixpkgsReleaseCheck = false;
+  home.stateVersion = "25.05";
 
   home.packages =
     (with pkgs; [
