@@ -4,6 +4,7 @@ imports = [
     # Include the results of the hardware scan.
     inputs.home-manager.nixosModules.default
     ./pipewire.nix
+    ./hardware-configuration.nix
   ];
 
   graphics-driver-selection.gpu = "nvidia";
@@ -61,4 +62,5 @@ imports = [
     networkmanager-openconnect
   ];
 
+  system.stateVersion = "25.05";
 }
