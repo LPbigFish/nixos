@@ -3,7 +3,22 @@
   gnomeExtensions,
   ...
 }:
+let
+  light_wp = builtins.fetchurl {
+    url = "https://raw.githubusercontent.com/LPbigFish/nixos/refs/heads/main/.github/images/light_image.jpg";
+    sha256 = "1b8lfq0mg3swi45zcxlg71zv3svw1f3ff4qdgxwv3w9sbpfjn0k7";
+  };
+  dark_wp = builtins.fetchurl {
+    url = "https://raw.githubusercontent.com/LPbigFish/nixos/refs/heads/main/.github/images/dark_image.jpg";
+    sha256 = "1d0yxj5d1mak9fvxsh49g6vcx0q5almjyhqqay06cw21s1qdjqw8";
+  };
+in
 {
+
+  imports = [
+    ./dconf.nix
+  ];
+
   home.username = "lpbigfish";
   home.homeDirectory = "/home/lpbigfish";
   home.enableNixpkgsReleaseCheck = false;
@@ -75,6 +90,22 @@
       syntaxHighlighting.enable = true;
       autosuggestion.enable = true;
       initContent = builtins.readFile ./zsh_init.bash;
+    };
+  };
+
+  dconf = {
+    enable = true;
+    settings = {
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = gnomeExtensions.extensionUuidList;
+      };
+
+      "org/gnome/desktop/interface".color-scheme = "prefer-dark";
+      "org/gnome/desktop/background" = {
+        picture-uri = "file://${light_wp}";
+        picture-uri-dark = "file://${dark_wp}";
+      };
     };
   };
 
