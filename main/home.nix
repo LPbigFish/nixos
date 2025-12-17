@@ -7,11 +7,11 @@
 let
   light_wp = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/LPbigFish/nixos/refs/heads/main/.github/images/image_uw.jpg";
-    hash = lib.fakeHash;
+    sha256 = "0n20194xkwhlbizyva43698q0mmgdpdwrgrv3hmi7zbmx0lskrwc";
   };
   dark_wp = builtins.fetchurl {
     url = "https://raw.githubusercontent.com/LPbigFish/nixos/refs/heads/main/.github/images/image_dark_uw.jpg";
-    hash = lib.fakeHash;
+    sha256 = "0y3wcdp954j3kc0wxg56mc5kmi5h8xpw1pv7vrq9qb60khw22h1m";
   };
 in
 {
