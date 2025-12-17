@@ -13,6 +13,7 @@
     ./pipewire.nix
   ];
 
+  boot.kernelPackages = pkgs.linuxPackages_6_18;
   boot.kernelModules = [ "snd-hda-intel" ];
   boot.extraModprobeConfig = ''
     options snd-hda-intel model=generic
