@@ -40,6 +40,9 @@ in
       hunspellDicts.en_US
       android-studio
       davinci-resolve
+      pavucontrol
+      audacity
+      vinegar
     ])
     ++ (with pkgs.jetbrains; [
       idea-ultimate
@@ -59,7 +62,12 @@ in
     theme = {
       name = "Orchis-Dark";
       package = pkgs.orchis-theme.override {
-        tweaks = [ "black" "primary" "compact" "dock" ];
+        tweaks = [
+          "black"
+          "primary"
+          "compact"
+          "dock"
+        ];
       };
     };
   };
@@ -85,11 +93,56 @@ in
         enable = true;
       };
     };
+    obs-studio = {
+      enable = true;
+
+      package = (
+        pkgs.obs-studio.override {
+          cudaSupport = true;
+        }
+      );
+
+      plugins = with pkgs.obs-studio-plugins; [
+        wlrobs
+        obs-backgroundremoval
+        obs-pipewire-audio-capture
+        obs-gstreamer
+        obs-vkcapture
+      ];
+    };
     zsh = {
       enable = true;
       syntaxHighlighting.enable = true;
       autosuggestion.enable = true;
-      initContent = builtins.readFile ./zsh_init.bash;
+      initContent = ''
+        source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
+          [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+          # General
+          POWERLEVEL9K_BACKGROUND='#F7F7F7'
+          POWERLEVEL9K_FOREGROUND='#1C1C1C'
+
+          # OS logo
+          POWERLEVEL9K_OS_ICON_BACKGROUND='#FFFFFF'
+          POWERLEVEL9K_OS_ICON_FOREGROUND='#1C1C1C'
+
+          # Directory
+          POWERLEVEL9K_DIR_BACKGROUND='#FFFFFF'
+          POWERLEVEL9K_DIR_FOREGROUND='#1C1C1C'
+          POWERLEVEL9K_DIR_ANCHOR_FOREGROUND='#1C1C1C'
+
+          # VCS (git)
+          POWERLEVEL9K_VCS_CLEAN_BACKGROUND='#E8E8E8'
+          POWERLEVEL9K_VCS_CLEAN_FOREGROUND='#1C1C1C'
+          POWERLEVEL9K_VCS_UNTRACKED_BACKGROUND='#E8E8E8'
+          POWERLEVEL9K_VCS_UNTRACKED_FOREGROUND='#7F7F7F'
+          POWERLEVEL9K_VCS_MODIFIED_BACKGROUND='#E8E8E8'
+          POWERLEVEL9K_VCS_MODIFIED_FOREGROUND='#7F7F7F'
+
+          # Status segment
+          POWERLEVEL9K_STATUS_OK_BACKGROUND='#FFFFFF'
+          POWERLEVEL9K_STATUS_OK_FOREGROUND='#7F7F7F'
+      '';
     };
   };
 

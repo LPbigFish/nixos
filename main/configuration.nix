@@ -1,11 +1,22 @@
-{pkgs, inputs, gnomeExtensions, ...}: {
+{
+  pkgs,
+  inputs,
+  gnomeExtensions,
+  ...
+}:
+{
 
-imports = [
+  imports = [
     # Include the results of the hardware scan.
     inputs.home-manager.nixosModules.default
-    ./pipewire.nix
     ./hardware-configuration.nix
+    ./pipewire.nix
   ];
+
+  boot.kernelModules = [ "snd-hda-intel" ];
+  boot.extraModprobeConfig = ''
+    options snd-hda-intel model=generic
+  '';
 
   graphics-driver-selection.gpu = "nvidia";
 
@@ -38,13 +49,15 @@ imports = [
 
   services.printing.enable = true;
 
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-
   hardware.bluetooth = {
     enable = true;
     powerOnBoot = true;
   };
+
+  hardware.trackpoint.emulateWheel = true;
+
+  security.rtkit.enable = true;
+  services.pulseaudio.enable = false;
 
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs gnomeExtensions; };
@@ -54,12 +67,16 @@ imports = [
     backupFileExtension = "backup";
   };
 
+  programs.obs-studio.enableVirtualCamera = true;
+
   environment.systemPackages = with pkgs; [
     curl
     wget
     scrcpy
     openconnect
     networkmanager-openconnect
+    qpwgraph
+    easyeffects
   ];
 
   system.stateVersion = "25.05";

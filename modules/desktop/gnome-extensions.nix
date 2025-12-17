@@ -13,9 +13,10 @@
     lockscreen-extension
     customize-clock-on-lock-screen
     appindicator
-    gtile
     bluetooth-quick-connect
     hide-top-bar
+    #tiling-shell
+    tiling-assistant
   ];
 
   extensionUuidList = builtins.map (x: x.extensionUuid) extensions;

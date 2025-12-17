@@ -17,7 +17,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    # modrinth-app
+    modrinth-app
     mangohud
     protonup-rs
     heroic

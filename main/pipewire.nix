@@ -1,86 +1,101 @@
-{ ... }:
-{
+{...}: {
   services.pipewire = {
     enable = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    extraConfig.pipewire."99-sonar-devices" = {
-      "context.modules" = [
-        # 1. Create the "Game" Virtual Sink
+    jack.enable = true;
+
+    # Define the Virtual Sinks (Sonar Channels)
+    extraConfig.pipewire."99-sonar-channels" = {
+      "context.objects" = [
+        # --- GAME CHANNEL ---
         {
-          name = "libpipewire-module-null-audio-sink";
+          factory = "adapter";
           args = {
-            "node.name" = "sonar_game";
+            "factory.name" = "support.null-audio-sink";
+            "node.name" = "Sonar-Game";
             "node.description" = "Sonar Game";
             "media.class" = "Audio/Sink";
             "audio.position" = "FL,FR";
+            "monitor.channel-volumes" = "true";
           };
         }
-        # 2. Loop "Game" audio to your physical speakers
+        # --- CHAT CHANNEL ---
         {
-          name = "libpipewire-module-loopback";
+          factory = "adapter";
           args = {
-            "node.name" = "sonar_game_loopback";
-            "capture.props" = {
-              "node.target" = "sonar_game";
-              "media.class" = "Stream/Input/Audio";
-            };
-            "playback.props" = {
-              "media.class" = "Stream/Output/Audio";
-              "node.target" = ""; # Empty string = auto-connect to default speakers
-            };
-          };
-        }
-
-        # 3. Create the "Chat" Virtual Sink
-        {
-          name = "libpipewire-module-null-audio-sink";
-          args = {
-            "node.name" = "sonar_chat";
+            "factory.name" = "support.null-audio-sink";
+            "node.name" = "Sonar-Chat";
             "node.description" = "Sonar Chat";
             "media.class" = "Audio/Sink";
             "audio.position" = "FL,FR";
+            "monitor.channel-volumes" = "true";
           };
         }
-        # 4. Loop "Chat" audio to speakers
+        # --- MEDIA CHANNEL ---
         {
-          name = "libpipewire-module-loopback";
+          factory = "adapter";
           args = {
-            "node.name" = "sonar_chat_loopback";
-            "capture.props" = {
-              "node.target" = "sonar_chat";
-              "media.class" = "Stream/Input/Audio";
-            };
-            "playback.props" = {
-              "media.class" = "Stream/Output/Audio";
-              "node.target" = "";
-            };
-          };
-        }
-
-        # 5. Create the "Media" Virtual Sink
-        {
-          name = "libpipewire-module-null-audio-sink";
-          args = {
-            "node.name" = "sonar_media";
+            "factory.name" = "support.null-audio-sink";
+            "node.name" = "Sonar-Media";
             "node.description" = "Sonar Media";
             "media.class" = "Audio/Sink";
             "audio.position" = "FL,FR";
+            "monitor.channel-volumes" = "true";
           };
         }
-        # 6. Loop "Media" audio to speakers
+      ];
+
+      "context.modules" = [
+        # --- LOOPBACK FOR GAME ---
         {
           name = "libpipewire-module-loopback";
           args = {
-            "node.name" = "sonar_media_loopback";
+            "node.name" = "Sonar-Game-Link";
+            "audio.position" = [ "FL" "FR" ];
             "capture.props" = {
-              "node.target" = "sonar_media";
               "media.class" = "Stream/Input/Audio";
+              "node.target" = "Sonar-Game";
+              "stream.capture.sink" = "true"; # <--- CRITICAL: Tells it to look for an Output's monitor, not a Mic
             };
             "playback.props" = {
               "media.class" = "Stream/Output/Audio";
-              "node.target" = "";
+              "node.target" = "auto"; 
+            };
+          };
+        }
+        # --- LOOPBACK FOR CHAT ---
+        {
+          name = "libpipewire-module-loopback";
+          args = {
+            "node.name" = "Sonar-Chat-Link";
+            "audio.position" = [ "FL" "FR" ];
+            "capture.props" = {
+              "media.class" = "Stream/Input/Audio";
+              "node.target" = "Sonar-Chat";
+              "stream.capture.sink" = "true"; # <--- Add here
+            };
+            "playback.props" = {
+              "media.class" = "Stream/Output/Audio";
+              "node.target" = "auto";
+            };
+          };
+        }
+        # --- LOOPBACK FOR MEDIA ---
+        {
+          name = "libpipewire-module-loopback";
+          args = {
+            "node.name" = "Sonar-Media-Link";
+            "audio.position" = [ "FL" "FR" ];
+            "capture.props" = {
+              "media.class" = "Stream/Input/Audio";
+              "node.target" = "Sonar-Media";
+              "stream.capture.sink" = "true"; # <--- Add here
+            };
+            "playback.props" = {
+              "media.class" = "Stream/Output/Audio";
+              "node.target" = "auto";
             };
           };
         }

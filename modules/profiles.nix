@@ -2,7 +2,7 @@
 let
   system = "x86_64-linux";
   rk_system = "aarch64-linux";
-  
+
   overlays = [
     (import ../overlays/rk-overlay.nix)
     (import ../overlays/generic-overlay.nix)
@@ -14,6 +14,7 @@ let
     config = {
       allowUnfree = true;
       nvidia.acceptLicense = true;
+      cudaSupport = true;
     };
   };
 
@@ -26,6 +27,10 @@ let
   shared_modules = [
     {
       disabledModules = [ "services/games/terraria.nix" ];
+      nix.settings = {
+        substituters = [ "https://cache.nixos-cuda.org" ];
+        trusted-public-keys = [ "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M=" ];
+      };
     }
     inputs.devkit.nixosModules.registry
     inputs.sops-config.nixosModules.sops_configuration
