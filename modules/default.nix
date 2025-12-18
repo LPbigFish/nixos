@@ -5,7 +5,6 @@
 }:
 {
   imports = [
-    ./nix-options.nix
     ./graphics_drivers
   ];
 
@@ -75,4 +74,37 @@
     "1.1.1.1"
     "8.8.8.8"
   ];
+
+  security = {
+    sudo.enable = false;
+    sudo-rs = {
+      enable = true;
+      package = pkgs.sudo-rs;
+      execWheelOnly = true;
+      wheelNeedsPassword = true;
+    };
+  };
+
+  nix = {
+    settings = {
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+
+      substituters = [
+        "https://cache.nixos-cuda.org"
+        "https://app.cachix.org/cache/nix-community"
+      ];
+      trusted-public-keys = [
+        "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
+    };
+
+    optimise = {
+      automatic = true;
+      dates = "weekly";
+    };
+  };
 }

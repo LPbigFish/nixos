@@ -1,7 +1,6 @@
 {
   pkgs,
   gnomeExtensions,
-  lib,
   ...
 }:
 let
@@ -44,11 +43,11 @@ in
       pavucontrol
       audacity
       vinegar
+      termius
     ])
     ++ (with pkgs.jetbrains; [
       idea-ultimate
       clion
-      rider
       datagrip
       pycharm-professional
     ])
@@ -61,7 +60,7 @@ in
       package = pkgs.papirus-icon-theme;
     };
     theme = {
-      name = "Orchis-Dark";
+      name = "Orchis-Red-Dark";
       package = pkgs.orchis-theme.override {
         tweaks = [
           "black"

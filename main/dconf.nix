@@ -60,7 +60,6 @@ with lib.hm.gvariant;
       font-antialiasing = "grayscale";
       font-hinting = "slight";
       gtk-enable-primary-paste = false;
-      gtk-theme = "Orchis-Dark";
       icon-theme = "Papirus";
       monospace-font-name = "MesloLGL Nerd Font Mono 11";
       show-battery-percentage = true;
