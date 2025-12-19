@@ -59,6 +59,8 @@
 
   security.rtkit.enable = true;
   services.pulseaudio.enable = false;
+  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs gnomeExtensions; };
@@ -78,6 +80,7 @@
     networkmanager-openconnect
     qpwgraph
     easyeffects
+    rquickshare
   ];
 
   system.stateVersion = "25.05";

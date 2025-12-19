@@ -6,8 +6,8 @@
     clipboard-indicator
     user-themes
     gsconnect
-    wifi-qrcode
-    status-area-horizontal-spacing
+    #wifi-qrcode
+    #status-area-horizontal-spacing
     add-to-desktop
     emoji-copy
     lockscreen-extension

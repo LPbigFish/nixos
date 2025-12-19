@@ -31,7 +31,6 @@ in
         withVencord = true;
       })
       zsh-powerlevel10k
-      mullvad-vpn
       brave
       gnome-tweaks
       libreoffice-qt
