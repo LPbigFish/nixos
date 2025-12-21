@@ -43,12 +43,13 @@ in
       audacity
       vinegar
       termius
+      freecad-wayland
     ])
     ++ (with pkgs.jetbrains; [
-      idea-ultimate
+      idea
       clion
       datagrip
-      pycharm-professional
+      pycharm
     ])
     ++ gnomeExtensions.extensions;
 

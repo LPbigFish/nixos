@@ -72,6 +72,15 @@
 
   programs.obs-studio.enableVirtualCamera = true;
 
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     curl
     wget
@@ -81,6 +90,9 @@
     qpwgraph
     easyeffects
     rquickshare
+    dive
+    podman-tui
+    docker-compose
   ];
 
   system.stateVersion = "25.05";

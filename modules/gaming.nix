@@ -21,7 +21,6 @@
     mangohud
     protonup-rs
     heroic
-    bottles
     lutris
     protontricks
   ];
