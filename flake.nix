@@ -30,7 +30,6 @@
     sops-config.url = "./modules/sops";
 
     devkit.url = "./modules/devkit";
-
   };
 
   outputs =

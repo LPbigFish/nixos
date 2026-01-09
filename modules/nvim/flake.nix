@@ -1,35 +1,32 @@
 {
   inputs = {
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-  }; 
-  outputs = { self, nixpkgs, nixvim }: {
-    nixosModules.nvimConfiguration = { pkgs, ... }: {
-        imports = [ nixvim.nixosModules.nixvim ];
-
-        programs.nixvim = {
-          enable = true;
-
-          plugins = {
-            treesitter.enable = true;
-            telescope.enable = true;
-            web-devicons.enable = true;
-          };
-
-          extraPlugins = with pkgs.vimPlugins; [
-            vim-nix
-            onedarkpro-nvim
-          ];
-
-          colorscheme = "onedark_dark";
-
-          opts = {
-            number = true;
-            shiftwidth = 2;
-          };
-        };
-      };
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nvf.url = "github:NotAShelf/nvf";
+    flake-utils.url = "github:numtide/flake-utils";
   };
+
+  outputs = { self, nixpkgs, nvf, flake-utils }:
+    let
+      systemOutputs = flake-utils.lib.eachDefaultSystem (system:
+        let
+          pkgs = import nixpkgs { inherit system; };
+          config = nvf.lib.neovimConfiguration {
+            inherit pkgs;
+            modules = [ ./nvf-configuration.nix ];
+          };
+        in
+        {
+          packages.default = config.neovim;
+        }
+      );
+      overlay = final: prev: {
+        my-neovim = (nvf.lib.neovimConfiguration {
+          pkgs = final; 
+          modules = [ ./nvf-configuration.nix ];
+        }).neovim;
+      };
+    in
+    systemOutputs // {
+      overlays.default = overlay;
+    };
 }

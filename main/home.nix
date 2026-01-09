@@ -43,6 +43,7 @@ in
       audacity
       vinegar
       termius
+      my-neovim
     ])
     ++ (with pkgs.jetbrains; [
       idea

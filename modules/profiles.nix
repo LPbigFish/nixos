@@ -7,6 +7,7 @@ let
     (import ../overlays/rk-overlay.nix)
     (import ../overlays/generic-overlay.nix)
     inputs.nix-minecraft.overlay
+    inputs.vim-conf.overlays.default
   ];
 
   pkgs = import nixpkgs {
@@ -33,7 +34,6 @@ let
     inputs.devkit.nixosModules.registry
     inputs.sops-config.nixosModules.sops_configuration
     inputs.disko.nixosModules.disko
-    inputs.vim-conf.nixosModules.nvimConfiguration
     inputs.nix-minecraft.nixosModules.minecraft-servers
     ./.
     ./terraria-override.nix

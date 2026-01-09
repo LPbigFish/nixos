@@ -1,0 +1,66 @@
+{ ... }:
+{
+  vim = {
+    theme = {
+      enable = true;
+      name = "onedark";
+      style = "darker";
+      transparent = true;
+    };
+
+    statusline.lualine.enable = true;
+    telescope.enable = true;
+    diagnostics.enable = true;
+    autocomplete.nvim-cmp.enable = true;
+    lsp.enable = true;
+    options = {
+      tabstop = 8;
+      shiftwidth = 2;
+    };
+
+    filetree.nvimTree = {
+      enable = true;
+      setupOpts = {
+        actions.open_file.quit_on_open = true;
+        view = {
+          side = "right";
+        };
+        renderer = {
+          icons.webdev_colors = true;
+        };
+      };
+    };
+
+    visuals.nvim-web-devicons.enable = true;
+
+    languages = {
+      enableTreesitter = true;
+
+      nix = {
+        enable = true;
+        lsp.enable = true;
+        lsp.servers = [ "nixd" ];
+        format.enable = true;
+        format.type = [ "nixfmt" ];
+        treesitter.enable = true;
+      };
+      rust = {
+        enable = true;
+        dap.enable = true;
+        extensions.crates-nvim.enable = true;
+        format.enable = true;
+        lsp.enable = true;
+        lsp.opts = ''
+          ['rust-analyzer'] = {
+            cargo = {allFeature = true},
+            checkOnSave = true,
+            procMacro = {
+              enable = true,
+            },
+          },
+        '';
+        treesitter.enable = true;
+      };
+    };
+  };
+}
