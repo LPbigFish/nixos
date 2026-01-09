@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ config, lib, ... }:
 let
   cfg = config.graphics-driver-selection;
 in
@@ -8,12 +8,15 @@ lib.mkIf (cfg.gpu == "nvidia") {
     enable32Bit = true;
   };
 
+  boot.initrd.kernelModules = [ "nvidia" ];
+  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
     modesetting.enable = true;
 
-    powerManagement.enable = false;
+    powerManagement.enable = true;
 
     powerManagement.finegrained = false;
 
@@ -21,36 +24,6 @@ lib.mkIf (cfg.gpu == "nvidia") {
 
     nvidiaSettings = true;
 
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
-
-  environment.systemPackages = with pkgs; [
-    git
-    gitRepo
-    gnupg
-    autoconf
-    curl
-    procps
-    gnumake
-    util-linux
-    m4
-    gperf
-    unzip
-    cudatoolkit
-    linuxPackages.nvidia_x11
-    libGLU
-    libGL
-    xorg.libXi
-    xorg.libXmu
-    freeglut
-    xorg.libXext
-    xorg.libX11
-    xorg.libXv
-    xorg.libXrandr
-    zlib
-    ncurses5
-    stdenv.cc
-    binutils
-  ];
 }

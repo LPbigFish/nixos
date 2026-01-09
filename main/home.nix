@@ -43,7 +43,6 @@ in
       audacity
       vinegar
       termius
-      freecad-wayland
     ])
     ++ (with pkgs.jetbrains; [
       idea

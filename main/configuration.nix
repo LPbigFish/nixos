@@ -93,6 +93,7 @@
     dive
     podman-tui
     docker-compose
+    bottles
   ];
 
   system.stateVersion = "25.05";

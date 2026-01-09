@@ -32,8 +32,11 @@
   services.timesyncd.enable = true;
 
   fonts = {
-    packages = [
-      pkgs.nerd-fonts.meslo-lg
+    packages = with pkgs; [
+      nerd-fonts.meslo-lg
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
     ];
     fontconfig = {
       defaultFonts = {
@@ -49,8 +52,8 @@
       nano
       vim
       btop
+      nixfmt
       nixd
-      nixfmt-rfc-style
       git
       git-lfs
       screen

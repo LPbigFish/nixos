@@ -30,10 +30,9 @@
     // {
 
       nixosModules.registry =
-        { ... }:
+        { pkgs, ... }:
         {
-          programs.adb.enable = true;
-
+          environment.systemPackages = [ pkgs.android-tools ];
           nix.settings.experimental-features = [
             "nix-command"
             "flakes"

@@ -17,11 +17,11 @@
   };
 
   environment.systemPackages = with pkgs; [
-    modrinth-app
     mangohud
     protonup-rs
     heroic
     lutris
     protontricks
+    prismlauncher
   ];
 }
