@@ -46,11 +46,11 @@ in
           };
 
           serverProperties = {
+            online-mode = false;
             difficulty = 3;
             max-players = 12;
             spawn-protection = 0;
             level-seed = "-7266280065385116388";
-            white-list = true;
           };
 
           jvmOpts = "-Xmx4096M";
