@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
   modpack_normal = pkgs.fetchPackwizModpack {
     url = "https://raw.githubusercontent.com/LPbigFish/FabricMods/2252cca5909f84757501388c862809f194b4e8b5/pack.toml";
@@ -7,7 +7,7 @@ let
 
   modpack_spookers = pkgs.fetchPackwizModpack {
     url = "https://raw.githubusercontent.com/LPbigFish/HorrorMods/1e997dbbae2b361236c56190febf02112e9c1720/pack.toml";
-    packHash = lib.fakeHash;
+    packHash = "sha256-/brtYbbMxN2HwW0xcOijY136y0DUP9ZxUrCDohOcEhM=";
   };
 in
 {
