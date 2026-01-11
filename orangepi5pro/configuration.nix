@@ -57,6 +57,8 @@
     gawk
     tmux
     binutils
+
+    my-neovim
   ];
 
   # Match your target release
