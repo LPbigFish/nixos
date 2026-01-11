@@ -87,12 +87,6 @@ in
         name = "LPbigFish";
       };
     };
-    direnv = {
-      enable = true;
-      nix-direnv = {
-        enable = true;
-      };
-    };
     obs-studio = {
       enable = true;
 

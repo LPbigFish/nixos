@@ -72,6 +72,18 @@
 
   programs.obs-studio.enableVirtualCamera = true;
 
+  programs.direnv = {
+      enable = true;
+      nix-direnv = {
+        enable = true;
+      };
+      settings = {
+        global = {
+          hide_env_diff = true;
+        };
+      };
+    };
+
   virtualisation.containers.enable = true;
   virtualisation = {
     podman = {
@@ -94,6 +106,8 @@
     podman-tui
     docker-compose
     bottles
+    unzip
+    zip
   ];
 
   system.stateVersion = "25.05";
