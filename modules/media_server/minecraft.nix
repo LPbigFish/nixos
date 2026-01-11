@@ -41,6 +41,10 @@ in
         package = pkgs.fabricServers.fabric-1_20_1.override {
           loaderVersion = "0.18.4";
 
+          symlinks = {
+            mods = "${modpack_spookers}/mods";
+          };
+
           serverProperties = {
             difficulty = 3;
             max-players = 12;
