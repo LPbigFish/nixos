@@ -42,13 +42,13 @@ in
       hunspellDicts.cs_CZ
       android-studio
       davinci-resolve
+      my-neovim
     ])
     ++ (with pkgs.jetbrains; [
-      idea-ultimate
+      idea
       clion
-      rider
       datagrip
-      pycharm-professional
+      pycharm
     ])
     ++ gnomeExtensions.extensions;
 

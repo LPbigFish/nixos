@@ -57,6 +57,10 @@ in
         };
       };
     };
+  
+  environment.systemPackages = with pkgs; [
+    tmux
+  ];
 
   services.tailscale.enable = true;
 }
