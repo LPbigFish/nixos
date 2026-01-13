@@ -33,6 +33,8 @@
 
     visuals.nvim-web-devicons.enable = true;
 
+    mini.move.enable = true;
+
     languages = {
       enableTreesitter = true;
 

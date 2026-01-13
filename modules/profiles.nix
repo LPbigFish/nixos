@@ -105,6 +105,7 @@ let
         ./monerod.nix
         #./media_server/terraria.nix
         #./media_server/jellyfin.nix
+        ./media_server/postgresql.nix
         ./media_server/minecraft.nix
         ./media_server/nextcloud.nix
         ../orangepi5pro/configuration.nix

@@ -73,16 +73,16 @@
   programs.obs-studio.enableVirtualCamera = true;
 
   programs.direnv = {
+    enable = true;
+    nix-direnv = {
       enable = true;
-      nix-direnv = {
-        enable = true;
-      };
-      settings = {
-        global = {
-          hide_env_diff = true;
-        };
+    };
+    settings = {
+      global = {
+        hide_env_diff = true;
       };
     };
+  };
 
   virtualisation.containers.enable = true;
   virtualisation = {

@@ -95,9 +95,16 @@
         "flakes"
       ];
 
+      connect-timeout = 5;
+
+      fallback = true;
+
+      warn-dirty = false;
+
       substituters = [
+        "https://cache.nixos.org?priority=10"
         "https://cache.nixos-cuda.org"
-        "https://app.cachix.org/cache/nix-community"
+        "https://nix-community.cachix.org?priority=40"
       ];
       trusted-public-keys = [
         "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="
