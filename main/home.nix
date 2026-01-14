@@ -161,7 +161,8 @@ in
   };
 
   home.sessionVariables = {
-    EDITOR = "nano";
+    EDITOR = "nvim";
+    SOPS_EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.
