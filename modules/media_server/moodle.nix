@@ -16,8 +16,9 @@
 
   services.moodle = {
     enable = true;
-    virtualHost = "192.168.18.76";
-    
+    virtualHost = {
+        hostName = "192.168.18.76";
+    };
     database = {
       type = "pgsql";
       name = "moodle";
