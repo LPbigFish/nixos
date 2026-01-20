@@ -4,7 +4,6 @@
 
   services.postgresql = {
     enable = true;
-    package = pkgs.postgresql_15;
     ensureDatabases = [ "moodle" ];
     ensureUsers = [
       {
@@ -32,7 +31,7 @@
     enable = true;
     clientMaxBodySize = "100m";
 
-    virtualHosts."192.168.18.X" = {
+    virtualHosts."192.168.18.76" = {
       listen = [ { addr = "0.0.0.0"; port = 80; } ];
     };
   };
