@@ -24,7 +24,7 @@
       user = "moodle";
     };
 
-    initialAdminPassword = "1234567890"; 
+    initialPassword = "1234567890";
   };
 
   services.nginx = {
