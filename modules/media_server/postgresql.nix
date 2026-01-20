@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   networking.firewall.allowedTCPPorts = [ 5432 ];
@@ -9,7 +9,7 @@
     package = pkgs.postgresql_17; 
 
     settings = {
-      listen_addresses = "*";
+      listen_addresses = lib.mkForce "*";
     };
 
     ensureUsers = [
