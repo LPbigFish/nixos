@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   networking.firewall.allowedTCPPorts = [ 80 ];
 
@@ -24,7 +24,7 @@
       user = "moodle";
     };
 
-    initialPassword = "1234567890";
+    # initialPassword = "1234567890";
   };
 
   services.nginx = {
