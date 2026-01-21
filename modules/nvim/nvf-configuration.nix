@@ -8,11 +8,22 @@
       transparent = true;
     };
 
+    debugger.nvim-dap = {
+      enable = true;
+      ui = {
+        enable = true;
+        autoStart = true;
+      };
+    };
+
     statusline.lualine.enable = true;
     telescope.enable = true;
     diagnostics.enable = true;
     autocomplete.nvim-cmp.enable = true;
     lsp.enable = true;
+    lsp.trouble = {
+      enable = true;
+    };
     options = {
       tabstop = 8;
       shiftwidth = 2;
@@ -37,7 +48,13 @@
 
     languages = {
       enableTreesitter = true;
-
+      python = {
+        enable = true;
+        dap.enable = true;
+        format.enable = true;
+        lsp.enable = true;
+        treesitter.enable = true;
+      };
       nix = {
         enable = true;
         lsp.enable = true;
