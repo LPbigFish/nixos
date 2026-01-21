@@ -61,6 +61,11 @@
     my-neovim
   ];
 
+  services.iperf3 = {
+    enable = true;
+    openFirewall = true;
+  };
+
   # Match your target release
   system.stateVersion = "24.11";
 }
