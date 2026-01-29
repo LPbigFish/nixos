@@ -16,17 +16,27 @@
       };
     };
 
+    utility.multicursors.enable = true;
+
     statusline.lualine.enable = true;
     telescope.enable = true;
     diagnostics.enable = true;
     autocomplete.nvim-cmp.enable = true;
-    lsp.enable = true;
-    lsp.trouble = {
+    lsp = {
       enable = true;
+      formatOnSave = true;
+      trouble = {
+        enable = true;
+      }; 
     };
     options = {
       tabstop = 8;
       shiftwidth = 2;
+    };
+
+    clipboard = {
+      enable = true;
+      providers.wl-copy.enable = true;
     };
 
     filetree.nvimTree = {
@@ -79,6 +89,10 @@
           },
         '';
         treesitter.enable = true;
+      };
+      markdown = {
+        enable = true;
+        extensions.markview-nvim.enable = true;
       };
     };
   };

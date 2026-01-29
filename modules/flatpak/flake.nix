@@ -19,6 +19,7 @@
         packages = [
           "org.vinegarhq.Sober"
           "com.stremio.Stremio"
+          "org.freecad.FreeCAD"
         ];
       };
     };

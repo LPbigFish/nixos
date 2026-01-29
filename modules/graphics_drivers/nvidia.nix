@@ -8,10 +8,8 @@ lib.mkIf (cfg.gpu == "nvidia") {
     enable32Bit = true;
   };
 
-  boot.initrd.kernelModules = [ "nvidia" ];
-  boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
-
   services.xserver.videoDrivers = [ "nvidia" ];
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -20,10 +18,10 @@ lib.mkIf (cfg.gpu == "nvidia") {
 
     powerManagement.finegrained = false;
 
-    open = true;
+    open = false;
 
     nvidiaSettings = true;
 
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 }

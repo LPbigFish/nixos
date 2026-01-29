@@ -59,6 +59,7 @@
       screen
       sudo-rs
       nvd
+      pciutils
       (writeShellScriptBin "nhswitch" ''
         #!/usr/bin/env bash
 

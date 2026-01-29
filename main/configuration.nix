@@ -29,6 +29,7 @@
 
   i18n.defaultLocale = "en_US.UTF-8";
 
+
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "cs_CZ.UTF-8";
     LC_IDENTIFICATION = "cs_CZ.UTF-8";
@@ -93,6 +94,13 @@
     };
   };
 
+  environment.sessionVariables = {
+    GSK_RENDERER = "gl";
+    NIXOS_OZONE_WL = "1";
+    WEBKIT_DISABLE_COMPOSITING_MODE = "1";
+    GDK_BACKEND = "x11";
+  };
+
   environment.systemPackages = with pkgs; [
     curl
     wget
@@ -101,13 +109,13 @@
     networkmanager-openconnect
     qpwgraph
     easyeffects
-    rquickshare
     dive
     podman-tui
     docker-compose
     bottles
     unzip
     zip
+    orca-slicer
   ];
 
   system.stateVersion = "25.05";
