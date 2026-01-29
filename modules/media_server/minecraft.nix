@@ -12,7 +12,7 @@ let
 
   modpack_spookers2 = pkgs.fetchPackwizModpack {
     url = "https://raw.githubusercontent.com/LPbigFish/HorrorMods/514db63f85d0c24ff1123ea5de16088a4d8e8e3a/pack.toml";
-    packHash = lib.fakeHash;
+    packHash = "sha256-UDYQT/ECbEkZkZyHV84hDGIkpnyFMoVOAcF1jG8Sx+o=";
   };
 in
 {
