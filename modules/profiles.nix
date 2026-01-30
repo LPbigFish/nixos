@@ -58,6 +58,7 @@ let
         inputs.grub-conf.nixosModules.grubConfiguration
         inputs.flatpak-module.nixosModules.flatpak
         ./gaming.nix
+        #./rtorrent.nix
         ./desktop/gnome.nix
         ../main/configuration.nix
       ];
