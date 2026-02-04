@@ -115,6 +115,8 @@
     bottles
     unzip
     zip
+    unrar
+    rar
     distrobox
   ];
 

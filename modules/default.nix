@@ -60,8 +60,6 @@
       sudo-rs
       nvd
       pciutils
-      unrar
-      rar
       (writeShellScriptBin "nhswitch" ''
         #!/usr/bin/env bash
 
