@@ -15,6 +15,9 @@
 
   services.moodle = {
     enable = true;
+
+    webserverRoot = "public";
+
     virtualHost = {
         hostName = "192.168.18.76";
         listen = [{ ip = "127.0.0.1"; port = 8080; }];

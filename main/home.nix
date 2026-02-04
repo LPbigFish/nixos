@@ -45,6 +45,7 @@ in
       termius
       my-neovim
       qbittorrent
+      eigenwallet
     ])
     ++ (with pkgs.jetbrains; [
       idea
