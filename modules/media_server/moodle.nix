@@ -19,6 +19,7 @@
     virtualHost = {
         hostName = "192.168.18.76";
         listen = [{ ip = "127.0.0.1"; port = 8080; }];
+        documentRoot = lib.mkForce "${config.services.moodle.package}/share/moodle/public"; 
     };
     database = {
       type = "pgsql";
@@ -40,8 +41,6 @@
     virtualHosts."192.168.18.76" = {
       listen = [ { addr = "0.0.0.0"; port = 80; } ];
 
-      documentRoot = lib.mkForce "${config.services.moodle.package}/share/moodle/public"; 
-      
       locations."/" = {
         proxyPass = "http://127.0.0.1:8080";
         
