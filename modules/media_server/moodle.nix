@@ -26,7 +26,7 @@
       user = "moodle";
     };
     extraConfig = ''
-      $CFG->reverseproxy = 1;
+      $CFG->reverseproxy = 0;
       $CFG->sslproxy = 0;
     '';
 
