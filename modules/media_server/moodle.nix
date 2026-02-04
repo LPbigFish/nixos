@@ -1,4 +1,4 @@
-{ ... }:
+{ config, lib, ... }:
 {
   networking.firewall.allowedTCPPorts = [ 80 ];
 
@@ -16,8 +16,6 @@
   services.moodle = {
     enable = true;
 
-    webserverRoot = "public";
-
     virtualHost = {
         hostName = "192.168.18.76";
         listen = [{ ip = "127.0.0.1"; port = 8080; }];
@@ -28,7 +26,7 @@
       user = "moodle";
     };
     extraConfig = ''
-      $CFG->reverseproxy = 0;
+      $CFG->reverseproxy = 1;
       $CFG->sslproxy = 0;
     '';
 
@@ -40,7 +38,7 @@
     clientMaxBodySize = "100m";
 
     virtualHosts."192.168.18.76" = {
-      listen = [ { addr = "0.0.0.0"; port = 80; } ];
+      listen = [ { addr = "0.0.0.0"; port = 80; documentRoot = lib.mkForce "${config.services.moodle.package}/share/moodle/public"; } ];
 
       locations."/" = {
         proxyPass = "http://127.0.0.1:8080";
