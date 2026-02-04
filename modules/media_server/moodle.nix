@@ -38,8 +38,10 @@
     clientMaxBodySize = "100m";
 
     virtualHosts."192.168.18.76" = {
-      listen = [ { addr = "0.0.0.0"; port = 80; documentRoot = lib.mkForce "${config.services.moodle.package}/share/moodle/public"; } ];
+      listen = [ { addr = "0.0.0.0"; port = 80; } ];
 
+      documentRoot = lib.mkForce "${config.services.moodle.package}/share/moodle/public"; 
+      
       locations."/" = {
         proxyPass = "http://127.0.0.1:8080";
         
