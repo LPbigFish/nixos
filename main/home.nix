@@ -44,6 +44,7 @@ in
       vinegar
       termius
       my-neovim
+      qbittorrent
     ])
     ++ (with pkgs.jetbrains; [
       idea

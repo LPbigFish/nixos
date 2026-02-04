@@ -115,7 +115,7 @@
     bottles
     unzip
     zip
-    orca-slicer
+    distrobox
   ];
 
   system.stateVersion = "25.05";
