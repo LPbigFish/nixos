@@ -45,7 +45,7 @@ in
       termius
       my-neovim
       qbittorrent
-      eigenwallet
+      monero-gui
     ])
     ++ (with pkgs.jetbrains; [
       idea
