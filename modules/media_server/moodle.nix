@@ -22,37 +22,8 @@
     enable = true;
     package = pkgs.moodle;
 
-    virtualHost = {
-      hostName = "192.168.18.76";
-      listen = [
-        {
-          ip = "127.0.0.1";
-          port = 8080;
-        }
-      ];
-      documentRoot = lib.mkForce "${config.services.moodle.package}/share/moodle/public";
+    virtualHost.hostName = "moodle-dummy.local";
 
-      # WIPE the module's Apache config and use this one
-      extraConfig = lib.mkForce ''
-        <Directory "${config.services.moodle.package}/share/moodle/public">
-          <FilesMatch "\.php$">
-            <If "-f %{REQUEST_FILENAME}">
-              SetHandler "proxy:unix:${config.services.phpfpm.pools.moodle.socket}|fcgi://localhost/"
-            </If>
-          </FilesMatch>
-          Options -Indexes +FollowSymLinks
-          AllowOverride All
-          Require all granted
-          DirectoryIndex index.php
-        </Directory>
-
-        # We must ALSO allow access to the parent dir because Moodle 
-        # internally references files there (like config.php)
-        <Directory "${config.services.moodle.package}/share/moodle">
-            Require all granted
-        </Directory>
-      '';
-    };
     database = {
       type = "pgsql";
       name = "moodle";
@@ -69,8 +40,29 @@
     initialPassword = "1234567890";
   };
 
+  services.httpd.virtualHosts."192.168.18.76" = {
+    # Point explicitly to the public directory
+    documentRoot = "${config.services.moodle.package}/share/moodle/public";
+
+    extraConfig = ''
+      <Directory "${config.services.moodle.package}/share/moodle/public">
+        # Connect to the PHP-FPM socket created by the moodle service
+        <FilesMatch "\.php$">
+          <If "-f %{REQUEST_FILENAME}">
+            SetHandler "proxy:unix:${config.services.phpfpm.pools.moodle.socket}|fcgi://localhost/"
+          </If>
+        </FilesMatch>
+        
+        Options -Indexes +FollowSymLinks
+        AllowOverride None
+        Require all granted
+        DirectoryIndex index.php
+      </Directory>
+    '';
+  };
+
   services.nginx = {
-    enable = true;
+    enable = false;
     virtualHosts."_" = {
       # Use wildcard to catch all requests on port 80
       listen = [
