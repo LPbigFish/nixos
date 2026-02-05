@@ -5,23 +5,39 @@
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
-  outputs = { nix-flatpak, ... }: {
-    nixosModules.flatpak = { ... }: {
-      imports = [
-        nix-flatpak.nixosModules.nix-flatpak
-      ];
+  outputs =
+    { nix-flatpak, ... }:
+    {
+      nixosModules.flatpak =
+        { ... }:
+        {
+          imports = [
+            nix-flatpak.nixosModules.nix-flatpak
+          ];
 
-      xdg.portal.enable = true;
+          xdg.portal.enable = true;
 
-      services.flatpak = {
-        enable = true;
-        update.onActivation = true;
-        packages = [
-          "org.vinegarhq.Sober"
-          "com.stremio.Stremio"
-          "org.freecad.FreeCAD"
-        ];
-      };
+          services.flatpak = {
+            enable = true;
+            update.onActivation = true;
+
+            remotes = [
+              {
+                name = "flathub";
+                location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
+              }
+              {
+                name = "eigenwallet";
+                location = "https://eigenwallet.github.io/core/eigenwallet.flatpakrepo";
+              }
+            ];
+
+            packages = [
+              "org.vinegarhq.Sober"
+              "com.stremio.Stremio"
+              "org.freecad.FreeCAD"
+            ];
+          };
+        };
     };
-  };
 }

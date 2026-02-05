@@ -46,6 +46,7 @@ in
       my-neovim
       qbittorrent
       monero-gui
+      eigenwallet
     ])
     ++ (with pkgs.jetbrains; [
       idea
