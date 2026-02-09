@@ -7,12 +7,14 @@
     };
   };
   services.desktopManager.gnome.enable = true;
-  services.xserver.enable = true; 
+  services.xserver.enable = true;
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gnome ];
+    xdgOpenUsePortal = true;
   };
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
 }

@@ -94,13 +94,6 @@
     };
   };
 
-  environment.sessionVariables = {
-    GSK_RENDERER = "gl";
-    NIXOS_OZONE_WL = "1";
-    WEBKIT_DISABLE_COMPOSITING_MODE = "1";
-    GDK_BACKEND = "x11";
-  };
-
   environment.systemPackages = with pkgs; [
     curl
     wget

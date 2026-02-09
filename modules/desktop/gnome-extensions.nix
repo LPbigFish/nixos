@@ -19,7 +19,7 @@
     tiling-assistant
   ];
 
-  extensionUuidList = builtins.map (x: x.extensionUuid) extensions;
+  extensionUuidList = map (x: x.extensionUuid) extensions;
 in
 {
   inherit extensions extensionUuidList;

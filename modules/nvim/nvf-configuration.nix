@@ -94,6 +94,10 @@
         enable = true;
         extensions.markview-nvim.enable = true;
       };
+      elixir = {
+        enable = true;
+        elixir-tools.enable = true;
+      };
     };
   };
 }

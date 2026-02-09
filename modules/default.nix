@@ -46,6 +46,8 @@
     };
   };
 
+  documentation.man.generateCaches = false;
+  
   environment.systemPackages = lib.mkBefore (
     with pkgs;
     [

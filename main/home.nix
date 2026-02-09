@@ -46,7 +46,8 @@ in
       my-neovim
       qbittorrent
       monero-gui
-      eigenwallet
+      tidal-hifi
+      electrum
     ])
     ++ (with pkgs.jetbrains; [
       idea
@@ -79,6 +80,10 @@ in
     vscode = {
       enable = true;
       package = pkgs.vscode;
+    };
+    eza = {
+      enable = true;
+      enableZshIntegration = true;
     };
     gnome-shell = {
       enable = true;
@@ -140,6 +145,18 @@ in
           POWERLEVEL9K_STATUS_OK_BACKGROUND='#FFFFFF'
           POWERLEVEL9K_STATUS_OK_FOREGROUND='#7F7F7F'
       '';
+    };
+    alacritty = {
+      enable = true;
+      theme = "one_dark";
+      settings = {
+        window = {
+          opacity = 0.9;
+        };
+        font = {
+          size = 9;
+        };
+      };
     };
   };
 
