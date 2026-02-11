@@ -26,10 +26,6 @@
                 name = "flathub";
                 location = "https://dl.flathub.org/repo/flathub.flatpakrepo";
               }
-              {
-                name = "eigenwallet";
-                location = "https://eigenwallet.github.io/core/eigenwallet.flatpakrepo";
-              }
             ];
 
             packages = [

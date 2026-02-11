@@ -42,6 +42,7 @@ in
       hunspellDicts.cs_CZ
       android-studio
       davinci-resolve
+      obsidian
       my-neovim
     ])
     ++ (with pkgs.jetbrains; [
@@ -139,7 +140,7 @@ in
 
   # Home Manager is pretty good at managing dotfiles
   home.file = {
-    "~/.p10k.zsh".source = ../modules/.p10k.zsh;
+    "~/.p10k.zsh".source = ../../modules/.p10k.zsh;
   };
 
   home.sessionVariables = {

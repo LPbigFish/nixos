@@ -105,7 +105,6 @@ with lib.hm.gvariant;
       font-antialiasing = "grayscale";
       font-hinting = "slight";
       gtk-enable-primary-paste = false;
-      gtk-theme = "Orchis-Red-Dark";
       icon-theme = "Papirus";
       monospace-font-name = "MesloLGL Nerd Font Mono 11";
       show-battery-percentage = true;
@@ -619,10 +618,6 @@ with lib.hm.gvariant;
       workspace-agnostic-urgent-windows = false;
     };
 
-    "org/gnome/shell/extensions/emoji-copy" = {
-      recently-used = [ "❄️" "🇨🇿" "🎓" "😂" "✨" "📦" "😒" "❤️" "😍" "😭" "😊" ];
-    };
-
     "org/gnome/shell/extensions/gsconnect" = {
       devices = [ "d3f8e1ea_67d0_44ff_91aa_7f6ec202db67" ];
       enabled = true;
@@ -709,10 +704,6 @@ with lib.hm.gvariant;
       '';
       selected-layouts = [ [ "Layout 1" "Layout 1" ] [ "Layout 1" "Layout 1" ] ];
       window-use-custom-border-color = false;
-    };
-
-    "org/gnome/shell/extensions/user-theme" = {
-      name = "Orchis-Red-Dark";
     };
 
     "org/gnome/shell/keybindings" = {

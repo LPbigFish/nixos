@@ -62,6 +62,7 @@
       sudo-rs
       nvd
       pciutils
+      inetutils
       (writeShellScriptBin "nhswitch" ''
         #!/usr/bin/env bash
 

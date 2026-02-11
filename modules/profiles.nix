@@ -44,7 +44,7 @@ let
     wsl = {
       inherit system pkgs;
       modules = shared_modules ++ [
-        ../wsl/configuration.nix
+        ../hosts/wsl/configuration.nix
         inputs.nixos-wsl.nixosModules.default
       ];
       specialArgs = { };
@@ -60,7 +60,7 @@ let
         ./gaming.nix
         #./rtorrent.nix
         ./desktop/gnome.nix
-        ../main/configuration.nix
+        ../hosts/main/configuration.nix
       ];
     };
     laptop = {
@@ -74,7 +74,7 @@ let
         ./gaming.nix
         ./desktop/gnome.nix
         ../disk-config.nix
-        ../laptop/configuration.nix
+        ../hosts/laptop/configuration.nix
       ];
     };
     minimal = {
@@ -82,7 +82,7 @@ let
       modules = shared_modules ++ [
         inputs.grub-conf.nixosModules.grubConfiguration
         ../disk-config.nix
-        ../minimal/configuration.nix
+        ../hosts/minimal/configuration.nix
       ];
       specialArgs = {
         swapSize = "8G";
@@ -110,7 +110,7 @@ let
         ./media_server/minecraft.nix
         ./media_server/nextcloud.nix
         ./media_server/moodle.nix
-        ../orangepi5pro/configuration.nix
+        ../hosts/orangepi5pro/configuration.nix
       ];
     };
   };

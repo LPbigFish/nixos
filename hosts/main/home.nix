@@ -37,17 +37,16 @@ in
       hunspell
       hunspellDicts.cs_CZ
       hunspellDicts.en_US
-      android-studio
       davinci-resolve
       pavucontrol
       audacity
-      vinegar
       termius
       my-neovim
-      qbittorrent
       monero-gui
       tidal-hifi
       electrum
+      qdirstat
+      obsidian
     ])
     ++ (with pkgs.jetbrains; [
       idea
@@ -64,7 +63,7 @@ in
       package = pkgs.papirus-icon-theme;
     };
     theme = {
-      name = "Orchis-Red-Dark";
+      name = "Orchis-Red";
       package = pkgs.orchis-theme.override {
         tweaks = [
           "black"
@@ -177,7 +176,7 @@ in
   };
 
   home.file = {
-    "~/.p10k.zsh".source = ../modules/.p10k.zsh;
+    "~/.p10k.zsh".source = ../../modules/.p10k.zsh;
   };
 
   home.sessionVariables = {
