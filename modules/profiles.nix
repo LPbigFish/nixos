@@ -122,6 +122,7 @@ let
       modules = shared_modules ++ [
         ../hosts/netcup/configuration.nix
       ];
+      specialArgs = { };
     };
   };
 in
