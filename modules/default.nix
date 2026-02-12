@@ -63,6 +63,7 @@
       nvd
       pciutils
       inetutils
+      my-neovim
       (writeShellScriptBin "nhswitch" ''
         #!/usr/bin/env bash
 

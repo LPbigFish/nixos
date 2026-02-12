@@ -31,13 +31,9 @@ let
       nix.settings = {
       };
     }
-    inputs.devkit.nixosModules.registry
-    inputs.sops-config.nixosModules.sops_configuration
     inputs.disko.nixosModules.disko
     inputs.nix-minecraft.nixosModules.minecraft-servers
     ./.
-    ./terraria-override.nix
-    ./user-group.nix
   ];
 
   configurations = {
@@ -46,6 +42,7 @@ let
       modules = shared_modules ++ [
         ../hosts/wsl/configuration.nix
         inputs.nixos-wsl.nixosModules.default
+        inputs.sops-config.nixosModules.sops_configuration
       ];
       specialArgs = { };
     };
@@ -57,10 +54,11 @@ let
       modules = shared_modules ++ [
         inputs.grub-conf.nixosModules.grubConfiguration
         inputs.flatpak-module.nixosModules.flatpak
+        inputs.sops-config.nixosModules.sops_configuration
         ./gaming.nix
-        #./rtorrent.nix
         ./desktop/gnome.nix
         ../hosts/main/configuration.nix
+        ./user-group.nix
       ];
     };
     laptop = {
@@ -71,18 +69,22 @@ let
       modules = shared_modules ++ [
         inputs.grub-conf.nixosModules.grubConfiguration
         inputs.flatpak-module.nixosModules.flatpak
+        inputs.sops-config.nixosModules.sops_configuration
         ./gaming.nix
         ./desktop/gnome.nix
         ../disk-config.nix
         ../hosts/laptop/configuration.nix
+        ./user-group.nix
       ];
     };
     minimal = {
       inherit system pkgs;
       modules = shared_modules ++ [
         inputs.grub-conf.nixosModules.grubConfiguration
+        inputs.sops-config.nixosModules.sops_configuration
         ../disk-config.nix
         ../hosts/minimal/configuration.nix
+        ./user-group.nix
       ];
       specialArgs = {
         swapSize = "8G";
@@ -102,6 +104,7 @@ let
       modules = shared_modules ++ [
         inputs.nixos-rk3588.nixosModules.boards.orangepi5.core
         inputs.disko.nixosModules.disko
+        inputs.sops-config.nixosModules.sops_configuration
         ./tor_services.nix
         ./monerod.nix
         #./media_server/terraria.nix
@@ -111,6 +114,13 @@ let
         ./media_server/nextcloud.nix
         ./media_server/moodle.nix
         ../hosts/orangepi5pro/configuration.nix
+        ./user-group.nix
+      ];
+    };
+    netcup = {
+      inherit system pkgs;
+      modules = shared_modules ++ [
+        ../hosts/netcup/configuration.nix
       ];
     };
   };

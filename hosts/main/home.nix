@@ -41,7 +41,6 @@ in
       pavucontrol
       audacity
       termius
-      my-neovim
       monero-gui
       tidal-hifi
       electrum

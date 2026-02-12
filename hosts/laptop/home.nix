@@ -43,7 +43,6 @@ in
       android-studio
       davinci-resolve
       obsidian
-      my-neovim
     ])
     ++ (with pkgs.jetbrains; [
       idea

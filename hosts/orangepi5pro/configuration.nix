@@ -57,8 +57,6 @@
     gawk
     tmux
     binutils
-
-    my-neovim
   ];
 
   services.iperf3 = {
