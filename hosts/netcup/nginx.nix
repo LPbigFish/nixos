@@ -3,7 +3,10 @@
   networking.firewall.allowedTCPPorts = [
     80
     443
+    25565
   ];
+
+  networking.firewall.allowedUDPPorts = [ 24454 ];
 
   security.acme = {
     acceptTerms = true;
@@ -47,5 +50,19 @@
         };
       };
     };
+    streamConfig = ''
+      server {
+        listen 25565;
+        proxy_pass 10.100.0.2:25565;
+        
+        proxy_timeout 600s; 
+        proxy_connect_timeout 30s;
+      }
+
+      # server {
+      #   listen 24454 udp;
+      #   proxy_pass 10.100.0.2:24454;
+      # }
+    '';
   };
 }
