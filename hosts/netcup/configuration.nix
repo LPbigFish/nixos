@@ -1,10 +1,10 @@
 { pkgs, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+    ./nginx.nix
+  ];
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/vda";
@@ -20,15 +20,15 @@
     font = "Lat2-Terminus16";
     useXkbConfig = true;
   };
+
   users.users.lpbigfish = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     packages = with pkgs; [
       tree
     ];
-    initialPassword = "1234567890";
     openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NyaC1lYDI1NTE5AAAAIMxi1IWl6ruYYblKGbg3LyFi5v8nWftqPpp1fWUDKGEa lpbyblock@gmail.com"
+      "ssh-ed25519 AAAAC3NyaC1lYDI1NTE5AAAAIMxi1IWl6ruYYblKGbg3LyFi5v8nWftqPpp1fWUDKGEa lpbyblock@gmail.com"
     ];
   };
 
@@ -40,10 +40,33 @@
     wget
   ];
 
-  
   services.openssh.enable = true;
 
-  networking.firewall.allowedTCPPorts = [ 22 ];
-  system.stateVersion = "25.11";
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [
+      22
+      80
+      443
+    ];
+    allowedUDPPorts = [ 51820 ];
+  };
 
+  networking.wireguard.interfaces = {
+    wg0 = {
+      ips = [ "10.100.0.1/24" ];
+      listenPort = 51820;
+
+      privateKeyFile = "/root/wireguard-keys/private";
+
+      peers = [
+        {
+          publicKey = "ZCYiBrOqKHXpuyB9VfOgI0ohR0w87LCsHaGomCi6Fxs=";
+          allowedIPs = [ "10.100.0.2/32" ];
+        }
+      ];
+    };
+  };
+
+  system.stateVersion = "25.11";
 }
