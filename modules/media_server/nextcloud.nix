@@ -5,15 +5,24 @@
     owner = config.users.users.nextcloud.name;
   };
 
-  sops.secrets."tunnel.json" = {
-    sopsFile = ../../secrets/tunnel.yaml;
-    path = "/var/lib/cloudflared/tunnel.json";
+  sops.secrets.nextcloud-email-config = {
+    sopsFile = ../../secrets/nextcloud.yaml;
+    owner = config.users.users.nextcloud.name;
+    group = config.users.users.nextcloud.group; # Important for permissions
+    restartUnits = [ "php-fpm-nextcloud.service" ]; # Auto-restart on change
   };
+
+  # sops.secrets."tunnel.json" = {
+  # sopsFile = ../../secrets/tunnel.yaml;
+  # path = "/var/lib/cloudflared/tunnel.json";
+  #};
 
   services.nextcloud = {
     enable = true;
-    
+
     package = pkgs.nextcloud32;
+
+    secretFile = config.sops.secrets.nextcloud-email-config.path;
 
     hostName = "nextcloud.rybak.website";
 
@@ -23,7 +32,11 @@
     settings = {
       "trusted_domains" = [ "nextcloud.rybak.website" ];
       overwriteprotocol = "https";
-      trusted_proxies = [ "127.0.0.1" "::1" ];
+      trusted_proxies = [
+        "10.100.0.1"
+        "127.0.0.1"
+        "::1"
+      ];
       overwritehost = "nextcloud.rybak.website";
       "overwrite.cli.url" = "https://nextcloud.rybak.website";
       "overwritewebroot" = "\/";
@@ -60,14 +73,15 @@
     };
   };
 
-  services.cloudflared = {
-    enable = true;
-    tunnels."25b602b7-1da8-4039-a7ad-f51630ccfc12" = {
-      credentialsFile = "/var/lib/cloudflared/tunnel.json";
-      ingress = {
-        "nextcloud.rybak.website" = "http://127.0.0.1:80";
-      };
-      default = "http_status:404";
-    };
-  };
+  services.nginx.enable = true;
+  #  services.cloudflared = {
+  #    enable = true;
+  #    tunnels."25b602b7-1da8-4039-a7ad-f51630ccfc12" = {
+  #      credentialsFile = "/var/lib/cloudflared/tunnel.json";
+  #      ingress = {
+  #        "nextcloud.rybak.website" = "http://127.0.0.1:80";
+  #      };
+  #      default = "http_status:404";
+  #    };
+  #  };
 }

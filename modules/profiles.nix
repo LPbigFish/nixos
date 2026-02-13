@@ -113,6 +113,7 @@ let
         ./media_server/minecraft.nix
         ./media_server/nextcloud.nix
         ./media_server/moodle.nix
+        ./media_server/couchdb.nix
         ../hosts/orangepi5pro/configuration.nix
         ./user-group.nix
       ];
