@@ -9,7 +9,6 @@ lib.mkIf (cfg.gpu == "nvidia") {
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
-  boot.blacklistedKernelModules = [ "nouveau" ];
 
   hardware.nvidia = {
     modesetting.enable = true;
@@ -18,10 +17,10 @@ lib.mkIf (cfg.gpu == "nvidia") {
 
     powerManagement.finegrained = false;
 
-    open = false;
+    open = true;
 
     nvidiaSettings = true;
 
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
 }

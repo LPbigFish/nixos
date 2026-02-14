@@ -1,11 +1,8 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs = {
     steam = {
       package = pkgs.steam.override {
-        extraPkgs = p: with p; [
-          bumblebee
-          primus
-        ];
       };
       enable = true;
       gamescopeSession.enable = true;
@@ -23,5 +20,6 @@
     lutris
     protontricks
     prismlauncher
+    xautoclick
   ];
 }
