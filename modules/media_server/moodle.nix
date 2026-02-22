@@ -8,9 +8,11 @@
   services.nginx.virtualHosts."ucimse.rybak.website" = {
     listen = [ { port = 8080; } ];
     root = "${config.services.moodle.package}/share/moodle/public";
-    index = "index.php";
 
-    tryFiles = "$uri $uri/ /index.php?$args";
+    locations."/" = {
+      index = "index.php";
+      tryFiles = "$uri $uri/ /index.php?$args";
+    };
 
     location."~ \.php$" = {
       extraConfig = ''
