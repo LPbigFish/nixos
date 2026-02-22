@@ -19,7 +19,7 @@
   };
 
   services.moodle = {
-    enable = true;
+    enable = false;
     package = pkgs.moodle;
 
     virtualHost.hostName = "moodle-dummy.local";
