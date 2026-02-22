@@ -4,25 +4,21 @@
   ...
 }:
 {
-  services.httpd = {
-    enable = true;
-    enablePHP = true;
-    virtualHosts."ucimse.rybak.website" = {
-      listen = [ { ip = "0.0.0.0"; port = 8080; } ];
-      documentRoot = "${config.services.moodle.package}/share/moodle/public";
+  # Nginx will be used to serve Moodle, avoiding conflicts with httpd.
+  services.nginx.virtualHosts."ucimse.rybak.website" = {
+    listen = [ { port = 8080; } ];
+    root = "${config.services.moodle.package}/share/moodle/public";
+    index = "index.php";
+
+    tryFiles = "$uri $uri/ /index.php?$args";
+
+    location."~ \.php$" = {
       extraConfig = ''
-        <Directory "${config.services.moodle.package}/share/moodle/public">
-          <FilesMatch "\.php$">
-            <If "-f %{REQUEST_FILENAME}">
-              SetHandler "proxy:unix:${config.services.phpfpm.pools.moodle.socket}|fcgi://localhost/"
-            </If>
-          </FilesMatch>
-          Options -Indexes +FollowSymLinks
-          AllowOverride None
-          Require all granted
-          DirectoryIndex index.php
-        </Directory>
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        include ${pkgs.nginx}/conf/fastcgi_params;
       '';
+      fastcgi_param.SCRIPT_FILENAME = "$document_root$fastcgi_script_name";
+      fastcgi_pass = "unix:${config.services.phpfpm.pools.moodle.socket}";
     };
   };
 
@@ -40,7 +36,6 @@
   services.moodle = {
     enable = true;
     package = pkgs.moodle;
-    virtualHost.hostName = "ucimse.rybak.website";
 
     database = {
       type = "pgsql";
