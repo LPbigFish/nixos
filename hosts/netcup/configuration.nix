@@ -55,6 +55,7 @@
   networking.wireguard.interfaces = {
     wg0 = {
       ips = [ "10.100.0.1/24" ];
+      mtu = 1420;
       listenPort = 51820;
 
       privateKeyFile = "/root/wireguard-keys/private";
