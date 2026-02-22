@@ -20,7 +20,9 @@
 
     virtualHost = {
       hostName = "ucimse.rybak.website";
-      port = 8080;
+      listen = [
+        { port = 8080; }
+      ];
     };
 
     database = {
