@@ -18,7 +18,10 @@
     enable = true;
     package = pkgs.moodle;
 
-    virtualHost.hostName = "ucimse.rybak.website";
+    virtualHost = {
+      hostName = "ucimse.rybak.website";
+      port = 8080;
+    };
 
     database = {
       type = "pgsql";

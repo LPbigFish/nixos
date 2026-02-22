@@ -26,7 +26,7 @@
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://10.100.0.2:80";
+          proxyPass = "http://10.100.0.2:8080";
           extraConfig = "client_max_body_size 10G;";
         };
       };
