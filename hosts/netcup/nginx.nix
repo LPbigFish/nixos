@@ -22,6 +22,14 @@
     recommendedOptimisation = true;
 
     virtualHosts = {
+      "ucimse.rybak.website" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          proxyPass = "http://10.100.0.2:80";
+          extraConfig = "client_max_body_size 10G;";
+        };
+      };
       "nextcloud.rybak.website" = {
         forceSSL = true;
         enableACME = true;
