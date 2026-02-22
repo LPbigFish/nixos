@@ -4,26 +4,6 @@
   ...
 }:
 {
-  # Nginx will be used to serve Moodle, avoiding conflicts with httpd.
-  services.nginx.virtualHosts."ucimse.rybak.website" = {
-    listen = [ { port = 8080; } ];
-    root = "${config.services.moodle.package}/share/moodle/public";
-
-    locations."/" = {
-      index = "index.php";
-      tryFiles = "$uri $uri/ /index.php?$args";
-    };
-
-    location."~ \.php$" = {
-      extraConfig = ''
-        fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        include ${pkgs.nginx}/conf/fastcgi_params;
-      '';
-      fastcgi_param.SCRIPT_FILENAME = "$document_root$fastcgi_script_name";
-      fastcgi_pass = "unix:${config.services.phpfpm.pools.moodle.socket}";
-    };
-  };
-
   services.postgresql = {
     enable = true;
     ensureDatabases = [ "moodle" ];
@@ -36,8 +16,9 @@
   };
 
   services.moodle = {
-    enable = true;
+    enable = false;
     package = pkgs.moodle;
+    virtualHost.hostName = "ucimse.rybak.website";
 
     database = {
       type = "pgsql";
