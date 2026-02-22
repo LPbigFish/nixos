@@ -40,6 +40,7 @@
   services.moodle = {
     enable = true;
     package = pkgs.moodle;
+    virtualHost.hostName = "ucimse.rybak.website";
 
     database = {
       type = "pgsql";
