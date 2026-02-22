@@ -21,6 +21,6 @@ lib.mkIf (cfg.gpu == "nvidia") {
 
     nvidiaSettings = true;
 
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 }
