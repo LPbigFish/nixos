@@ -4,6 +4,7 @@
   networking.wireguard.interfaces = {
     wg0 = {
       ips = [ "10.100.0.2/24" ];
+      mtu = 1420;
       listenPort = 51820;
 
       privateKeyFile = "/etc/wireguard/private.key";

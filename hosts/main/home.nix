@@ -46,6 +46,10 @@ in
       electrum
       qdirstat
       obsidian
+      postman
+      gemini-cli
+      android-studio
+      android-studio-tools
     ])
     ++ (with pkgs.jetbrains; [
       idea
