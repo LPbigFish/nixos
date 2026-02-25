@@ -27,7 +27,7 @@
       formatOnSave = true;
       trouble = {
         enable = true;
-      }; 
+      };
     };
     options = {
       tabstop = 8;
@@ -64,6 +64,11 @@
         format.enable = true;
         lsp.enable = true;
         treesitter.enable = true;
+      };
+      clang = {
+        enable = true;
+        dap.enable = true;
+        cHeader = true;
       };
       nix = {
         enable = true;

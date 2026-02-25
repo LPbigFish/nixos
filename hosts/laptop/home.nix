@@ -5,12 +5,12 @@
 }:
 let
   light_wp = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/LPbigFish/nixos/refs/heads/main/.github/images/light_image.jpg";
-    sha256 = "1b8lfq0mg3swi45zcxlg71zv3svw1f3ff4qdgxwv3w9sbpfjn0k7";
+    url = "https://raw.githubusercontent.com/LPbigFish/nixos/refs/heads/main/.github/images/image_uw.jpg";
+    sha256 = "0n20194xkwhlbizyva43698q0mmgdpdwrgrv3hmi7zbmx0lskrwc";
   };
   dark_wp = builtins.fetchurl {
-    url = "https://raw.githubusercontent.com/LPbigFish/nixos/refs/heads/main/.github/images/dark_image.jpg";
-    sha256 = "1d0yxj5d1mak9fvxsh49g6vcx0q5almjyhqqay06cw21s1qdjqw8";
+    url = "https://raw.githubusercontent.com/LPbigFish/nixos/refs/heads/main/.github/images/image_dark_uw.jpg";
+    sha256 = "0y3wcdp954j3kc0wxg56mc5kmi5h8xpw1pv7vrq9qb60khw22h1m";
   };
 in
 {
@@ -65,6 +65,18 @@ in
   };
 
   programs = {
+    alacritty = {
+      enable = true;
+      theme = "one_dark";
+      settings = {
+        window = {
+          opacity = 0.9;
+        };
+        font = {
+          size = 9;
+        };
+      };
+    };
     vscode = {
       enable = true;
       package = pkgs.vscode;
