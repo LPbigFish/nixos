@@ -1,4 +1,5 @@
-{...}: {
+{ ... }:
+{
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -53,15 +54,18 @@
           name = "libpipewire-module-loopback";
           args = {
             "node.name" = "Sonar-Game-Link";
-            "audio.position" = [ "FL" "FR" ];
+            "audio.position" = [
+              "FL"
+              "FR"
+            ];
             "capture.props" = {
               "media.class" = "Stream/Input/Audio";
               "node.target" = "Sonar-Game";
-              "stream.capture.sink" = "true"; # <--- CRITICAL: Tells it to look for an Output's monitor, not a Mic
+              "stream.capture.sink" = "true";
             };
             "playback.props" = {
               "media.class" = "Stream/Output/Audio";
-              "node.target" = "auto"; 
+              "media.role" = "Multimedia"; # <--- Tells your DE to move this when default output changes
             };
           };
         }
@@ -70,15 +74,18 @@
           name = "libpipewire-module-loopback";
           args = {
             "node.name" = "Sonar-Chat-Link";
-            "audio.position" = [ "FL" "FR" ];
+            "audio.position" = [
+              "FL"
+              "FR"
+            ];
             "capture.props" = {
               "media.class" = "Stream/Input/Audio";
               "node.target" = "Sonar-Chat";
-              "stream.capture.sink" = "true"; # <--- Add here
+              "stream.capture.sink" = "true";
             };
             "playback.props" = {
               "media.class" = "Stream/Output/Audio";
-              "node.target" = "auto";
+              "media.role" = "Multimedia";
             };
           };
         }
@@ -87,15 +94,18 @@
           name = "libpipewire-module-loopback";
           args = {
             "node.name" = "Sonar-Media-Link";
-            "audio.position" = [ "FL" "FR" ];
+            "audio.position" = [
+              "FL"
+              "FR"
+            ];
             "capture.props" = {
               "media.class" = "Stream/Input/Audio";
               "node.target" = "Sonar-Media";
-              "stream.capture.sink" = "true"; # <--- Add here
+              "stream.capture.sink" = "true";
             };
             "playback.props" = {
               "media.class" = "Stream/Output/Audio";
-              "node.target" = "auto";
+              "media.role" = "Multimedia";
             };
           };
         }

@@ -23,6 +23,7 @@
       package = pkgs.nix-ld;
     };
     direnv.enable = true;
+    git.config = { init.defaultBranch = "main"; };
   };
 
   environment.shellAliases = {
@@ -46,7 +47,7 @@
     };
   };
 
-  documentation.man.generateCaches = false;
+  documentation.man.cache.enable = false;
   
   environment.systemPackages = lib.mkBefore (
     with pkgs;
@@ -109,7 +110,7 @@
       substituters = [
         "https://cache.nixos.org?priority=10"
         "https://cache.nixos-cuda.org"
-        "https://nix-community.cachix.org?priority=40"
+        #"https://nix-community.cachix.org?priority=40"
       ];
       trusted-public-keys = [
         "cache.nixos-cuda.org:74DUi4Ye579gUqzH4ziL9IyiJBlDpMRn9MBN8oNan9M="

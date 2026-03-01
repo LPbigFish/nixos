@@ -43,7 +43,7 @@ in
       android-studio
       davinci-resolve
       obsidian
-      gemini-cli
+      opencode
       vinegar
     ])
     ++ (with pkgs.jetbrains; [

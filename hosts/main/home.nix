@@ -43,11 +43,10 @@ in
       termius
       monero-gui
       tidal-hifi
-      electrum
       qdirstat
       obsidian
       postman
-      gemini-cli
+      opencode
       android-studio
       android-studio-tools
     ])
