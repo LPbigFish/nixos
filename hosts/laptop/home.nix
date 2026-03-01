@@ -154,6 +154,7 @@ in
   # Home Manager is pretty good at managing dotfiles
   home.file = {
     "~/.p10k.zsh".source = ../../modules/.p10k.zsh;
+    "~/.config/opencode/opencode.json".source = ../../modules/opencode.json;
   };
 
   home.sessionVariables = {
