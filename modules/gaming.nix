@@ -21,5 +21,6 @@
     protontricks
     prismlauncher
     xautoclick
+    protonup-qt
   ];
 }

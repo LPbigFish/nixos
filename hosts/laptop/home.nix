@@ -45,6 +45,7 @@ in
       obsidian
       opencode
       vinegar
+      postman
     ])
     ++ (with pkgs.jetbrains; [
       idea
