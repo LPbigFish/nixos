@@ -9,7 +9,10 @@ with lib.hm.gvariant;
       custom-font = "MesloLGL Nerd Font Mono 12";
       font-scale = 0.7;
       last-window-maximised = false;
-      last-window-size = mkTuple [ 732 528 ];
+      last-window-size = mkTuple [
+        732
+        528
+      ];
       use-system-font = false;
     };
 
@@ -19,11 +22,20 @@ with lib.hm.gvariant;
 
     "org/gnome/control-center" = {
       last-panel = "display";
-      window-state = mkTuple [ 980 640 false ];
+      window-state = mkTuple [
+        980
+        640
+        false
+      ];
     };
 
     "org/gnome/desktop/app-folders" = {
-      folder-children = [ "System" "Utilities" "YaST" "Pardus" ];
+      folder-children = [
+        "System"
+        "Utilities"
+        "YaST"
+        "Pardus"
+      ];
     };
 
     "org/gnome/desktop/app-folders/folders/Pardus" = {
@@ -33,13 +45,27 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/app-folders/folders/System" = {
-      apps = [ "org.gnome.baobab.desktop" "org.gnome.DiskUtility.desktop" "org.gnome.Logs.desktop" "org.gnome.tweaks.desktop" "org.gnome.SystemMonitor.desktop" ];
+      apps = [
+        "org.gnome.baobab.desktop"
+        "org.gnome.DiskUtility.desktop"
+        "org.gnome.Logs.desktop"
+        "org.gnome.tweaks.desktop"
+        "org.gnome.SystemMonitor.desktop"
+      ];
       name = "X-GNOME-Shell-System.directory";
       translate = true;
     };
 
     "org/gnome/desktop/app-folders/folders/Utilities" = {
-      apps = [ "org.gnome.Decibels.desktop" "org.gnome.Connections.desktop" "org.gnome.Evince.desktop" "org.gnome.FileRoller.desktop" "org.gnome.font-viewer.desktop" "org.gnome.Loupe.desktop" "org.gnome.seahorse.Application.desktop" ];
+      apps = [
+        "org.gnome.Decibels.desktop"
+        "org.gnome.Connections.desktop"
+        "org.gnome.Evince.desktop"
+        "org.gnome.FileRoller.desktop"
+        "org.gnome.font-viewer.desktop"
+        "org.gnome.Loupe.desktop"
+        "org.gnome.seahorse.Application.desktop"
+      ];
       name = "X-GNOME-Shell-Utilities.directory";
       translate = true;
     };
@@ -51,7 +77,12 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/input-sources" = {
-      sources = [ (mkTuple [ "xkb" "cz" ]) ];
+      sources = [
+        (mkTuple [
+          "xkb"
+          "cz"
+        ])
+      ];
       xkb-options = [ "terminate:ctrl_alt_bksp" ];
     };
 
@@ -68,7 +99,11 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/notifications" = {
-      application-children = [ "org-gnome-software" "gnome-power-panel" "org-gnome-console" ];
+      application-children = [
+        "org-gnome-software"
+        "gnome-power-panel"
+        "org-gnome-console"
+      ];
     };
 
     "org/gnome/desktop/notifications/application/discord" = {
@@ -129,8 +164,14 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/nautilus/window-state" = {
-      initial-size = mkTuple [ 890 550 ];
-      initial-size-file-chooser = mkTuple [ 890 550 ];
+      initial-size = mkTuple [
+        890
+        550
+      ];
+      initial-size-file-chooser = mkTuple [
+        890
+        550
+      ];
     };
 
     "org/gnome/nm-applet/eap/8b7d8a56-e566-4625-8d07-4ea71759c0a5" = {
@@ -156,13 +197,17 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/settings-daemon/plugins/power" = {
-      power-button-action= "hibernate";
+      power-button-action = "hibernate";
     };
 
     "org/gnome/shell" = {
       disable-user-extensions = false;
       disabled-extensions = [ "wintile-beyond@GrylledCheez.xyz" ];
-      favorite-apps = [ "org.gnome.Console.desktop" "brave-browser.desktop" "code.desktop" ];
+      favorite-apps = [
+        "Alacritty.desktop"
+        "brave-browser.desktop"
+        "code.desktop"
+      ];
       last-selected-power-profile = "power-saver";
       welcome-dialog-last-shown-version = "48.3";
     };
@@ -276,7 +321,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/shell/world-clocks" = {
-      locations = [];
+      locations = [ ];
     };
 
     "org/gnome/software" = {
@@ -291,3 +336,4 @@ with lib.hm.gvariant;
 
   };
 }
+

@@ -46,6 +46,7 @@ in
       opencode
       vinegar
       postman
+      vivaldi
     ])
     ++ (with pkgs.jetbrains; [
       idea
@@ -154,8 +155,13 @@ in
 
   # Home Manager is pretty good at managing dotfiles
   home.file = {
-    "~/.p10k.zsh".source = ../../modules/.p10k.zsh;
-    "~/.config/opencode/opencode.json".source = ../../modules/opencode.json;
+    ".p10k.zsh".source = ../../modules/.p10k.zsh;
+    ".config/opencode/opencode.json".text = ''
+            {
+        "$schema": "https://opencode.ai/config.json",
+        "plugin": ["opencode-gemini-auth"]
+      }
+    '';
   };
 
   home.sessionVariables = {
