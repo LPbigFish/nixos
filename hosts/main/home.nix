@@ -45,10 +45,12 @@ in
       tidal-hifi
       qdirstat
       obsidian
-      postman
       opencode
+      gemini-cli
+      postman
       android-studio
       android-studio-tools
+      vivaldi
     ])
     ++ (with pkgs.jetbrains; [
       idea
@@ -178,8 +180,8 @@ in
   };
 
   home.file = {
-    "~/.p10k.zsh".source = ../../modules/.p10k.zsh;
-    "~/.config/opencode/opencode.json".source = ../../modules/opencode.json;
+    ".p10k.zsh".source = ../../modules/.p10k.zsh;
+    ".config/opencode/opencode.json".source = ../../modules/opencode.json;
   };
 
   home.sessionVariables = {
