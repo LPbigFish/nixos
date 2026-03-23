@@ -51,6 +51,7 @@ in
       android-studio
       android-studio-tools
       vivaldi
+      gemini-cli
     ])
     ++ (with pkgs.jetbrains; [
       idea

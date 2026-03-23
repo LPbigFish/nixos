@@ -47,6 +47,7 @@ in
       vinegar
       postman
       vivaldi
+      gemini-cli
     ])
     ++ (with pkgs.jetbrains; [
       idea
