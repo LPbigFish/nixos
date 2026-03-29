@@ -205,7 +205,7 @@ with lib.hm.gvariant;
       disabled-extensions = [ "wintile-beyond@GrylledCheez.xyz" ];
       favorite-apps = [
         "Alacritty.desktop"
-        "brave-browser.desktop"
+        "vivaldi.desktop"
         "code.desktop"
       ];
       last-selected-power-profile = "power-saver";

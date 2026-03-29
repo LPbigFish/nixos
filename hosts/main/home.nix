@@ -67,8 +67,9 @@ in
       name = "Papirus";
       package = pkgs.papirus-icon-theme;
     };
+    gtk4.theme = null;
     theme = {
-      name = "Orchis-Red";
+      name = "Orchis";
       package = pkgs.orchis-theme.override {
         tweaks = [
           "black"
