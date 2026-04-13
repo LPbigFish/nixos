@@ -52,12 +52,12 @@ in
       android-studio-tools
       vivaldi
       gemini-cli
+      gimp
     ])
     ++ (with pkgs.jetbrains; [
       idea
       clion
       datagrip
-      pycharm
     ])
     ++ gnomeExtensions.extensions;
 

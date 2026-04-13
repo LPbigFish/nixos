@@ -503,7 +503,7 @@ with lib.hm.gvariant;
       disable-user-extensions = false;
       disabled-extensions = [ "wintile-beyond@GrylledCheez.xyz" ];
       enabled-extensions = [ "caffeine@patapon.info" "blur-my-shell@aunetx" "dash-to-dock@micxgx.gmail.com" "clipboard-indicator@tudmotu.com" "user-theme@gnome-shell-extensions.gcampax.github.com" "gsconnect@andyholmes.github.io" "add-to-desktop@tommimon.github.com" "emoji-copy@felipeftn" "lockscreen-extension@pratap.fastmail.fm" "CustomizeClockOnLockScreen@pratap.fastmail.fm" "appindicatorsupport@rgcjonas.gmail.com" "bluetooth-quick-connect@bjarosze.gmail.com" "hidetopbar@mathieu.bidon.ca" "tiling-assistant@leleat-on-github" ];
-      favorite-apps = [ "Alacritty.desktop" "vivaldi.desktop" "code.desktop" ];
+      favorite-apps = [ "Alacritty.desktop" "vivaldi-stable.desktop" "code.desktop" ];
       last-selected-power-profile = "power-saver";
       welcome-dialog-last-shown-version = "48.3";
     };

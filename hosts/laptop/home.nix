@@ -53,7 +53,6 @@ in
       idea
       clion
       datagrip
-      pycharm
     ])
     ++ gnomeExtensions.extensions;
 
