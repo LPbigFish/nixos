@@ -13,7 +13,7 @@
 
   graphics-driver-selection.gpu = "intel";
 
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.kernelPackages = pkgs.linuxPackages_6_19;
 
   networking.hostName = "DESKTOP-E323AF"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -73,6 +73,9 @@
     };
     backupFileExtension = "backup";
   };
+
+  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

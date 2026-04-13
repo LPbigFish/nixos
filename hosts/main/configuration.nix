@@ -13,7 +13,7 @@
     ./pipewire.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_6_18;
+  boot.kernelPackages = pkgs.linuxPackages_6_19;
   boot.kernelModules = [ "snd-hda-intel" ];
   boot.extraModprobeConfig = ''
     options snd-hda-intel model=generic
@@ -28,7 +28,6 @@
   time.timeZone = "Europe/Prague";
 
   i18n.defaultLocale = "en_US.UTF-8";
-
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "cs_CZ.UTF-8";
