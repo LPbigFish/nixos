@@ -23,7 +23,9 @@
       package = pkgs.nix-ld;
     };
     direnv.enable = true;
-    git.config = { init.defaultBranch = "main"; };
+    git.config = {
+      init.defaultBranch = "main";
+    };
   };
 
   environment.shellAliases = {
@@ -48,7 +50,7 @@
   };
 
   documentation.man.cache.enable = false;
-  
+
   environment.systemPackages = lib.mkBefore (
     with pkgs;
     [
@@ -80,6 +82,8 @@
   );
 
   networking.nameservers = [
+    "2606:4700:4700::1111"
+    "2606:4700:4700::1001"
     "1.1.1.1"
     "8.8.8.8"
   ];

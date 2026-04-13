@@ -205,7 +205,7 @@ with lib.hm.gvariant;
       disabled-extensions = [ "wintile-beyond@GrylledCheez.xyz" ];
       favorite-apps = [
         "Alacritty.desktop"
-        "vivaldi.desktop"
+        "vivaldi-stable.desktop"
         "code.desktop"
       ];
       last-selected-power-profile = "power-saver";
@@ -336,4 +336,3 @@ with lib.hm.gvariant;
 
   };
 }
-

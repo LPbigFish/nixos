@@ -44,9 +44,9 @@ in
       davinci-resolve
       obsidian
       opencode
+      vivaldi
       vinegar
       postman
-      vivaldi
       gemini-cli
     ])
     ++ (with pkgs.jetbrains; [
