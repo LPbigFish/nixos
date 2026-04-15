@@ -13,7 +13,7 @@
 
   graphics-driver-selection.gpu = "intel";
 
-  boot.kernelPackages = pkgs.linuxPackages_6_19;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "DESKTOP-E323AF"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
