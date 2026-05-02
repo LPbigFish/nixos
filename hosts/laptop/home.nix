@@ -44,7 +44,10 @@ in
       davinci-resolve
       obsidian
       opencode
-      vivaldi
+      (vivaldi.override {
+        proprietaryCodecs = true;
+        enableWidevine = true;
+      })
       vinegar
       postman
       gemini-cli

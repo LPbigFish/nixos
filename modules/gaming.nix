@@ -17,7 +17,6 @@
     mangohud
     protonup-rs
     heroic
-    lutris
     protontricks
     prismlauncher
     xautoclick

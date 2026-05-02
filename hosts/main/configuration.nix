@@ -104,7 +104,6 @@
     dive
     podman-tui
     docker-compose
-    bottles
     unzip
     zip
     unrar

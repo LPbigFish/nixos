@@ -40,7 +40,7 @@ in
       davinci-resolve
       pavucontrol
       audacity
-      termius
+      #      termius
       monero-gui
       tidal-hifi
       qdirstat
@@ -50,7 +50,10 @@ in
       postman
       android-studio
       android-studio-tools
-      vivaldi
+      (vivaldi.override {
+        proprietaryCodecs = true;
+        enableWidevine = true;
+      })
       gemini-cli
       gimp
     ])
