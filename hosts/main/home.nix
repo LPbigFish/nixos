@@ -56,7 +56,6 @@ in
     ])
     ++ (with pkgs.jetbrains; [
       idea
-      clion
       datagrip
     ])
     ++ gnomeExtensions.extensions;
