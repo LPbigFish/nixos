@@ -51,6 +51,7 @@ in
       vinegar
       postman
       gemini-cli
+      beeper
     ])
     ++ (with pkgs.jetbrains; [
       idea

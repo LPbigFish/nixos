@@ -68,6 +68,7 @@
       inetutils
       my-neovim
       tldr
+      jq
       (writeShellScriptBin "nhswitch" ''
         #!/usr/bin/env bash
 

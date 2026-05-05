@@ -56,6 +56,7 @@ in
       })
       gemini-cli
       gimp
+      beeper
     ])
     ++ (with pkgs.jetbrains; [
       idea
