@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   inputs,
   gnomeExtensions,
@@ -66,6 +67,13 @@
     powerOnBoot = true;
   };
 
+  sops.secrets.opencode = {
+    sopsFile = ../../secrets/opencode.json;
+    format = "binary";
+    path = "/home/lpbigfish/.config/opencode/opencode.json";
+    owner = config.users.users.lpbigfish.name;
+  };
+
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs gnomeExtensions; };
     users = {
@@ -85,6 +93,7 @@
     scrcpy
     openconnect
     networkmanager-openconnect
+    nodejs
   ];
 
   system.stateVersion = "25.05"; # Did you read the comment?

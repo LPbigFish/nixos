@@ -17,13 +17,19 @@
             inputs.sops-nix.nixosModules.sops
           ];
 
-          environment.systemPackages = with pkgs; [
-            sops
-            ssh-to-age
-            ssh-to-pgp
-            age
-            gnupg
-          ];
+          environment = {
+            systemPackages = with pkgs; [
+              sops
+              ssh-to-age
+              ssh-to-pgp
+              age
+              gnupg
+            ];
+
+            sessionVariables = {
+              SOPS_AGE_KEY_FILE = "/nix/persist/var/lib/sops-nix/key.txt";
+            };
+          };
 
           services.openssh.hostKeys = [
             {

@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   inputs,
   gnomeExtensions,
@@ -26,6 +27,11 @@
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/Prague";
+
+  nix.settings.trusted-users = [
+    "root"
+    "lpbigfish"
+  ];
 
   i18n.defaultLocale = "en_US.UTF-8";
 
@@ -60,7 +66,15 @@
   security.rtkit.enable = true;
   services.pulseaudio.enable = false;
   services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.enableExcludeWrapper = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
+
+  sops.secrets.opencode = {
+    sopsFile = ../../secrets/opencode.json;
+    format = "binary";
+    path = "/home/lpbigfish/.config/opencode/opencode.json";
+    owner = config.users.users.lpbigfish.name;
+  };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs gnomeExtensions; };
@@ -109,6 +123,7 @@
     unrar
     rar
     distrobox
+    nodejs
   ];
 
   system.stateVersion = "25.05";
