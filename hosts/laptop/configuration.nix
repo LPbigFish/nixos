@@ -74,6 +74,15 @@
     owner = config.users.users.lpbigfish.name;
   };
 
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs gnomeExtensions; };
     users = {
@@ -94,6 +103,8 @@
     openconnect
     networkmanager-openconnect
     nodejs
+    podman-tui
+    docker-compose
   ];
 
   system.stateVersion = "25.05"; # Did you read the comment?
