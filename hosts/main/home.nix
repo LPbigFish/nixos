@@ -187,7 +187,7 @@ in
 
   home.file = {
     ".p10k.zsh".source = ../../modules/.p10k.zsh;
-    "skills".source = ../../files/opencode/skills;
+    ".config/opencode/skills".source = ../../files/opencode/skills;
   };
 
   home.sessionVariables = {

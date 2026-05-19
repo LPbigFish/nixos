@@ -161,7 +161,7 @@ in
   # Home Manager is pretty good at managing dotfiles
   home.file = {
     ".p10k.zsh".source = ../../modules/.p10k.zsh;
-    "skills".source = ../../files/opencode/skills;
+    ".config/opencode/skills".source = ../../files/opencode/skills;
   };
 
   home.sessionVariables = {
