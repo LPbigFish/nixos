@@ -21,11 +21,12 @@
       url = "github:gnull/nixos-rk3588";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     vim-conf = {
       url = "./modules/nvim";
     };
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
 
     sops-config.url = "./modules/sops";
 
