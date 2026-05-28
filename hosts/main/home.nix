@@ -27,7 +27,7 @@ in
   home.packages =
     (with pkgs; [
       (discord.override {
-        withOpenASAR = true;
+        #        withOpenASAR = true;
         withVencord = true;
       })
       zsh-powerlevel10k
@@ -61,7 +61,6 @@ in
     ])
     ++ (with pkgs.jetbrains; [
       idea
-      datagrip
     ])
     ++ gnomeExtensions.extensions;
 

@@ -69,6 +69,7 @@
       my-neovim
       tldr
       jq
+      nixos-firewall-tool
       (writeShellScriptBin "nhswitch" ''
         #!/usr/bin/env bash
 
