@@ -14,10 +14,14 @@ let
     url = "https://raw.githubusercontent.com/LPbigFish/HorrorMods/514db63f85d0c24ff1123ea5de16088a4d8e8e3a/pack.toml";
     packHash = "sha256-UDYQT/ECbEkZkZyHV84hDGIkpnyFMoVOAcF1jG8Sx+o=";
   };
+  modpack_carovnak = pkgs.fetchPackwizModpack {
+    url = "https://raw.githubusercontent.com/LPbigFish/HorrorMods/514db63f85d0c24ff1123ea5de16088a4d8e8e3a/pack.toml";
+    packHash = "sha256-UDYQT/ECbEkZkZyHV84hDGIkpnyFMoVOAcF1jG8Sx+o=";
+  };
 in
 {
   services.minecraft-servers = {
-    enable = true;
+    enable = false;
     eula = true;
     openFirewall = true;
     servers = {
@@ -63,7 +67,7 @@ in
       };
 
       spookers2 = {
-        enable = true;
+        enable = false;
 
         package = pkgs.fabricServers.fabric-1_20_1.override {
           loaderVersion = "0.18.4";
@@ -83,6 +87,29 @@ in
 
         jvmOpts = "-Xmx4096M";
       };
+
+      carovnak = {
+        enable = true;
+
+        package = pkgs.fabricServers.forge-1_12_2.override {
+          loaderVersion = "0.18.4";
+        };
+
+        symlinks = {
+          mods = "${modpack_carovnak}/mods";
+        };
+
+        serverProperties = {
+          online-mode = false;
+          difficulty = 3;
+          max-players = 3;
+          spawn-protection = 0;
+          level-seed = "3651756747332231632";
+        };
+
+        jvmOpts = "-Xmx4096M";
+      };
+
     };
   };
 

@@ -56,9 +56,12 @@
 
   services.printing.enable = true;
 
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = true;
+  hardware = {
+    bluetooth = {
+      enable = true;
+      powerOnBoot = true;
+    };
+    xone.enable = true;
   };
 
   hardware.trackpoint.emulateWheel = true;
@@ -70,8 +73,9 @@
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   sops.secrets.opencode = {
-    sopsFile = ../../secrets/opencode.json;
-    format = "binary";
+    sopsFile = ../../secrets/opencode.yaml;
+    format = "yaml";
+    key = "data";
     path = "/home/lpbigfish/.config/opencode/opencode.json";
     owner = config.users.users.lpbigfish.name;
   };

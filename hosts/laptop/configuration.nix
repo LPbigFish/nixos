@@ -68,8 +68,9 @@
   };
 
   sops.secrets.opencode = {
-    sopsFile = ../../secrets/opencode.json;
-    format = "binary";
+    sopsFile = ../../secrets/opencode.yaml;
+    format = "yaml";
+    key = "data";
     path = "/home/lpbigfish/.config/opencode/opencode.json";
     owner = config.users.users.lpbigfish.name;
   };

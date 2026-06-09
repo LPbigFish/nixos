@@ -158,6 +158,13 @@ in
       enable = true;
       theme = "one_dark";
       settings = {
+        keyboard.bindings = [
+          {
+            key = "N";
+            mods = "Control|Shift";
+            action = "CreateNewWindow";
+          }
+        ];
         window = {
           opacity = 0.9;
         };

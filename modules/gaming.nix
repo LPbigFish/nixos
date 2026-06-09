@@ -21,5 +21,6 @@
     prismlauncher
     xautoclick
     protonup-qt
+    jdk25
   ];
 }
