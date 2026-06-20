@@ -42,6 +42,7 @@ in
       hunspellDicts.cs_CZ
       android-studio
       davinci-resolve
+      resolve-convert
       obsidian
       opencode
       (vivaldi.override {

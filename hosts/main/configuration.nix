@@ -128,6 +128,7 @@
     rar
     distrobox
     nodejs
+    bottles
   ];
 
   system.stateVersion = "25.05";

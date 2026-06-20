@@ -38,6 +38,7 @@ in
       hunspellDicts.cs_CZ
       hunspellDicts.en_US
       davinci-resolve
+      resolve-convert
       pavucontrol
       audacity
       #      termius
@@ -46,7 +47,6 @@ in
       qdirstat
       obsidian
       opencode
-      gemini-cli
       postman
       android-studio
       android-studio-tools
@@ -54,10 +54,8 @@ in
         proprietaryCodecs = true;
         enableWidevine = true;
       })
-      gemini-cli
       gimp
       beeper
-      telegram-desktop
     ])
     ++ (with pkgs.jetbrains; [
       idea
