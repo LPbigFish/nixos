@@ -17,7 +17,7 @@ lib.mkIf (cfg.gpu == "nvidia") {
 
     powerManagement.finegrained = false;
 
-    open = true;
+    open = false;
 
     nvidiaSettings = true;
 

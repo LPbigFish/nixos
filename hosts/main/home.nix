@@ -41,7 +41,7 @@ in
       resolve-convert
       pavucontrol
       audacity
-      #      termius
+      qbittorrent
       monero-gui
       tidal-hifi
       qdirstat
@@ -192,6 +192,7 @@ in
   home.file = {
     ".p10k.zsh".source = ../../modules/.p10k.zsh;
     ".config/opencode/skills".source = ../../files/opencode/skills;
+    ".config/opencode/agents".source = ../../agents;
   };
 
   home.sessionVariables = {

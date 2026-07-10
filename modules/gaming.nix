@@ -22,5 +22,15 @@
     xautoclick
     protonup-qt
     jdk25
+    adwaita-icon-theme
+    gdk-pixbuf
+    librsvg
+    glycin-loaders
   ];
+
+  networking.extraHosts = ''
+    0.0.0.0 paradise-s1.battleye.com
+    0.0.0.0 test-s1.battleye.com
+    0.0.0.0 paradiseenhanced-s1.battleye.com
+  '';
 }
