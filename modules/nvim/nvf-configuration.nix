@@ -58,18 +58,6 @@
 
     languages = {
       enableTreesitter = true;
-      python = {
-        enable = true;
-        dap.enable = true;
-        format.enable = true;
-        lsp.enable = true;
-        treesitter.enable = true;
-      };
-      clang = {
-        enable = true;
-        dap.enable = true;
-        cHeader = true;
-      };
       nix = {
         enable = true;
         lsp.enable = true;
@@ -78,30 +66,9 @@
         format.type = [ "nixfmt" ];
         treesitter.enable = true;
       };
-      rust = {
-        enable = true;
-        dap.enable = true;
-        extensions.crates-nvim.enable = true;
-        format.enable = true;
-        lsp.enable = true;
-        lsp.opts = ''
-          ['rust-analyzer'] = {
-            cargo = {allFeature = true},
-            checkOnSave = true,
-            procMacro = {
-              enable = true,
-            },
-          },
-        '';
-        treesitter.enable = true;
-      };
       markdown = {
         enable = true;
         extensions.markview-nvim.enable = true;
-      };
-      elixir = {
-        enable = true;
-        elixir-tools.enable = true;
       };
     };
   };

@@ -12,6 +12,12 @@ let
     url = "https://raw.githubusercontent.com/LPbigFish/nixos/refs/heads/main/.github/images/image_dark_uw.jpg";
     sha256 = "0y3wcdp954j3kc0wxg56mc5kmi5h8xpw1pv7vrq9qb60khw22h1m";
   };
+  # ponytail: union gstack derivation skills + hand-written skills into one tree.
+  opencodeSkills = pkgs.runCommand "opencode-skills" { } ''
+    mkdir $out
+    cp -r ${pkgs.gstack}/skills/. $out/
+    cp -r ${../../files/opencode/skills}/. $out/
+  '';
 in
 {
 
@@ -191,8 +197,7 @@ in
 
   home.file = {
     ".p10k.zsh".source = ../../modules/.p10k.zsh;
-    ".config/opencode/skills".source = ../../files/opencode/skills;
-    ".config/opencode/agents".source = ../../agents;
+    ".config/opencode/skills".source = opencodeSkills;
   };
 
   home.sessionVariables = {

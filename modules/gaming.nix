@@ -22,10 +22,6 @@
     xautoclick
     protonup-qt
     jdk25
-    adwaita-icon-theme
-    gdk-pixbuf
-    librsvg
-    glycin-loaders
   ];
 
   networking.extraHosts = ''
