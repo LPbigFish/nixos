@@ -20,7 +20,7 @@
   services.nextcloud = {
     enable = true;
 
-    package = pkgs.nextcloud32;
+    package = pkgs.nextcloud33;
 
     secretFile = config.sops.secrets.nextcloud-email-config.path;
 
@@ -59,7 +59,7 @@
 
     extraAppsEnable = true;
     extraApps = {
-      inherit (pkgs.nextcloud32.packages.apps)
+      inherit (pkgs.nextcloud33.packages.apps)
         calendar
         cospend
         deck

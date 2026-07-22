@@ -24,6 +24,8 @@
 
   networking.networkmanager.enable = true;
 
+  services.ntp.enable = true;
+  time.timeZone = "Europe/Prague";
   # OPi 5 Pro DTB (RK3588S)
   hardware.deviceTree.name = lib.mkForce "rockchip/rk3588s-orangepi-5-pro.dtb";
 
@@ -61,11 +63,34 @@
     gawk
     tmux
     binutils
+    openssl
+
+    podman-tui
+    docker-compose
   ];
+
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
 
   services.iperf3 = {
     enable = true;
     openFirewall = true;
+  };
+
+  services.resolved = {
+    enable = true;
+    dnssec = "true";
+    domains = [ "~." ];
+    fallbackDns = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
   };
 
   # Match your target release

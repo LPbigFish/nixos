@@ -107,7 +107,7 @@ let
         inputs.disko.nixosModules.disko
         inputs.sops-config.nixosModules.sops_configuration
         ./tor_services.nix
-        ./monerod.nix
+        #./monerod.nix
         #./media_server/terraria.nix
         #./media_server/jellyfin.nix
         ./media_server/postgresql.nix
