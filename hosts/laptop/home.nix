@@ -40,7 +40,7 @@ in
       libreoffice-qt
       hunspell
       hunspellDicts.cs_CZ
-      android-studio
+      # android-studio
       davinci-resolve
       resolve-convert
       obsidian
@@ -51,12 +51,10 @@ in
       })
       vinegar
       postman
-      gemini-cli
       beeper
     ])
     ++ (with pkgs.jetbrains; [
       idea
-      clion
       datagrip
     ])
     ++ gnomeExtensions.extensions;
@@ -79,6 +77,13 @@ in
       enable = true;
       theme = "one_dark";
       settings = {
+        keyboard.bindings = [
+          {
+            key = "N";
+            mods = "Control|Shift";
+            action = "CreateNewWindow";
+          }
+        ];
         window = {
           opacity = 0.9;
         };

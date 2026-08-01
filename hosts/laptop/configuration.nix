@@ -93,7 +93,7 @@
   };
 
   services.mullvad-vpn.enable = true;
-  services.mullvad-vpn.package = pkgs.mullvad-vpn;
+  services.mullvad-vpn.gui.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

@@ -32,7 +32,7 @@
     nhclean = "nh clean all -k 1 --no-gcroots";
   };
 
-  services.timesyncd.enable = true;
+  services.timesyncd.enable = lib.mkDefault true;
 
   fonts = {
     packages = with pkgs; [
