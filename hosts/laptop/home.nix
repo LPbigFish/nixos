@@ -46,12 +46,13 @@ in
       obsidian
       opencode
       (vivaldi.override {
-        proprietaryCodecs = true;
+        proprietaryCodecs = false;
         enableWidevine = true;
       })
       vinegar
       postman
       beeper
+      qbittorrent
     ])
     ++ (with pkgs.jetbrains; [
       idea
@@ -91,6 +92,14 @@ in
           size = 9;
         };
       };
+    };
+    zed-editor = {
+      enable = true;
+      extensions = [
+        "nix"
+        "elixir"
+        "haskell"
+      ];
     };
     vscode = {
       enable = true;
