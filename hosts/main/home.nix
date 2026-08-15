@@ -89,9 +89,44 @@ in
   };
 
   programs = {
+    vicinae = {
+      enable = true;
+      systemd = {
+        enable = true; # default: false
+        autoStart = true; # default: false
+      };
+      extensions = [
+        (pkgs.mkRayCastExtension {
+          name = "chatgpt";
+          rev = "62edb5f5b52d28d38c918add66553e827d9cdc4b";
+          hash = "sha256-yEl+JyZmUXVuVojthtqlSyqLYmHyf+PFqsP+LBkjEK0=";
+        })
+        (pkgs.mkRayCastExtension {
+          name = "google-search";
+          rev = "62edb5f5b52d28d38c918add66553e827d9cdc4b";
+          hash = "sha256-L1uXvVu640AIm+FUMYKxZ0mnvwpA6cAdJpOPBvnbtuk=";
+        })
+      ];
+      settings = {
+        theme = {
+          name = "one-dark";
+        };
+        window = {
+          opacity = 0.8;
+        };
+      };
+    };
     vscode = {
       enable = true;
       package = pkgs.vscode;
+    };
+    zed-editor = {
+      enable = true;
+      extensions = [
+        "nix"
+        "elixir"
+        "haskell"
+      ];
     };
     eza = {
       enable = true;
@@ -128,6 +163,9 @@ in
       enable = true;
       syntaxHighlighting.enable = true;
       autosuggestion.enable = true;
+      shellAliases = {
+        ls = "eza";
+      };
       initContent = ''
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
           [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

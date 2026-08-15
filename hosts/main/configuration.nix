@@ -33,6 +33,11 @@
     "lpbigfish"
   ];
 
+  nix.settings.substituters = [ "https://vicinae.cachix.org" ];
+  nix.settings.trusted-public-keys = [
+    "vicinae.cachix.org-1:1kDrfienkGHPYbkpNj1mWTr7Fm1+zcenzgTizIcI3oc="
+  ];
+
   i18n.defaultLocale = "en_US.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -82,6 +87,7 @@
 
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs gnomeExtensions; };
+    sharedModules = [ inputs.vicinae.homeManagerModules.default ];
     users = {
       "lpbigfish" = import ./home.nix;
     };

@@ -31,6 +31,8 @@
     sops-config.url = "./modules/sops";
 
     devkit.url = "./modules/devkit";
+
+    vicinae.url = "github:vicinaehq/vicinae";
   };
 
   outputs =

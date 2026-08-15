@@ -9,6 +9,7 @@ let
     inputs.nix-minecraft.overlay
     inputs.vim-conf.overlays.default
     inputs.nix-cachyos-kernel.overlays.default
+    inputs.vicinae.overlays.default
   ];
 
   pkgs = import nixpkgs {
@@ -56,6 +57,7 @@ let
         inputs.grub-conf.nixosModules.grubConfiguration
         inputs.flatpak-module.nixosModules.flatpak
         inputs.sops-config.nixosModules.sops_configuration
+        inputs.vicinae.nixosModules.default
         ./gaming.nix
         ./desktop/gnome.nix
         ../hosts/main/configuration.nix

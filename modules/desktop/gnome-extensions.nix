@@ -1,4 +1,5 @@
-{ pkgs }: let
+{ pkgs }:
+let
   extensions = with pkgs.gnomeExtensions; [
     caffeine
     blur-my-shell
@@ -17,6 +18,7 @@
     hide-top-bar
     #tiling-shell
     tiling-assistant
+    vicinae
   ];
 
   extensionUuidList = map (x: x.extensionUuid) extensions;
