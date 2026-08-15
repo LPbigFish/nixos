@@ -97,11 +97,6 @@ in
       };
       extensions = [
         (pkgs.mkRayCastExtension {
-          name = "chatgpt";
-          rev = "62edb5f5b52d28d38c918add66553e827d9cdc4b";
-          hash = "sha256-yEl+JyZmUXVuVojthtqlSyqLYmHyf+PFqsP+LBkjEK0=";
-        })
-        (pkgs.mkRayCastExtension {
           name = "google-search";
           rev = "62edb5f5b52d28d38c918add66553e827d9cdc4b";
           hash = "sha256-L1uXvVu640AIm+FUMYKxZ0mnvwpA6cAdJpOPBvnbtuk=";
