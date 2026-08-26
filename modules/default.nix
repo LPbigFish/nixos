@@ -59,6 +59,7 @@
       btop
       nixfmt
       nixd
+      nil
       git
       git-lfs
       screen
