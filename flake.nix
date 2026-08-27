@@ -1,5 +1,5 @@
 {
-  description = "A very basic flake";
+  description = "LPbigFish NixOS fleet";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
@@ -23,6 +23,10 @@
     };
     nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     vim-conf = {
       url = "./modules/nvim";
@@ -37,22 +41,29 @@
 
   outputs =
     {
+      self,
       nixpkgs,
       ...
     }@inputs:
     let
+      lib = nixpkgs.lib;
+      infra = import ./infra { inherit lib; };
+
       mkHost =
         name: cfg:
         nixpkgs.lib.nixosSystem {
           inherit (cfg) system pkgs;
           specialArgs = {
-            inherit inputs;
+            inherit inputs infra;
+            hostName = name;
           }
           // cfg.specialArgs;
           modules = cfg.modules ++ [
             {
               system.autoUpgrade = {
-                enable = true;
+                # deploy-rs owns activation on infrastructure hosts,
+                # so their auto-upgrade is disabled to avoid fights.
+                enable = !((infra.hosts.${name} or { }).deploy or false);
                 flake = "github:LPbigFish/nixos#${name}";
                 persistent = true;
                 dates = "weekly";
@@ -63,8 +74,35 @@
         };
 
       configs = import ./modules/profiles.nix { inherit inputs nixpkgs; };
+
+      deployHosts = lib.filterAttrs (_: host: host.deploy or false) infra.hosts;
     in
     {
-      nixosConfigurations = nixpkgs.lib.mapAttrs mkHost configs;
+      nixosConfigurations = lib.mapAttrs mkHost configs;
+
+      deploy.nodes = lib.mapAttrs (
+        name: host:
+        {
+          hostname = host.sshHostname;
+          sshUser = host.sshUser;
+          profiles.system = {
+            user = "root";
+            path = inputs.deploy-rs.lib.${host.system}.activate.nixos self.nixosConfigurations.${name};
+          };
+        }
+        // lib.optionalAttrs ((host.sshProxyJump or null) != null) {
+          sshOpts = [
+            "-J"
+            host.sshProxyJump
+          ];
+        }
+      ) deployHosts;
+
+      checks = lib.mapAttrs (
+        system: deployLib:
+        deployLib.deployChecks {
+          nodes = lib.filterAttrs (name: _: deployHosts.${name}.system == system) self.deploy.nodes;
+        }
+      ) inputs.deploy-rs.lib;
     };
 }

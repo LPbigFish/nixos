@@ -5,7 +5,7 @@
     owner = config.users.users.couchdb.name;
   };
 
-  networking.firewall.allowedTCPPorts = [ 5984 ];
+  # port 5984 is opened on wg0 by modules/infrastructure/service-firewall.nix
 
   services.couchdb = {
     enable = true;

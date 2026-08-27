@@ -46,6 +46,13 @@
   networking.hostName = "orangepi5pro";
   services.openssh.enable = true;
 
+  # deploy-rs: push closures as this user + passwordless activation
+  nix.settings.trusted-users = [
+    "root"
+    "@wheel"
+  ];
+  security.sudo-rs.wheelNeedsPassword = false;
+
   environment.systemPackages = with pkgs; [
     util-linux
     curl

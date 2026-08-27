@@ -25,6 +25,17 @@ sudo nix --experimental-features "nix-command flakes" run github:nix-community/d
 
 ```
 
+### Deploy servers (deploy-rs)
+
+```
+nix run github:serokell/deploy-rs -- .#netcup
+nix run github:serokell/deploy-rs -- .#orangepi5pro   # jumps through netcup
+nix run github:serokell/deploy-rs -- .
+```
+
+Hosts and exposed services are defined in `infra/hosts.nix` and
+`infra/services.nix`. Server auto-upgrade is off; deploy manually.
+
 ### Orange Pi 5 Pro
 ```
 sudo apt update

@@ -1,4 +1,9 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  infra,
+  ...
+}:
 {
   sops.secrets.nextcloudAdminpass = {
     sopsFile = ../../secrets/nextcloud.yaml;
@@ -33,7 +38,7 @@
       "trusted_domains" = [ "nextcloud.rybak.website" ];
       overwriteprotocol = "https";
       trusted_proxies = [
-        "10.100.0.1"
+        "${infra.hosts.netcup.vpnAddress}"
         "127.0.0.1"
         "::1"
       ];

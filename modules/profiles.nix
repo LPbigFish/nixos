@@ -1,7 +1,9 @@
 { nixpkgs, inputs }:
 let
-  system = "x86_64-linux";
-  rk_system = "aarch64-linux";
+  infra = import ../infra { inherit (nixpkgs) lib; };
+
+  system = infra.hosts.main.system;
+  rk_system = infra.hosts.orangepi5pro.system;
 
   overlays = [
     (import ../overlays/rk-overlay.nix)
@@ -35,6 +37,7 @@ let
     }
     inputs.disko.nixosModules.disko
     inputs.nix-minecraft.nixosModules.minecraft-servers
+    ./infrastructure
     ./.
   ];
 

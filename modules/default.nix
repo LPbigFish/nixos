@@ -98,7 +98,7 @@
       enable = true;
       package = pkgs.sudo-rs;
       execWheelOnly = true;
-      wheelNeedsPassword = true;
+      wheelNeedsPassword = lib.mkDefault true;
     };
   };
 
