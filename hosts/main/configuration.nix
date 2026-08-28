@@ -134,6 +134,7 @@
     rar
     distrobox
     nodejs
+    inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
     #bottles
   ];
 

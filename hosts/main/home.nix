@@ -63,7 +63,6 @@ in
       })
       gimp
       beeper
-      deploy-rs
     ])
     ++ (with pkgs.jetbrains; [
       idea
