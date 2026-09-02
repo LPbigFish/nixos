@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -45,6 +46,28 @@
 
   networking.hostName = "orangepi5pro";
   services.openssh.enable = true;
+
+  sops.secrets.polymarketScannerEnv = {
+    sopsFile = ../../secrets/polymarket.env;
+    format = "dotenv";
+    owner = "root";
+    group = "polymarket-scanner";
+    mode = "0440";
+  };
+
+  services.polymarket-scanner = {
+    enable = true;
+    environmentFile = config.sops.secrets.polymarketScannerEnv.path;
+    extraEnvironment = {
+      INGESTION_ENABLED = "true";
+      SCORING_ENABLED = "true";
+      ALERTS_ENABLED = "false";
+      RECEIPTS_ENABLED = "false";
+      COMMANDS_ENABLED = "true";
+      LEGACY_ALERTS_ENABLED = "false";
+      LEGAL_REVIEW_APPROVED = "false";
+    };
+  };
 
   # deploy-rs: push closures as this user + passwordless activation
   nix.settings.trusted-users = [

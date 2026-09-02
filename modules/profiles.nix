@@ -111,6 +111,7 @@ let
         inputs.nixos-rk3588.nixosModules.boards.orangepi5.core
         inputs.disko.nixosModules.disko
         inputs.sops-config.nixosModules.sops_configuration
+        inputs.polymarket-scanner.nixosModules.default
         ./tor_services.nix
         #./monerod.nix
         #./media_server/terraria.nix

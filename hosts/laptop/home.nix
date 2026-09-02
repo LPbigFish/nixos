@@ -53,6 +53,7 @@ in
       postman
       beeper
       qbittorrent
+      freecad-wayland
     ])
     ++ (with pkgs.jetbrains; [
       idea

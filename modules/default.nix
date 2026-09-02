@@ -23,8 +23,8 @@
       package = pkgs.nix-ld;
     };
     direnv.enable = true;
-    git.config = {
-      init.defaultBranch = "main";
+    git.config.init = {
+      defaultBranch = "main";
     };
   };
 

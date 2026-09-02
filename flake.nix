@@ -27,6 +27,10 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    polymarket-scanner = {
+      url = "git+ssh://git@github.com/LPbigFish/PolymarketScanner.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     vim-conf = {
       url = "./modules/nvim";
