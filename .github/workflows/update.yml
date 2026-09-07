@@ -21,6 +21,12 @@ jobs:
               with:
                 ref: main
                 fetch-depth: 0
+            
+            - name: Load PolymarketScanner deploy key
+              uses: webfactory/ssh-agent@v0.9.0
+              with:
+               ssh-private-key: ${{ secrets.POLYMARKET_SSH_KEY }}
+            
             - name: Install Nix
               uses: cachix/install-nix-action@v31
               with:
