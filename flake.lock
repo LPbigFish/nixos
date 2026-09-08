@@ -175,11 +175,11 @@
         "nixpkgs-lib": "nixpkgs-lib_2"
       },
       "locked": {
-        "lastModified": 1782949081,
-        "narHash": "sha256-vp6Y/Grm98ESt6ceOkWiHWyZRDV3J1RID4w+6NWK9yA=",
+        "lastModified": 1788450739,
+        "narHash": "sha256-glZLQlzIn1fXH6PazR2iUmTo7kzzyYSshrWhLS9TqCU=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "17c9d6cdfc60c64f4ee8d306f9bc0b4ccb51481e",
+        "rev": "31729ca8cbdb4fa927b34e5f4353e6a83f39e993",
         "type": "github"
       },
       "original": {
@@ -514,11 +514,11 @@
     },
     "nixpkgs-lib_2": {
       "locked": {
-        "lastModified": 1782614948,
-        "narHash": "sha256-ePjCwr1sNm9NYUqywL7QfK3JnlS015msC+eBu2zKlp8=",
+        "lastModified": 1788057806,
+        "narHash": "sha256-DTQSMxzDWmT0zhguthvegnVkn7CFqGCv4IHCzk5ZUpM=",
         "owner": "nix-community",
         "repo": "nixpkgs.lib",
-        "rev": "db3f255737b94216eb71cce308e2912cf6bc2d7c",
+        "rev": "596e2e3940e09b2abbeb03f75fa1828c57fcd72c",
         "type": "github"
       },
       "original": {
@@ -718,11 +718,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788262631,
-        "narHash": "sha256-jD3zAO6osLL7EoO2fsQdpltwt/Mgf657Tvt/OaP8DzY=",
+        "lastModified": 1788895685,
+        "narHash": "sha256-/qXCbIJo3BQHi4fDDwarRy6cFZJPgZM+S4mcKmwSrX0=",
         "ref": "refs/heads/main",
-        "rev": "287348c35374102de406a874473830eb58c98e7a",
-        "revCount": 16,
+        "rev": "7f30f639c950d51975c6f55f20f624fc2d71abef",
+        "revCount": 30,
         "type": "git",
         "url": "ssh://git@github.com/LPbigFish/PolymarketScanner.git"
       },

@@ -92,6 +92,7 @@ in
   programs = {
     vicinae = {
       enable = true;
+
       systemd = {
         enable = true; # default: false
         autoStart = true; # default: false
@@ -108,6 +109,7 @@ in
         })
       ];
       settings = {
+        providers.calculator.preferences.backend = "qalculate";
         theme.dark.name = "one-dark";
         launcher_window = {
           opacity = 0.8;

@@ -47,6 +47,35 @@
   networking.hostName = "orangepi5pro";
   services.openssh.enable = true;
 
+  # polymarket-scanner operator console (LAN-only, read-only, plain HTTP by
+  # design review — upstream force_ssl removed in fb3e7d27)
+  networking.firewall.allowedTCPPorts = [
+    4000
+    80
+  ];
+
+  # Plain reverse proxy for console: scheme stays http, cookies stay
+  # non-Secure, LiveView rides ws://. No proto lie, no TLS.
+  services.nginx = {
+    enable = true;
+    virtualHosts."polymarket-console" = {
+      serverName = "192.168.18.76";
+      default = true;
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:4000";
+        extraConfig = ''
+          proxy_set_header Host $host;
+          proxy_set_header X-Real-IP $remote_addr;
+          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+          proxy_http_version 1.1;
+          proxy_set_header Upgrade $http_upgrade;
+          proxy_set_header Connection "upgrade";
+          proxy_read_timeout 86400;
+        '';
+      };
+    };
+  };
+
   sops.secrets.polymarketScannerEnv = {
     sopsFile = ../../secrets/polymarket.env;
     format = "dotenv";
@@ -66,6 +95,10 @@
       COMMANDS_ENABLED = "true";
       LEGACY_ALERTS_ENABLED = "false";
       LEGAL_REVIEW_APPROVED = "false";
+    };
+    console = {
+      enable = true;
+      passwordHashFile = config.sops.secrets.polymarketScannerEnv.path;
     };
   };
 
