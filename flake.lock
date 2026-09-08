@@ -372,11 +372,11 @@
         "systems": "systems_3"
       },
       "locked": {
-        "lastModified": 1788754263,
-        "narHash": "sha256-2WCKkVcc8//iWOVPIqbbmaBCJsET7wQ2gLOmSaxcMwM=",
+        "lastModified": 1788840747,
+        "narHash": "sha256-nZ6Yt+8u5NhPSP46VcYXEcu4cJpeOiR/K+lfyk3COVA=",
         "owner": "Infinidoge",
         "repo": "nix-minecraft",
-        "rev": "dd02a29f409a141a1396ae0feb948528a37ba4f3",
+        "rev": "1e6052f5ecebddbbb2d372e0fe6f1b7bc4b95a9e",
         "type": "github"
       },
       "original": {
@@ -718,11 +718,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788606731,
-        "narHash": "sha256-qUryZYk3Hu7hmKtsXHbnR00J9vEJKOxFdW5hTWHOWPY=",
+        "lastModified": 1788853101,
+        "narHash": "sha256-4Ft6xgxeh7UN+S+MT2hhgGV5K4CPWqaizvaPP5oMA9E=",
         "ref": "refs/heads/main",
-        "rev": "742836e7db060359b7d0d587e159dd3182c7819b",
-        "revCount": 21,
+        "rev": "460098178aab6f43d7d9777c0f99e9275d93cb33",
+        "revCount": 22,
         "type": "git",
         "url": "ssh://git@github.com/LPbigFish/PolymarketScanner.git"
       },
@@ -946,11 +946,11 @@
         "systems": "systems_5"
       },
       "locked": {
-        "lastModified": 1788786626,
-        "narHash": "sha256-W+LFdmei2vdIe7pqPC1x03CROL4hltTtouTKBwlzLv8=",
+        "lastModified": 1788821166,
+        "narHash": "sha256-mwSBAaQv85VzTg7W9dihcrvYs6naO4e1mWYvczXyu+k=",
         "owner": "vicinaehq",
         "repo": "vicinae",
-        "rev": "6696d5b33fa16a857846d941487c28b6a2995661",
+        "rev": "5618237244e952387a0ec26dbb24bf0ae31fa30d",
         "type": "github"
       },
       "original": {
