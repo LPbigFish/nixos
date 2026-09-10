@@ -90,11 +90,11 @@
     extraEnvironment = {
       INGESTION_ENABLED = "true";
       SCORING_ENABLED = "true";
-      ALERTS_ENABLED = "false";
+      ALERTS_ENABLED = "true";
       RECEIPTS_ENABLED = "false";
       COMMANDS_ENABLED = "true";
       LEGACY_ALERTS_ENABLED = "false";
-      LEGAL_REVIEW_APPROVED = "false";
+      LEGAL_REVIEW_APPROVED = "true";
     };
     console = {
       enable = true;

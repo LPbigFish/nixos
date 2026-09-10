@@ -718,11 +718,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1788895685,
-        "narHash": "sha256-/qXCbIJo3BQHi4fDDwarRy6cFZJPgZM+S4mcKmwSrX0=",
+        "lastModified": 1788958470,
+        "narHash": "sha256-bz6Ot0ijsyxa5Q5x3eshVW6C1/6Wva3ay+/rldRs3no=",
         "ref": "refs/heads/main",
-        "rev": "7f30f639c950d51975c6f55f20f624fc2d71abef",
-        "revCount": 30,
+        "rev": "1fd7b954d56cc7f70d26dd1e083fb416347ee712",
+        "revCount": 31,
         "type": "git",
         "url": "ssh://git@github.com/LPbigFish/PolymarketScanner.git"
       },
