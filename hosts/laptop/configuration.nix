@@ -74,6 +74,12 @@
     path = "/home/lpbigfish/.config/opencode/opencode.json";
     owner = config.users.users.lpbigfish.name;
   };
+  sops.secrets.z-ai-env = {
+    sopsFile = ../../secrets/z-ai.env;
+    format = "dotenv";
+    path = "/run/secrets/z-ai-env";
+    owner = config.users.users.lpbigfish.name;
+  };
 
   virtualisation.containers.enable = true;
   virtualisation = {

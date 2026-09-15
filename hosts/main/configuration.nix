@@ -84,6 +84,12 @@
     path = "/home/lpbigfish/.config/opencode/opencode.json";
     owner = config.users.users.lpbigfish.name;
   };
+  sops.secrets.z-ai-env = {
+    sopsFile = ../../secrets/z-ai.env;
+    format = "dotenv";
+    path = "/run/secrets/z-ai-env";
+    owner = config.users.users.lpbigfish.name;
+  };
 
   home-manager = {
     extraSpecialArgs = { inherit inputs pkgs gnomeExtensions; };
@@ -135,7 +141,7 @@
     distrobox
     nodejs
     inputs.deploy-rs.packages.${pkgs.system}.deploy-rs
-    #bottles
+    bottles
   ];
 
   system.stateVersion = "25.05";

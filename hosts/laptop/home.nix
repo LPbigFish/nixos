@@ -45,6 +45,7 @@ in
       resolve-convert
       obsidian
       opencode
+      codex
       (vivaldi.override {
         proprietaryCodecs = false;
         enableWidevine = true;
@@ -75,6 +76,42 @@ in
   };
 
   programs = {
+    codex = {
+      enable = true;
+      settings.mcp_servers = {
+        nixos = {
+          command = "nix";
+          args = [
+            "run"
+            "github:utensils/mcp-nixos"
+            "--"
+          ];
+        };
+        zai-mcp-server = {
+          command = "npx";
+          args = [
+            "-y"
+            "@z_ai/mcp-server"
+          ];
+          env_vars = [
+            "Z_AI_API_KEY"
+            "Z_AI_MODE"
+          ];
+        };
+        web-search-prime = {
+          url = "https://api.z.ai/api/mcp/web_search_prime/mcp";
+          bearer_token_env_var = "Z_AI_API_KEY";
+        };
+        web-reader = {
+          url = "https://api.z.ai/api/mcp/web_reader/mcp";
+          bearer_token_env_var = "Z_AI_API_KEY";
+        };
+        zread = {
+          url = "https://api.z.ai/api/mcp/zread/mcp";
+          bearer_token_env_var = "Z_AI_API_KEY";
+        };
+      };
+    };
     alacritty = {
       enable = true;
       theme = "one_dark";
@@ -127,6 +164,7 @@ in
       syntaxHighlighting.enable = true;
       autosuggestion.enable = true;
       initContent = ''
+        [[ -r /run/secrets/z-ai-env ]] && { set -a; source /run/secrets/z-ai-env; set +a; }
         source ${pkgs.zsh-powerlevel10k}/share/zsh-powerlevel10k/powerlevel10k.zsh-theme
         [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
