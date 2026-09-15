@@ -43,7 +43,7 @@ in
       hunspell
       hunspellDicts.cs_CZ
       hunspellDicts.en_US
-      davinci-resolve
+      #davinci-resolve
       resolve-convert
       pavucontrol
       audacity
