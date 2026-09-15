@@ -75,6 +75,32 @@ in
   };
 
   programs = {
+    vicinae = {
+      enable = true;
+
+      systemd = {
+        enable = true; # default: false
+        autoStart = true; # default: false
+      };
+      extensions = [
+        (pkgs.mkRayCastExtension {
+          name = "google-search";
+          rev = "62edb5f5b52d28d38c918add66553e827d9cdc4b";
+          hash = "sha256-L1uXvVu640AIm+FUMYKxZ0mnvwpA6cAdJpOPBvnbtuk=";
+          # ponytail: vicinae LocalStorage.getItem returns null, ext guards only undefined -> crash on empty history
+          postBuild = ''
+            sed -i 's/===void 0?\[\]:JSON.parse/==null?[]:JSON.parse/g' "$HOME/.config/raycast/extensions/"*/*.js
+          '';
+        })
+      ];
+      settings = {
+        providers.calculator.preferences.backend = "qalculate";
+        theme.dark.name = "one-dark";
+        launcher_window = {
+          opacity = 0.8;
+        };
+      };
+    };
     alacritty = {
       enable = true;
       theme = "one_dark";
