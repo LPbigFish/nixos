@@ -92,6 +92,7 @@ in
   programs = {
     codex = {
       enable = true;
+      skills = opencodeSkills;
       settings.mcp_servers = {
         nixos = {
           command = "nix";

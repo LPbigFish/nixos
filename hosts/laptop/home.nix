@@ -78,6 +78,7 @@ in
   programs = {
     codex = {
       enable = true;
+      skills = "${pkgs.gstack}/skills";
       settings.mcp_servers = {
         nixos = {
           command = "nix";
