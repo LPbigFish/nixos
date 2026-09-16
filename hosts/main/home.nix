@@ -93,39 +93,39 @@ in
     codex = {
       enable = true;
       skills = opencodeSkills;
-      settings.mcp_servers = {
-        nixos = {
-          command = "nix";
-          args = [
-            "run"
-            "github:utensils/mcp-nixos"
-            "--"
-          ];
-        };
-        zai-mcp-server = {
-          command = "npx";
-          args = [
-            "-y"
-            "@z_ai/mcp-server"
-          ];
-          env_vars = [
-            "Z_AI_API_KEY"
-            "Z_AI_MODE"
-          ];
-        };
-        web-search-prime = {
-          url = "https://api.z.ai/api/mcp/web_search_prime/mcp";
-          bearer_token_env_var = "Z_AI_API_KEY";
-        };
-        web-reader = {
-          url = "https://api.z.ai/api/mcp/web_reader/mcp";
-          bearer_token_env_var = "Z_AI_API_KEY";
-        };
-        zread = {
-          url = "https://api.z.ai/api/mcp/zread/mcp";
-          bearer_token_env_var = "Z_AI_API_KEY";
-        };
-      };
+      #      settings.mcp_servers = {
+      #        nixos = {
+      #          command = "nix";
+      #          args = [
+      #            "run"
+      #            "github:utensils/mcp-nixos"
+      #            "--"
+      #          ];
+      #        };
+      #        zai-mcp-server = {
+      #          command = "npx";
+      #          args = [
+      #            "-y"
+      #            "@z_ai/mcp-server"
+      #          ];
+      #          env_vars = [
+      #            "Z_AI_API_KEY"
+      #            "Z_AI_MODE"
+      #          ];
+      #        };
+      #        web-search-prime = {
+      #          url = "https://api.z.ai/api/mcp/web_search_prime/mcp";
+      #          bearer_token_env_var = "Z_AI_API_KEY";
+      #        };
+      #        web-reader = {
+      #          url = "https://api.z.ai/api/mcp/web_reader/mcp";
+      #          bearer_token_env_var = "Z_AI_API_KEY";
+      #        };
+      #        zread = {
+      #          url = "https://api.z.ai/api/mcp/zread/mcp";
+      #          bearer_token_env_var = "Z_AI_API_KEY";
+      #        };
+      #      };
     };
     vicinae = {
       enable = true;
