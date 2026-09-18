@@ -76,13 +76,13 @@
     #    };
   };
 
-  sops.secrets.polymarketScannerEnv = {
-    sopsFile = ../../secrets/polymarket.env;
-    format = "dotenv";
-    owner = "root";
-    group = "polymarket-scanner";
-    mode = "0440";
-  };
+  #  sops.secrets.polymarketScannerEnv = {
+  #   sopsFile = ../../secrets/polymarket.env;
+  #   format = "dotenv";
+  #   owner = "root";
+  #   group = "polymarket-scanner";
+  #   mode = "0440";
+  # };
 
   services.polymarket-scanner = {
     enable = false;
