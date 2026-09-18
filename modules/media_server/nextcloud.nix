@@ -29,21 +29,21 @@
 
     secretFile = config.sops.secrets.nextcloud-email-config.path;
 
-    hostName = "nextcloud.rybak.website";
+    hostName = "nextcloud.lpbigfish.xyz";
 
     config.adminuser = "lpbigfish";
     config.adminpassFile = "${config.sops.secrets.nextcloudAdminpass.path}";
 
     settings = {
-      "trusted_domains" = [ "nextcloud.rybak.website" ];
+      "trusted_domains" = [ "nextcloud.lpbigfish.xyz" ];
       overwriteprotocol = "https";
       trusted_proxies = [
         "${infra.hosts.netcup.vpnAddress}"
         "127.0.0.1"
         "::1"
       ];
-      overwritehost = "nextcloud.rybak.website";
-      "overwrite.cli.url" = "https://nextcloud.rybak.website";
+      overwritehost = "nextcloud.lpbigfish.xyz";
+      "overwrite.cli.url" = "https://nextcloud.lpbigfish.xyz";
       "overwritewebroot" = "\/";
     };
 
@@ -84,7 +84,7 @@
   #    tunnels."25b602b7-1da8-4039-a7ad-f51630ccfc12" = {
   #      credentialsFile = "/var/lib/cloudflared/tunnel.json";
   #      ingress = {
-  #        "nextcloud.rybak.website" = "http://127.0.0.1:80";
+  #        "nextcloud.lpbigfish.xyz" = "http://127.0.0.1:80";
   #      };
   #      default = "http_status:404";
   #    };

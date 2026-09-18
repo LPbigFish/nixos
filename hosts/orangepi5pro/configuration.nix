@@ -58,22 +58,22 @@
   # non-Secure, LiveView rides ws://. No proto lie, no TLS.
   services.nginx = {
     enable = true;
-    virtualHosts."polymarket-console" = {
-      serverName = "192.168.18.76";
-      default = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:4000";
-        extraConfig = ''
-          proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-          proxy_http_version 1.1;
-          proxy_set_header Upgrade $http_upgrade;
-          proxy_set_header Connection "upgrade";
-          proxy_read_timeout 86400;
-        '';
-      };
-    };
+    #    virtualHosts."polymarket-console" = {
+    #      serverName = "192.168.18.76";
+    #      default = true;
+    #      locations."/" = {
+    #        proxyPass = "http://127.0.0.1:4000";
+    #        extraConfig = ''
+    #          proxy_set_header Host $host;
+    #          proxy_set_header X-Real-IP $remote_addr;
+    #          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    #          proxy_http_version 1.1;
+    #          proxy_set_header Upgrade $http_upgrade;
+    #          proxy_set_header Connection "upgrade";
+    #          proxy_read_timeout 86400;
+    #        '';
+    #      };
+    #    };
   };
 
   sops.secrets.polymarketScannerEnv = {
@@ -85,7 +85,7 @@
   };
 
   services.polymarket-scanner = {
-    enable = true;
+    enable = false;
     environmentFile = config.sops.secrets.polymarketScannerEnv.path;
     extraEnvironment = {
       INGESTION_ENABLED = "true";
@@ -97,7 +97,7 @@
       LEGAL_REVIEW_APPROVED = "true";
     };
     console = {
-      enable = true;
+      enable = false;
       passwordHashFile = config.sops.secrets.polymarketScannerEnv.path;
     };
   };

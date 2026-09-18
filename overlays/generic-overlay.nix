@@ -3,6 +3,7 @@ final: prev: {
   resolve-convert = prev.callPackage ../packages/resolve-convert.nix { };
   terraria-server = prev.callPackage ../packages/terraria-server.nix { };
   gstack = prev.callPackage ../packages/gstack.nix { };
+  opencode = prev.callPackage ../packages/opencode-1.18.29.nix { };
   davinci-resolve-studio = prev.davinci-resolve-studio.overrideAttrs (old: {
     postFixup = (old.postFixup or "") + ''
       echo "Applying binary patch..."

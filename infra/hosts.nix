@@ -19,9 +19,8 @@
     system = "aarch64-linux";
     vpnAddress = "10.100.0.2";
     deploy = true;
-    # reached over WireGuard, jumping through the gateway
-    sshHostname = "10.100.0.2";
+    # reached directly over the LAN
+    sshHostname = "192.168.18.76";
     sshUser = "lpbigfish";
-    sshProxyJump = "lpbigfish@37.120.168.146";
   };
 }

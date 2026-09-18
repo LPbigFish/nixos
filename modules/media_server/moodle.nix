@@ -18,7 +18,7 @@
   services.moodle = {
     enable = false;
     package = pkgs.moodle;
-    virtualHost.hostName = "ucimse.rybak.website";
+    virtualHost.hostName = "ucimse.lpbigfish.xyz";
 
     database = {
       type = "pgsql";
@@ -28,7 +28,7 @@
     extraConfig = ''
       $CFG->reverseproxy = 1;
       $CFG->sslproxy = 1;
-      $CFG->wwwroot = 'https://ucimse.rybak.website';
+      $CFG->wwwroot = 'https://ucimse.lpbigfish.xyz';
       $CFG->proxyadmins = '10.100.0.1';
     '';
 

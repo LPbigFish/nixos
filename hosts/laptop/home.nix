@@ -109,6 +109,7 @@ in
         zread = {
           url = "https://api.z.ai/api/mcp/zread/mcp";
           bearer_token_env_var = "Z_AI_API_KEY";
+        };
       };
     };
     vicinae = {
