@@ -4,7 +4,7 @@
   bun,
   darwin,
   fetchFromGitHub,
-  makeBinaryWrapper,
+  makeWrapper,
   models-dev,
   nodejs,
   nix-update-script,
@@ -71,14 +71,14 @@ let
 
       dontFixup = true;
 
-      outputHash = "sha256-0rpyP6nqK4FrJNjl0WV5adPjEQhe8a55RM7CgP9wlak=";
+      outputHash = "sha256-qWZuOpolZAr7EZlAgfVx8nw8axoOMauoXwcqiJUGu24=";
       outputHashAlgo = "sha256";
       outputHashMode = "recursive";
     };
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "opencode";
-  version = "1.18.29";
+  version = "1.18.31";
 
   __structuredAttrs = true;
   strictDeps = true;
@@ -87,7 +87,7 @@ stdenv.mkDerivation (finalAttrs: {
     owner = "anomalyco";
     repo = "opencode";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-lCXlxTOhcX70jxJAbpolyGlIxQK2nst+6bFhq3Xzdmc=";
+    hash = "sha256-Q0DYH5GHQGZ6ICyMR5rWq86DvfWpQERGZeLYTJb7cj0=";
   };
 
   postPatch = ''
@@ -99,13 +99,15 @@ stdenv.mkDerivation (finalAttrs: {
       --replace-fail \
       'if (item.os === process.platform && item.arch === process.arch && !item.abi)' \
       'if (false)'
+    substituteInPlace packages/opencode/script/build.ts \
+      --replace-fail 'splitting: true,' 'splitting: false,'
   '';
 
   nativeBuildInputs = [
     bun
     nodejs
     installShellFiles
-    makeBinaryWrapper
+    makeWrapper
     writableTmpDirAsHomeHook
   ] ++ lib.optionals stdenv.hostPlatform.isDarwin [ darwin.sigtool ];
 
@@ -122,7 +124,7 @@ stdenv.mkDerivation (finalAttrs: {
   env.MODELS_DEV_API_JSON = "${models-dev}/dist/_api.json";
   env.OPENCODE_DISABLE_MODELS_FETCH = true;
   env.OPENCODE_VERSION = finalAttrs.version;
-  env.OPENCODE_CHANNEL = "stable";
+  env.OPENCODE_CHANNEL = "prod";
 
   buildPhase = ''
     runHook preBuild
@@ -143,7 +145,23 @@ stdenv.mkDerivation (finalAttrs: {
     install -Dm755 dist/opencode-*/bin/opencode $out/bin/opencode
     wrapProgram $out/bin/opencode \
       --prefix PATH : ${lib.makeBinPath ([ ripgrep ] ++ lib.optionals stdenv.hostPlatform.isDarwin [ sysctl ])} \
-      --set OPENCODE_DISABLE_AUTOUPDATE true
+      --set OPENCODE_DISABLE_AUTOUPDATE true \
+      --run '
+        data_home="''${XDG_DATA_HOME:-$HOME/.local/share}"
+        legacy="$data_home/opencode/opencode-stable.db"
+        canonical="$data_home/opencode/opencode.db"
+
+        if [ -z "''${OPENCODE_DB:-}" ] \
+          && [ -z "''${NIXPKGS_OPENCODE_DISABLE_LEGACY_DB_WORKAROUND:-}" ] \
+          && [ -e "$legacy" ] \
+          && [ ! -e "$canonical" ]; then
+          export OPENCODE_DB="opencode-stable.db"
+          if [ -t 2 ]; then
+            echo "Detected legacy nixpkgs OpenCode database at $legacy." >&2
+            echo "Continuing to use it for compatibility." >&2
+          fi
+        fi
+      '
 
     install -Dm644 ${models-dev.jsonschema} $out/share/model-schema.json
     install -Dm644 config.json $out/share/config.json
