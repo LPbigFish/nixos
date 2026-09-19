@@ -4,10 +4,4 @@ final: prev: {
   terraria-server = prev.callPackage ../packages/terraria-server.nix { };
   gstack = prev.callPackage ../packages/gstack.nix { };
   opencode = prev.callPackage ../packages/opencode-1.18.29.nix { };
-  davinci-resolve-studio = prev.davinci-resolve-studio.overrideAttrs (old: {
-    postFixup = (old.postFixup or "") + ''
-      echo "Applying binary patch..."
-      perl -pi -e 's/\x74\x11\xe8\x21\x23\x00\x00/\xeb\x11\xe8\x21\x23\x00\x00/g' $out/bin/resolve
-    '';
-  });
 }

@@ -41,7 +41,7 @@ in
       hunspell
       hunspellDicts.cs_CZ
       # android-studio
-      #davinci-resolve
+      davinci-resolve
       resolve-convert
       obsidian
       opencode
@@ -54,10 +54,10 @@ in
       postman
       beeper
       qbittorrent
+      freecad
     ])
     ++ (with pkgs.jetbrains; [
       idea
-      datagrip
     ])
     ++ gnomeExtensions.extensions;
 
