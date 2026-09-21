@@ -62,19 +62,7 @@
             hostName = name;
           }
           // cfg.specialArgs;
-          modules = cfg.modules ++ [
-            {
-              system.autoUpgrade = {
-                # deploy-rs owns activation on infrastructure hosts,
-                # so their auto-upgrade is disabled to avoid fights.
-                enable = !((infra.hosts.${name} or { }).deploy or false);
-                flake = "github:LPbigFish/nixos#${name}";
-                persistent = true;
-                dates = "weekly";
-                operation = "switch";
-              };
-            }
-          ];
+          modules = cfg.modules;
         };
 
       configs = import ./modules/profiles.nix { inherit inputs nixpkgs; };
