@@ -20,14 +20,7 @@
           login = true;
         };
       }
-      {
-        name = "polymarket_scanner";
-        ensureClauses.login = true;
-        ensureDBOwnership = true;
-      }
     ];
-
-    ensureDatabases = [ "polymarket_scanner" ];
 
     authentication = pkgs.lib.mkOverride 10 ''
       # Type  Database    User        Address            Method

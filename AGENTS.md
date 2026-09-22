@@ -103,11 +103,11 @@ Every profile includes the shared modules in `modules/profiles.nix`, notably:
 
 Host-specific configuration lives under `hosts/<profile>/`. The server profile
 `orangepi5pro` additionally imports the RK3588 board module, SOPS, Tor,
-PostgreSQL, Minecraft, Nextcloud, Moodle, CouchDB, and the Polymarket Scanner
+PostgreSQL, Minecraft, Nextcloud, CouchDB, and the Polymarket Scanner
 module. Importing a module does not mean its service is active: inspect the
 service's own `enable` flag. For example, CouchDB is enabled, while the
-Polymarket Scanner and Moodle are currently disabled; several other media
-modules are commented out in `modules/profiles.nix`.
+Polymarket Scanner is currently disabled; several other media modules are
+commented out in `modules/profiles.nix`.
 
 Use `system.stateVersion` values as historical compatibility settings. Do not
 change them as part of a routine NixOS or package upgrade.
