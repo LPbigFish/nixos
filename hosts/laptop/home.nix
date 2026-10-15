@@ -54,6 +54,7 @@ in
       postman
       beeper
       qbittorrent
+      blender
     ])
     ++ (with pkgs.jetbrains; [
       idea
