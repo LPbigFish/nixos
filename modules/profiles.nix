@@ -10,7 +10,6 @@ let
     (import ../overlays/generic-overlay.nix)
     inputs.nix-minecraft.overlay
     inputs.vim-conf.overlays.default
-    inputs.nix-cachyos-kernel.overlays.default
     inputs.vicinae.overlays.default
   ];
 

@@ -21,7 +21,6 @@
       url = "github:gnull/nixos-rk3588";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-cachyos-kernel.url = "github:xddxdd/nix-cachyos-kernel/release";
     nix-minecraft.url = "github:Infinidoge/nix-minecraft";
     deploy-rs = {
       url = "github:serokell/deploy-rs";
