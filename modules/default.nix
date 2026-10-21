@@ -119,7 +119,7 @@
         "https://cache.nixos.org?priority=10"
         "https://cache.nixos-cuda.org?priority=11"
         #"https://nix-community.cachix.org?priority=40"
-        "https://attic.xuyh0120.win/lantian?priority=12"
+        #"https://attic.xuyh0120.win/lantian?priority=12"
         "https://vicinae.cachix.org"
       ];
       trusted-public-keys = [

@@ -18,7 +18,6 @@ let
     hide-top-bar
     #tiling-shell
     tiling-assistant
-    vicinae
   ];
 
   extensionUuidList = map (x: x.extensionUuid) extensions;
