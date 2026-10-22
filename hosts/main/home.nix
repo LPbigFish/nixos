@@ -46,7 +46,7 @@ in
       #davinci-resolve
       resolve-convert
       pavucontrol
-      audacity
+      #audacity
       qbittorrent
       monero-gui
       tidal-hifi

@@ -14,7 +14,19 @@
     ./pipewire.nix
   ];
 
-  boot.kernelPackages = pkgs.linuxPackages_7_2; # pkgs.cachyosKernels.linuxPackages-cachyos-latest-lto-x86_64-v3;
+  boot.kernelPackages = pkgs.linuxPackages_7_3.extend (
+    _: prev: {
+      xpad-noone = prev.xpad-noone.overrideAttrs {
+        installPhase = ''
+          runHook preInstall
+          make -C ${prev.kernel.dev}/lib/modules/${prev.kernel.modDirVersion}/build \
+            ${pkgs.lib.escapeShellArgs prev.kernelModuleMakeFlags} \
+            M="$PWD" INSTALL_MOD_PATH="$out" modules_install
+          runHook postInstall
+        '';
+      };
+    }
+  );
   boot.kernelModules = [ "snd-hda-intel" ];
   boot.extraModprobeConfig = ''
     options snd-hda-intel model=generic
