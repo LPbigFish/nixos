@@ -13,6 +13,7 @@
   ];
 
   graphics-driver-selection.gpu = "intel";
+  hardware.graphics.enable = true;
 
   boot.kernelPackages = pkgs.linuxPackages_7_2;
 
@@ -112,6 +113,7 @@
     nodejs
     podman-tui
     docker-compose
+    mesa-demos
   ];
 
   system.stateVersion = "25.05"; # Did you read the comment?
