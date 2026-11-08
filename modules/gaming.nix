@@ -15,7 +15,6 @@
 
   environment.systemPackages = with pkgs; [
     mangohud
-    protonup-rs
     heroic
     protontricks
     prismlauncher

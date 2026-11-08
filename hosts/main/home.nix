@@ -37,7 +37,6 @@ in
         withVencord = true;
       })
       zsh-powerlevel10k
-      brave
       gnome-tweaks
       libreoffice-qt
       hunspell
