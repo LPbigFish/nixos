@@ -35,7 +35,6 @@ in
       })
       zsh-powerlevel10k
       mullvad-vpn
-      brave
       gnome-tweaks
       libreoffice-qt
       hunspell
@@ -45,7 +44,6 @@ in
       resolve-convert
       obsidian
       opencode
-      codex
       (vivaldi.override {
         proprietaryCodecs = false;
         enableWidevine = true;
@@ -76,7 +74,7 @@ in
 
   programs = {
     codex = {
-      enable = true;
+      enable = false;
       skills = "${pkgs.gstack}/skills";
       settings.mcp_servers = {
         nixos = {
