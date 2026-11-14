@@ -1,7 +1,4 @@
 final: prev: {
-  codex = prev.codex.overrideAttrs {
-    dontCargoUseSystemLibs = true;
-  };
   orchis-theme = prev.callPackage ../packages/orchis-theme.nix { };
   resolve-convert = prev.callPackage ../packages/resolve-convert.nix { };
   terraria-server = prev.callPackage ../packages/terraria-server.nix { };

@@ -31,8 +31,6 @@ let
   shared_modules = [
     {
       disabledModules = [ "services/games/terraria.nix" ];
-      nix.settings = {
-      };
     }
     inputs.disko.nixosModules.disko
     inputs.nix-minecraft.nixosModules.minecraft-servers
@@ -117,7 +115,7 @@ let
         #./media_server/jellyfin.nix
         ./media_server/postgresql.nix
         ./media_server/minecraft.nix
-        ./media_server/nextcloud.nix
+        #./media_server/nextcloud.nix
         ./media_server/couchdb.nix
         ../hosts/orangepi5pro/configuration.nix
         ./user-group.nix
