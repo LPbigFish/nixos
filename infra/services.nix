@@ -4,7 +4,7 @@
     host = "orangepi5pro";
     web = {
       port = 5984;
-      domain = "couchdb.lpbigfish.xyz";
+      domain = "obsidian.lpbigfish.xyz";
       # Essential for LiveSync (long polling)
       proxyExtraConfig = ''
         proxy_read_timeout 300s;

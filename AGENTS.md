@@ -85,7 +85,7 @@ ports, and collisions with gateway ports `22`, `80`, `443`, and `51820`.
 The current registry contains one public web service:
 
 - `couchdb` on `orangepi5pro`, backend port `5984`, exposed as
-  `https://couchdb.lpbigfish.xyz` through the `netcup` gateway.
+  `https://obsidian.lpbigfish.xyz` through the `netcup` gateway.
 
 For a web service, the gateway opens `80/443` and the backend opens the service
 port on `wg0`. Do not manually duplicate these generated openings unless the
